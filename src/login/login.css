@@ -4,7 +4,7 @@
     justify-content: center;
 }
 
-.first-input {
+#inputEmail {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -13,7 +13,7 @@ input:hover {
     background-color: #efefef;
 }
 
-.last-input {
+#inputPassword {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
