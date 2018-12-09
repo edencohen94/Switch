@@ -26,37 +26,36 @@
 
     <title>SWITCH</title>
 </head>
-<body>
-<div>
-    <form>
-        <div class="form-row">
-
-            <div class="col">
-                <input type="rigion/city" id="inputRigion/City" class="form-control" placeholder="Region/City" required>
+<body class = "text-center">
+<div class="searchContainer container">
+    <form class="form-col">
+        <div >
+            <div class="autocomplete" style="width:300px;">
+                <input type="rigion/city" id="inputRigion/City" class="form-control" placeholder="Region/City" autocomplete="shipping locality" required>
             </div>
 
-            <div class="col">
-                <input type="destinationCountry" id="inputdestinationCountry" class="form-control" placeholder="Destination Country" required>
-            </div>
+            <p style="margin-left:2.5em"></p>
 
-            <div class="col">
-                <input type="currency" id="inputCurrency" class="form-control" placeholder="Currency" required>
-            </div>
+            <input type="destinationCountry" id="inputdestinationCountry" class="form-control" placeholder="Destination Country" required>
+            <p style="margin-left:2.5em"></p>
 
-            <div class="col">
-                <input type="minAmount" id="inputMaxAmount" class="form-control" placeholder="Max" required>
-            </div>
+            <input type="currency" id="inputCurrency" class="form-control" placeholder="Currency" required>
+            <p style="margin-left:2.5em"></p>
 
-            <div class="col">
-                <input type="freeText" id="inputFreeText" class="form-control" placeholder="Free Text">
-            </div>
-            <div class="col">
-                <input type="search" placeholder="Search.." name="search">
-                <button type="searc"><i class="fa fa-search"></i></button>
-            </div>
+            <input type="minAmount" id="inputMinAmount" class="form-control" placeholder="Min" required>
+            <p style="margin-left:2.5em"></p>
+
+            <input type="maxAmount" id="inputMaxAmount" class="form-control" placeholder="Max" required>
+            <p style="margin-left:2.5em"></p>
+
+            <input type="freeText" id="inputFreeText" class="form-control" placeholder="Free Text">
+            <p style="margin-left:2.5em"></p>
 
 
         </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+
     </form>
 </div>
 </body>
