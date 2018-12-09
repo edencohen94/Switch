@@ -30,10 +30,11 @@
 <div class="searchContainer container">
     <form class="form-col">
         <div >
-            <div class="autocomplete" style="width:300px;">
-                <input type="rigion/city" id="inputRigion/City" class="form-control" placeholder="Region/City" autocomplete="shipping locality" required>
-            </div>
-
+                <form autocomplete="off" action="/action_page.php">
+                    <div class="autocomplete" style="width:300px;">
+                        <input type="rigion/city" id="inputRigion/City" class="form-control" placeholder="Region/City" autocomplete="shipping locality" required>
+                    </div>
+                </form>
             <p style="margin-left:2.5em"></p>
 
             <input type="destinationCountry" id="inputdestinationCountry" class="form-control" placeholder="Destination Country" required>
@@ -54,7 +55,7 @@
 
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+        <button class="btn btn-lg btn-primary btn-block" type="search">Search</button>
 
     </form>
 </div>
