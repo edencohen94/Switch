@@ -1,22 +1,70 @@
-.login-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
 }
 
-#inputEmail {
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+
+.links{
+    color: white;
+}
+
+.links a{
+    margin-left: 4px;
+}
+.login-page{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+.container{
+    height: 100%;
+    align-content: center;
+}
+
+.remember{
+    color: white;
+}
+
+.remember input
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+
+.login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+.login_btn:hover{
+    color: black;
+    background-color: white;
 }
 input:hover {
     background-color: #efefef;
 }
 
-#inputPassword {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
 
 .form-section {
     margin-top: 10px;

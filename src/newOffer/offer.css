@@ -1,0 +1,14 @@
+.offer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#inputFreeText{
+    margin-bottom: 10px;
+    height: 300px;
+}
+
+#inputAmount{
+    weight: 100;
+}
