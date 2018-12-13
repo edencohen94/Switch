@@ -30,10 +30,14 @@
 <div class="searchContainer container">
     <form class="form-col">
         <div >
+
                 <form autocomplete="off" action="/action_page.php">
                     <div class="autocomplete" style="width:300px;">
                         <input type="rigion/city" id="inputRigion/City" class="form-control" placeholder="Region/City" autocomplete="shipping locality" required>
-                    </div>
+
+                        <script>
+                            autocomplete(document.getElementById("rigion/city"), countries);
+                        </script>                    </div>
                 </form>
             <p style="margin-left:2.5em"></p>
 
