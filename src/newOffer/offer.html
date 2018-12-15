@@ -28,45 +28,43 @@
 </head>
 <body class="text-center">
 
-<div class="offer-container container">
     <form>
-        <div class="form-section">
-            <div class="money-section">
+        <div class="offer-container container">
+            <div>
                 Currency
                 <select required><option value="currency">Currency</option></select><br>
                 Amount
                 <input type="number" id="inputAmount" class="form-control" placeholder="Amount" required>
-            </div><br>
-
+            <br></div>
+            <div>
             Address <br>
             <input type="text" id="inputAddress" class="form-control" placeholder="Address" required>
             Alternative address <br>
             <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address">
+            </div>
+            <div>
             Main currency
             <select required><option value="currancy1">Currancy1</option></select><br>
             Second currency
             <select required><option value="currancy2">Currancy2</option></select><br>
-        </div>
-        <div class="form-section">
+            </div>
 
+            <div>
             Free text <br>
-            <textarea name="textarea" style="width:400px;height:400px;"></textarea>
+                <textarea name="textarea" style="width:400px;height:400px;"></textarea>
+            </div>
 
-            <div class="details-section">
+            <div>
                 Phone <br>
                 <input type="text" id="inputPhone" class="form-control" placeholder="Phone">
                 Email address <br>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
             </div>
+            <div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
-
-        </form>
-
-</div>
-
-
-
+    </form>
 
 
 </body>

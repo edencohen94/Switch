@@ -17,8 +17,8 @@ body{
 }
 .container-home{
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     align-content: center;
     padding: 3%;
