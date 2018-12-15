@@ -27,7 +27,6 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
             defer></script>
 
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -35,10 +34,71 @@
     <title>SWITCH</title>
 </head>
 <body class="text-center">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SWITCH</a>
+        </div>
+        <div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="#section1">Section 1</a></li>
+                    <li><a href="#section2">Section 2</a></li>
+                    <li><a href="#section3">Section 3</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Section 4 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#section41">Section 4-1</a></li>
+                            <li><a href="#section42">Section 4-2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
 <div class="container-home">
+    <div class="searchContainer container">
+        <form class="form-col">
+            <div>
+                <input type="text" id="inputRigion-City" class="form-control" placeholder="Region/City" required>
+                <p style="margin-left:2.5em"></p>
+
+                <form autocomplete="off" action="/action_page.php">
+                    <div class="autocomplete">
+                        <input type="text" id="inputdestinationCountry" class="form-control" placeholder="Destination Country" required>
+                    </div>
+                </form>
+
+
+                <p style="margin-left:2.5em"></p>
+
+                <input type="text" id="inputCurrency" class="form-control" placeholder="Currency" required>
+                <p style="margin-left:2.5em"></p>
+
+                <input type="number" id="inputMinAmount" class="form-control" placeholder="Min" required>
+                <p style="margin-left:2.5em"></p>
+
+                <input type="number" id="inputMaxAmount" class="form-control" placeholder="Max" required>
+                <p style="margin-left:2.5em"></p>
+
+                <input type="text" id="inputFreeText" class="form-control" placeholder="Free Text">
+                <p style="margin-left:2.5em"></p>
+
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="search">Search</button>
+
+        </form>
+    </div>
+    <br><br>
    <div class="homePage">
 
-   </div> <div class="head">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">all offers</a>
@@ -47,12 +107,11 @@
                  <a class="nav-link" id="checked-tab" data-toggle="tab" href="#checked" role="tab" aria-controls="checked" aria-selected="false">checked offers</a>
             </li>
         </ul>
-    </div>
 
     <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
         Currently there are <span id="main_" style="font-weight:bold;">11967</span> relevent offers
     <br>
-    <table id="lastoffers" >
+    <table id="lastoffers" align="center">
         <tr>
             <th>check</th>
             <th>amount</th>
@@ -208,19 +267,14 @@
 
     </table>
     </div>
-</div>
-<div class="tab-pane fade" id="checked" role="tabpanel" aria-labelledby="checked-tab">
-        <table id="lastoffers2" >
-            <tr>
-                <th>check</th>
-                <th>amount</th>
-                <th>currency</th>
-                <th>preferred currency</th>
-                <th>last update</th>
-                <th>details</th>
-            </tr>
-        </table>
+
+    <div class="tab-pane fade" id="checked" role="tabpanel" aria-labelledby="checked-tab">
+
     </div>
+   </div>
+
 </div>
+
+
 </body>
 </html>
