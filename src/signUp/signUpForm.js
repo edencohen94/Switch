@@ -1,8 +1,5 @@
-import currencies from "../../config/currency.json"
-
-
-for (let currency in currencies) {
-    let element = document.createElement("a");
-    element.innerHTML = currency.name + " - " + currency.cone;
-    document.getElementById("currency-dropdown").appendChild(element);
+for (let currency of config.currencies) {
+    let element = $("<a></a>").addClass("dropdown-item");
+    element.text(currency.name + " - " + currency.code);
+    $("#currency-dropdown").append(element);
 }
