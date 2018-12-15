@@ -9,20 +9,26 @@ body{
     align-items: center;
 }
 
-.offer-container > div {
-    background-color: gray();
-    color: white;
-    width: 100px;
-    margin: 10px;
-    text-align: center;
-    line-height: 75px;
-    font-size: 30px;
-}
 #inputFreeText{
     margin-bottom: 10px;
     height: 300px;
 }
 
 #inputAmount{
-    weight: 100;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+}
+
+#inputAddress{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputAddress2{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
