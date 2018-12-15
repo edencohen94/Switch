@@ -12,10 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
             defer></script>
+
+    <!--script-->
+    <script type="text/javascript" src="../../config/currency.js" defer></script>
+    <script type="text/javascript" src="./offers.js" defer></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
             defer></script>
@@ -28,46 +34,62 @@
 </head>
 <body class="text-center">
 
-<div class="offer-container container">
     <form>
-        <div class="form-section">
-            <div class="money-section">
-                Currency
-                <select required><option value="currency">Currency</option></select><br>
-                Amount
-                <input type="number" id="inputAmount" class="form-control" placeholder="Amount" required>
-            </div><br>
+        <div class="offer-container container">
+            <div>
 
+                <br><button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Offered currency
+                </button><br>
+                <div id="dropdownCurrency" class="dropdown-menu" aria-labelledby="dropdownMainCurrency">
+                </div>
+
+                <br>
+                Offered amount
+                <input type="number" id="inputAmount" class="form-control" placeholder="Amount" required>
+            <br></div>
+            <div>
             Address <br>
             <input type="text" id="inputAddress" class="form-control" placeholder="Address" required>
             Alternative address <br>
-            <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address">
-            Main currency
-            <select required><option value="currancy1">Currancy1</option></select><br>
-            Second currency
-            <select required><option value="currancy2">Currancy2</option></select><br>
-        </div>
-        <div class="form-section">
+            <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address"><br>
+            </div>
+            <div>
+                    <div class="dropdown mr-1">
+                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Select primary currency
+                    </button>
+                    <div id="dropdown1" class="dropdown-menu" aria-labelledby="dropdownPreffered1">
+                    </div>
+                    </div><br>
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Select second currency
+                        </button>
+                        <div id="dropdown2" class="dropdown-menu" aria-labelledby="dropdownPreffered2">
+                        </div>
+                    </div>
 
-            Free text <br>
-            <textarea name="textarea" style="width:400px;height:400px;"></textarea>
+            </div>
 
-            <div class="details-section">
+            <div>
+            <br>Free text <br>
+                <textarea id="inputFreeText" name="textarea" style="width:400px;height:200px;"></textarea>
+            </div>
+
+            <div>
                 Phone <br>
                 <input type="text" id="inputPhone" class="form-control" placeholder="Phone">
                 Email address <br>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
             </div>
+            <div>
+            <br><button class="btn btn-lg btn-primary btn-block" type="submit">submit</button><br>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
-
-        </form>
-
-</div>
-
-
-
+    </form>
 
 
 </body>
 </html>
+
