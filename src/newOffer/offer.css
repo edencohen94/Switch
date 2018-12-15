@@ -8,6 +8,7 @@ body{
     justify-content: center;
     align-content: space-around;
     align-items: center;
+    background: white;
 }
 
 #inputAmount{
