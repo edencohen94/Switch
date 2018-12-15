@@ -46,21 +46,21 @@ body{
     border-bottom-right-radius: 0;
 }
 
-#dropdownCurrency{
+#dropdownMainCurrency{
     width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-#dropdown1{
+#dropdownPreffered1{
     width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-#dropdown2{
+#dropdownPreffered2{
     width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
