@@ -6,15 +6,12 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: space-around;
     align-items: center;
 }
 
-#inputFreeText{
-    margin-bottom: 10px;
-    height: 300px;
-}
-
 #inputAmount{
+    width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -22,12 +19,48 @@ body{
 }
 
 #inputAddress{
+    width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 #inputAddress2{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputPhone{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputEmail{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdownCurrency{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdown1{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdown2{
+    width: 400px;
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;

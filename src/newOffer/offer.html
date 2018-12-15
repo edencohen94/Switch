@@ -31,27 +31,40 @@
     <form>
         <div class="offer-container container">
             <div>
-                Currency
-                <select required><option value="currency">Currency</option></select><br>
-                Amount
+                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownCurrency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                    offered currency
+                </button><br>
+
+                Offered amount
                 <input type="number" id="inputAmount" class="form-control" placeholder="Amount" required>
             <br></div>
             <div>
             Address <br>
             <input type="text" id="inputAddress" class="form-control" placeholder="Address" required>
             Alternative address <br>
-            <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address">
+            <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address"><br>
             </div>
             <div>
-            Main currency
-            <select required><option value="currancy1">Currancy1</option></select><br>
-            Second currency
-            <select required><option value="currancy2">Currancy2</option></select><br>
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-primary dropdown-toggle" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Select primary currency
+                        </button>
+                        <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        </div>
+                    </div>
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Select secondary currency
+                        </button>
+                        <div id="currency-dropdown2" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        </div>
+                    </div>
+
             </div>
 
             <div>
-            Free text <br>
-                <textarea name="textarea" style="width:400px;height:400px;"></textarea>
+            <br>Free text <br>
+                <textarea id="inputFreeText" name="textarea" style="width:400px;height:200px;"></textarea>
             </div>
 
             <div>
@@ -61,7 +74,7 @@
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
             </div>
             <div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
+            <br><button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
             </div>
         </div>
     </form>
