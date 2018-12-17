@@ -177,10 +177,6 @@ const config = {
             "code": "KES"
         },
         {
-            "name": "Korea (South) Won",
-            "code": "KRW"
-        },
-        {
             "name": "Kuwait Dinars",
             "code": "KWD"
         },
