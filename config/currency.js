@@ -25,10 +25,6 @@ const config = {
             "code": "AUD"
         },
         {
-            "name": "Austria Schillings",
-            "code": "ATS"
-        },
-        {
             "name": "Bahamas Dollars",
             "code": "BSD"
         },
@@ -43,10 +39,6 @@ const config = {
         {
             "name": "Barbados Dollars",
             "code": "BBD"
-        },
-        {
-            "name": "Belgium Francs",
-            "code": "BEF"
         },
         {
             "name": "Bermuda Dollars",
@@ -101,10 +93,6 @@ const config = {
             "code": "HRK"
         },
         {
-            "name": "Cyprus Pounds",
-            "code": "CYP"
-        },
-        {
             "name": "Czech Republic Koruny",
             "code": "CZK"
         },
@@ -113,16 +101,8 @@ const config = {
             "code": "DKK"
         },
         {
-            "name": "Deutsche (Germany) Marks",
-            "code": "DEM"
-        },
-        {
             "name": "Dominican Republic Pesos",
             "code": "DOP"
-        },
-        {
-            "name": "Dutch (Netherlands) Guilders",
-            "code": "NLG"
         },
         {
             "name": "Eastern Caribbean Dollars",
@@ -133,10 +113,6 @@ const config = {
             "code": "EGP"
         },
         {
-            "name": "Estonia Krooni",
-            "code": "EEK"
-        },
-        {
             "name": "Euro",
             "code": "EUR"
         },
@@ -145,32 +121,12 @@ const config = {
             "code": "FJD"
         },
         {
-            "name": "Finland Markkaa",
-            "code": "FIM"
-        },
-        {
-            "name": "France Francs",
-            "code": "FRF*"
-        },
-        {
-            "name": "Germany Deutsche Marks",
-            "code": "DEM"
-        },
-        {
             "name": "Gold Ounces",
             "code": "XAU"
         },
         {
-            "name": "Greece Drachmae",
-            "code": "GRD"
-        },
-        {
             "name": "Guatemalan Quetzal",
             "code": "GTQ"
-        },
-        {
-            "name": "Holland (Netherlands) Guilders",
-            "code": "NLG"
         },
         {
             "name": "Hong Kong Dollars",
@@ -205,16 +161,8 @@ const config = {
             "code": "IQD"
         },
         {
-            "name": "Ireland Pounds",
-            "code": "IEP*"
-        },
-        {
             "name": "Israel New Shekels",
             "code": "ILS"
-        },
-        {
-            "name": "Italy Lire",
-            "code": "ITL*"
         },
         {
             "name": "Jamaica Dollars",
@@ -245,16 +193,8 @@ const config = {
             "code": "LBP"
         },
         {
-            "name": "Luxembourg Francs",
-            "code": "LUF"
-        },
-        {
             "name": "Malaysia Ringgits",
             "code": "MYR"
-        },
-        {
-            "name": "Malta Liri",
-            "code": "MTL"
         },
         {
             "name": "Mauritius Rupees",
@@ -267,10 +207,6 @@ const config = {
         {
             "name": "Morocco Dirhams",
             "code": "MAD"
-        },
-        {
-            "name": "Netherlands Guilders",
-            "code": "NLG"
         },
         {
             "name": "New Zealand Dollars",
@@ -289,10 +225,6 @@ const config = {
             "code": "PKR"
         },
         {
-            "name": "Palladium Ounces",
-            "code": "XPD"
-        },
-        {
             "name": "Peru Nuevos Soles",
             "code": "PEN"
         },
@@ -301,16 +233,8 @@ const config = {
             "code": "PHP"
         },
         {
-            "name": "Platinum Ounces",
-            "code": "XPT"
-        },
-        {
             "name": "Poland Zlotych",
             "code": "PLN"
-        },
-        {
-            "name": "Portugal Escudos",
-            "code": "PTE"
         },
         {
             "name": "Qatar Riyals",
@@ -319,10 +243,6 @@ const config = {
         {
             "name": "Romania New Lei",
             "code": "RON"
-        },
-        {
-            "name": "Romania Lei",
-            "code": "ROL"
         },
         {
             "name": "Russia Rubles",
@@ -341,14 +261,6 @@ const config = {
             "code": "SGD"
         },
         {
-            "name": "Slovakia Koruny",
-            "code": "SKK"
-        },
-        {
-            "name": "Slovenia Tolars",
-            "code": "SIT"
-        },
-        {
             "name": "South Africa Rand",
             "code": "ZAR"
         },
@@ -357,20 +269,12 @@ const config = {
             "code": "KRW"
         },
         {
-            "name": "Spain Pesetas",
-            "code": "ESP"
-        },
-        {
             "name": "Special Drawing Rights (IMF)",
             "code": "XDR"
         },
         {
             "name": "Sri Lanka Rupees",
             "code": "LKR"
-        },
-        {
-            "name": "Sudan Dinars",
-            "code": "SDD"
         },
         {
             "name": "Sweden Kronor",
@@ -411,10 +315,6 @@ const config = {
         {
             "name": "United States Dollars",
             "code": "USD"
-        },
-        {
-            "name": "Venezuela Bolivares",
-            "code": "VEB"
         },
         {
             "name": "Vietnam Dong",
