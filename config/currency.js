@@ -73,10 +73,6 @@ const config = {
             "code": "CNY"
         },
         {
-            "name": "RMB (China Yuan Renminbi)",
-            "code": "CNY"
-        },
-        {
             "name": "Colombia Pesos",
             "code": "COP"
         },
