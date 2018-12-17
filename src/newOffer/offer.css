@@ -1,14 +1,68 @@
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+
 .offer-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-#inputFreeText{
-    margin-bottom: 10px;
-    height: 300px;
+    align-content: space-around;
+    align-items: center;
+    background: white;
 }
 
 #inputAmount{
-    weight: 100;
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+}
+
+#inputAddress{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputAddress2{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputPhone{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#inputEmail{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdownMainCurrency{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdownPreffered1{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdownPreffered2{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }

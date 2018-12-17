@@ -1,13 +1,64 @@
 table {
     border-collapse: collapse;
     align-content: center;
-    width: 50%;
+    width: 100%;
 }
 
 th, td {
-    padding: 8px;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #ddd;
+    padding: 8px;
 }
 
-tr:hover {background-color:#f5f5f5;}
+tr:nth-child(even){background-color: #f2f2f2}
+
+tr{
+    height: 35px;
+}
+
+th {
+    background-color: turquoise;
+    color: white;
+}
+
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.container-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+
+.nav-tabs{
+    margin-bottom:5%;
+}
+.nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.nav-tabs .nav-link.active{
+
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+
+.calculator-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.searchContainer{
+    flex-direction: row;
+}
