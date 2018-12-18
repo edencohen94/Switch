@@ -1,10 +1,6 @@
 const config = {
     "currencies": [
         {
-            "name": "America (United States) Dollars",
-            "code": "USD"
-        },
-        {
             "name": "Afghanistan Afghanis",
             "code": "AFN"
         },
@@ -135,10 +131,6 @@ const config = {
         {
             "name": "Iceland Kronur",
             "code": "ISK"
-        },
-        {
-            "name": "IMF Special Drawing Right",
-            "code": "XDR"
         },
         {
             "name": "India Rupees",
