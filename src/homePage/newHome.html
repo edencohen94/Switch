@@ -66,6 +66,7 @@
 </nav>
 
 <div class="home_page">
+    <div><img src="../Images/logo.png"></div>
     <div class="searchContainer container">
         <div><form class="form-col">
             <div>
@@ -97,22 +98,25 @@
             <button class="btn btn-lg btn-primary btn-block" type="search">Search</button>
 
         </form></div>
+
+    </div><br><br>
+
+    <div class="tab container">
+        <div class="Tabs">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">all offers</a>
+                </li>
+                <li class="nav-item">
+                      <a class="nav-link" id="checked-tab" data-toggle="tab" href="#checked" role="tab" aria-controls="checked" aria-selected="false">checked offers</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-pane fade" id="all">
+            Currently there are <span id="main" style="font-weight:bold;">11967</span> relevent offers </div>
     </div>
-
-    <div class="Tabs">
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">all offers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="checked-tab" data-toggle="tab" href="#checked" role="tab" aria-controls="checked" aria-selected="false">checked offers</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="tab-pane fade" id="all">
-        Currently there are <span id="main" style="font-weight:bold;">11967</span> relevent offers </div>
 
     <div class="topResults container">
         <div class = "resultTitle container">

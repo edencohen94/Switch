@@ -2,9 +2,20 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
+    width: 200%;
     border-style: groove;
+    padding:5px;
 }
+
+.result >div{
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+
+}
+
 .resultTitle {
     display: flex;
     flex-direction: row;
@@ -15,11 +26,18 @@
     font-size: large;
 }
 
+.resultTitle >div{
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+}
+
 .topResults {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
 }
 
 body{
@@ -50,4 +68,12 @@ body{
 
     border: none;
     border-bottom:2px solid #0062cc;
+}
+
+.checkbox{
+    vertical-align: middle;
+}
+
+.Tabs{
+    align-items: left;
 }
