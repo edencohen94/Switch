@@ -38,7 +38,6 @@ body{
     background: #fff;
 }
 
-
 .nav-tabs{
     margin-bottom:5%;
 }
@@ -50,15 +49,4 @@ body{
 
     border: none;
     border-bottom:2px solid #0062cc;
-}
-
-.calculator-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.searchContainer{
-    flex-direction: row;
 }
