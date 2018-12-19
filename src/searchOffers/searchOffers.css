@@ -1,14 +1,25 @@
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
 .autocomplete {
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
 }
 
-.login-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+
+.searchoffers-body span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
 }
+
 
 #inputRigion-City {
     margin-bottom: -1px;

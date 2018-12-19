@@ -1,0 +1,79 @@
+.result {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200%;
+    border-style: groove;
+    padding:5px;
+}
+
+.result >div{
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+
+}
+
+.resultTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border-style: groove;
+    font-weight: bold;
+    font-size: large;
+}
+
+.resultTitle >div{
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+}
+
+.topResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.home_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.nav-tabs{
+    margin-bottom:5%;
+}
+.nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.nav-tabs .nav-link.active{
+
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+
+.checkbox{
+    vertical-align: middle;
+}
+
+.Tabs{
+    align-items: left;
+}
