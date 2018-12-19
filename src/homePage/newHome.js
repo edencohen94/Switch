@@ -1,11 +1,13 @@
 for (let offer of allOffers.offers) {
 
-    let curr = $("<a></a>").text(offer.currency)
-    $("#currency").append(curr);
-    let city = $("<a></a>").text(offer.city)
-    $("#city").append(city);
-    let lastUpdate = $("<a></a>").text(offer.lastUpdate)
-    $("#lastUpdate").append(lastUpdate);
-    let amount = $("<a></a>").text(offer.amount)
-    $("#amount").append(amount);
+    var i=1;
+    let curr = $("<a></a>").text(offer.currency);
+    let city = $("<a></a>").text(offer.city);
+    let lastUpdate = $("<a></a>").text(offer.lastUpdate);
+    let amount = $("<a></a>").text(offer.amount);
+    $("#currency"+i).append(curr);
+    $("#city"+i).append(city);
+    $("#lastUpdate"+i).append(lastUpdate);
+    $("#amount"+1).append(amount);
+    i=i+1;
 }
