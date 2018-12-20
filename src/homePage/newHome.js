@@ -1,7 +1,7 @@
 // Select first tab
 $('.nav-tabs a:first').tab('show')
 
-var maxrows=3;
+var maxrows=5;
 var page=0;
 var len= allOffers.offers.length;
 $("#btn_next").click();

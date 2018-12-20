@@ -69,6 +69,20 @@ const allOffers ={
             "preferredCurr": "Dollar(=340.4274) Shekel(=1 277.56891)",
             "city":"Tel-Aviv",
             "lastUpdate": "19/12/2018"
+        },
+        {
+            "amount": "300",
+            "currency": "Euro",
+            "preferredCurr": "Dollar(=340.4274) Shekel(=1 277.56891)",
+            "city":"Binyamina",
+            "lastUpdate": "19/12/2018"
+        },
+        {
+            "amount": "100",
+            "currency": "Euro",
+            "preferredCurr": "Dollar(=340.4274) Shekel(=1 277.56891)",
+            "city":"Tel-Aviv",
+            "lastUpdate": "19/12/2018"
         }
     ]
 };
