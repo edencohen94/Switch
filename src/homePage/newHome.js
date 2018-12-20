@@ -1,21 +1,21 @@
 // Select first tab
 $('.nav-tabs a:first').tab('show')
 
-var maxrows=1;
-var pos=0;
+var maxrows=3;
+var page=0;
 var len= allOffers.offers.length;
 $("#btn_next").click();
 
 function funAdd() {
-    if(len-pos>0) {
-        pos = pos + maxrows;
-        console.log(pos);
-        if (pos >maxrows) {
-            for (var j = pos - (2*maxrows); j < pos-maxrows; j++) {
+    if(len-page>0) {
+        page = page + maxrows;
+        console.log(page);
+        if (page >maxrows) {
+            for (var j = page - (2*maxrows); j < page-maxrows; j++) {
                 $("#results" + j).remove();
             }
         }
-        for (var i = pos-maxrows; i < pos && i<len ; i++) {
+        for (var i = page-maxrows; i < page && i<len ; i++) {
             var offer = allOffers.offers[i]
             let check = $("<input type=\"checkbox\" id=\"chk4\" className=\"checkbox\"/>");
             let amount = $("<a></a>").text(offer.amount);
@@ -43,13 +43,13 @@ function funAdd() {
 }
 
 function funRem(){
-    if(pos>maxrows) {
-        pos = pos - maxrows;
-        console.log(pos);
-        for (var j = pos; j < pos+maxrows ; j++) {
+    if(page>maxrows) {
+        page = page - maxrows;
+        console.log(page);
+        for (var j = page; j < page+maxrows ; j++) {
            $("#results" + j).remove();
         }
-        for (var i = pos - maxrows; i < pos ; i++) {
+        for (var i = page - maxrows; i < page ; i++) {
             var offer = allOffers.offers[i]
             let check = $("<input type=\"checkbox\" id=\"chk4\" className=\"checkbox\"/>");
             let amount = $("<a></a>").text(offer.amount);
