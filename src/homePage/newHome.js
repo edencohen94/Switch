@@ -33,4 +33,6 @@ for (let offer of allOffers.offers) {
         //.appendTo(".result container");
     //$('<div class="lastUpdate"></div>')
       //  .attr("id", "lastUpdate" + i)
+
+
 }
