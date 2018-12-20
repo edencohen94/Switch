@@ -52,13 +52,4 @@ body{
     border-bottom:2px solid #0062cc;
 }
 
-.calculator-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-}
-
-.searchContainer{
-    flex-direction: row;
-}
