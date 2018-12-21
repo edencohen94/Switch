@@ -1,0 +1,55 @@
+.main-container {
+    height: 100%;
+}
+
+.page-body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.page-container {
+    overflow-y: auto;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+
+.text-in-center {
+    text-align: center;
+}
+
+.info-container {
+    display: flex;
+    /*justify-content: center;*/
+    justify-content: space-between;
+}
+
+.offer-detail {
+    /*height: 100%;*/
+    /*border-width: 0 1px;*/
+    /*border: solid lightgrey;*/
+    /*border-color: lightgray;*/
+    margin-bottom: 6px;
+}
+
+.offer-card {
+    margin-bottom: 12px;
+}
+
+
+.no-focus:focus {
+    outline: none;
+}
