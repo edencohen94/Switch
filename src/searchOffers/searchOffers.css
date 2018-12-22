@@ -10,17 +10,58 @@ html,body{
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
+    color: white;
 }
 
+#inputRigion-City{
+    margin-top: 6em;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#inputdestinationCountry{
+    margin-top: 1em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#dropdownMenuOffset
+{
+    margin-top: 1em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#inputMinAmount{
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#inputMaxAmount{
+    margin-top: 1em;
+
+
+}
+
+#inputFreeText{
+    margin-bottom: 2em;
+    margin-top: 1em;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
 
 .searchoffers-body span{
+    margin: 0 auto;
     width: 50px;
     background-color: #FFC312;
     color: black;
     border:0 !important;
 }
 
-
+#currency-dropdown{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
 #inputRigion-City {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
