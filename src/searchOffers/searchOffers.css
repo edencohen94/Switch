@@ -10,17 +10,23 @@ html,body{
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
+    color: white;
 }
 
 
 .searchoffers-body span{
+    width: 50px;
     width: 50px;
     background-color: #FFC312;
     color: black;
     border:0 !important;
 }
 
-
+#currency-dropdown{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
 #inputRigion-City {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;

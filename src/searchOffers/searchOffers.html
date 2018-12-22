@@ -31,6 +31,9 @@
 
     <script type="text/javascript" src="./autocomplete.js" defer></script>
 
+    <!--script-->
+    <script type="text/javascript" src="../../config/currency.js" defer></script>
+    <script type="text/javascript" src="./currency.js" defer></script>
 
     <title>SWITCH</title>
 </head>
@@ -52,9 +55,11 @@
                         </form>
                         <p style="margin-left:2.5em"></p>
                     </div>
-
                     <div class="currency">
-                        <input type="text" id="inputCurrency" class="form-control" placeholder="Currency" required>
+                        <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown">Select primary currency<span class="caret"></span>
+                        </button>
+                        <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        </div>
                         <p style="margin-left:2.5em"></p>
                     </div>
 
