@@ -1,14 +1,29 @@
 .main-container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
 .page-body {
+    position: absolute;
     height: 100%;
-    overflow: hidden;
+    width: 100%;
 }
 
 .page-container {
+    padding-top: 15px;
     overflow-y: auto;
+}
+
+.ad-action-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0.5em 0;
+}
+
+.card-button {
+    margin-right: 1em;
 }
 
 .menu-items {
@@ -33,22 +48,16 @@
 
 .info-container {
     display: flex;
-    /*justify-content: center;*/
     justify-content: space-between;
 }
 
 .offer-detail {
-    /*height: 100%;*/
-    /*border-width: 0 1px;*/
-    /*border: solid lightgrey;*/
-    /*border-color: lightgray;*/
     margin-bottom: 6px;
 }
 
 .offer-card {
     margin-bottom: 12px;
 }
-
 
 .no-focus:focus {
     outline: none;
