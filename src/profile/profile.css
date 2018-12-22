@@ -1,18 +1,53 @@
-body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+.main-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: 0.5rem;
-    background: #fff;
+.page-body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
-.profile-head h5{
-    color: #333;
+.nav-item {
+    margin-bottom: 0.25rem;
 }
-.profile-head h6{
-    color: #0062cc;
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}
+.nav-item:hover {
+    cursor: pointer;
+}
+.image-container{
+    position: relative;
+    margin-top: 15px;
+}
+.image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.btn-change{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+.image-container:hover .image {
+    opacity: 0.3;
+}
+.image-container:hover .btn-change {
+    opacity: 1;
 }
 .profile-edit-btn{
     border: none;
@@ -22,22 +57,30 @@ body{
     font-weight: 600;
     color: #6c757d;
     cursor: pointer;
+    margin-top: 50px;
 }
-.profile-head .nav-tabs{
-    margin-bottom:10%;
+.info-container {
+    padding-top: 15px;
+    overflow-y: auto;
 }
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
+.Name{
+    margin-right: 50px;
 }
-.profile-head .nav-tabs .nav-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
+.Email{
+    margin-right: 50px;
 }
-.profile-tab label{
-    font-weight: 600;
+.Phone{
+    margin-right: 50px;
 }
-.profile-tab p{
-    font-weight: 600;
-    color: #0062cc;
+.Address{
+    margin-right: 50px;
+}
+.Zip{
+    margin-right: 50px;
+}
+.Primary-Currency{
+    margin-right: 50px;
+}
+.Secondary-Currency{
+    margin-right: 50px;
 }
