@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--login CSS-->
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet"  type="text/css" href="login.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -37,16 +37,19 @@
 
 <div class="login-container container">
     <div class="d-flex justify-content-center h-100">
-        <div class ="login-page">
-            <div class="login body">
+        <div class ="card">
+            <div class="card-header">
+                <h3>Sign In</h3>
+            </div>
+            <div class="card-body">
                 <form class="form-signin">
-                    <div class="input-email">
+                    <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
                         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                     </div>
-                    <div class = "input-password">
+                    <div class = "input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
@@ -55,20 +58,19 @@
                     <div class="row align-items-center remember">
                         <input type="checkbox">Remember Me
                     </div>
-                    <p style="margin-left:10em"></p>
-
-                    <div class="button - login">
+                    <div class="form-group">
                         <input type="submit" value="Login" class="btn float-right login_btn">
                     </div>
+                    <p style="margin-left:10em"></p>
                 </form>
         </div>
-            <div class = "login additional info">
-            <div class="d-flex justify-content-center links">
-                Don't have an account?<a href="#">Sign Up</a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="#">Forgot your password?</a>
-            </div>
+            <div class = "card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account?<a href="../signUp/signUpForm.html">Sign Up</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="#">Forgot your password?</a>
+                </div>
 
         </div>
     </div>

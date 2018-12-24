@@ -31,18 +31,20 @@
 
     <script type="text/javascript" src="./autocomplete.js" defer></script>
 
+    <!--script-->
+    <script type="text/javascript" src="../../config/currency.js" defer></script>
+    <script type="text/javascript" src="./currency.js" defer></script>
 
     <title>SWITCH</title>
 </head>
 <body class = "text-center">
 <div class="searchContainer container">
-    <div class="d-flex justify-content-center">
-        <div class="searchoffers-body">
+    <div class="d-flex justify-content-center h-100">
+        <div class="searchoffers-body h-100">
             <form class="form-col">
                 <div>
                     <div class="city">
                         <input type="text" id="inputRigion-City" class="form-control" placeholder="Region/City" required>
-                        <p style="margin-left:2.5em"></p>
 
                         <form autocomplete="off" action="/action_page.php">
                             <div class="autocomplete">
@@ -50,31 +52,29 @@
                             </div>
 
                         </form>
-                        <p style="margin-left:2.5em"></p>
                     </div>
-
                     <div class="currency">
-                        <input type="text" id="inputCurrency" class="form-control" placeholder="Currency" required>
-                        <p style="margin-left:2.5em"></p>
+                        <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown">Select primary currency<span class="caret"></span>
+                        </button>
+                        <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        </div>
                     </div>
 
                     <div class="minAmount">
                         <input type="number" id="inputMinAmount" class="form-control" placeholder="Min" required>
-                        <p style="margin-left:2.5em"></p>
                     </div>
 
                     <div class="maxAmount">
                         <input type="number" id="inputMaxAmount" class="form-control" placeholder="Max" required>
-                        <p style="margin-left:2.5em"></p>
                     </div>
 
                     <div class="freeText">
                         <input type="text" id="inputFreeText" class="form-control" placeholder="Free Text">
-                        <p style="margin-left:2.5em"></p>
                     </div>
 
 
                 </div>
+                <p style="margin-left:2.5em"></p>
 
                 <button class="btn btn-lg btn-primary btn-block" type="search">Search</button>
 
