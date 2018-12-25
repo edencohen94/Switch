@@ -1,6 +1,35 @@
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
 .dropdown-menu{
     height: auto;
     width: 400px;
     max-height: 200px;
     overflow-x: hidden;
+}
+h1{
+    color: white;
+}
+label {
+    color: white;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    color: white;
+}
+.flex-container{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+#signUpForm {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
