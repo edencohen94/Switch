@@ -33,28 +33,28 @@
     <title>SWITCH</title>
 </head>
 <body class="text-center">
-
-<form>
-    <div class="offer-container container">
-        <div>
-
-            <br><button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" >
-            Offered currency
-        </button><br>
-            <div id="dropdownCurrency" class="dropdown-menu" aria-labelledby="dropdownMainCurrency">
+<div class="newOffer container">
+    <div class="d-flex justify-content-center  h-100">
+        <div class="form-col">
+            <div class="currency">
+                <div class="dropdown mr-1">
+                    <button type="button" class="btn btn-primary dropdown-toggle" id="sdf" data-toggle="dropdown">
+                        Select primary currency
+                    </button>
+                    <div id="dropdownCurrency" class="dropdown-menu" aria-labelledby="dropdownPreffered1">
+                    </div>
+                </div><br>
             </div>
 
-            <br>
-            Offered amount
-            <input type="number" id="inputAmount" class="form-control" placeholder="Amount" required>
-            <br></div>
-        <div>
-            Address <br>
-            <input type="text" id="inputAddress" class="form-control" placeholder="Address" required>
-            Alternative address <br>
-            <input type="text" id="inputAddress2" class="form-control" placeholder="Alternative Address"><br>
-        </div>
-        <div>
+            <div class="offeredAmount">
+                <label for="inputAddress">  Offered amount</label>
+                <input type="number" class="form-control" id="inputAmount" placeholder="Amount" required>
+            </div>
+            <div class="address">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+            </div>
+        <div classs=currency">
             <div class="dropdown mr-1">
                 <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown">
                     Select primary currency
@@ -72,7 +72,7 @@
 
         </div>
 
-        <div>
+        <div class="freeText">
             <br>Free text <br>
             <textarea id="inputFreeText" name="textarea" style="width:400px;height:200px;"></textarea>
         </div>
@@ -86,8 +86,9 @@
         <div>
             <br><button class="btn btn-lg btn-primary btn-block" type="submit">submit</button><br>
         </div>
+        </div>
     </div>
-</form>
+</div>
 
 
 </body>
