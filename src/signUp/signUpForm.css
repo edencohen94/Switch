@@ -1,8 +1,22 @@
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+
 html,body{
     background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: 120%;
     font-family: 'Numans', sans-serif;
 }
 

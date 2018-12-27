@@ -38,11 +38,9 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-color: #e9f3f4;
 }
 
-body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
 .home_page{
     display: flex;
     flex-direction: column;
@@ -54,20 +52,6 @@ body{
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
-}
-
-.nav-tabs{
-    margin-bottom:5%;
-}
-.nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
-}
-.nav-tabs .nav-link.active{
-
-    border: none;
-    border-bottom:2px solid #0062cc;
 }
 
 .checkbox{
@@ -76,4 +60,102 @@ body{
 
 .Tabs{
     align-items: left;
+}
+
+
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+
+
+
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 140%;
+    font-family: 'Numans', sans-serif;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+
+#inputdestinationCountry{
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#dropdownMenuOffset {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.searchoffers-body span{
+    margin: 0 auto;
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+#currency-dropdown{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+#inputRigion-City {
+    margin-top: 6em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+input:hover {
+    background-color: #efefef;
+}
+#inputCurrency {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#inputMinAmount {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#inputMaxAmount {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#inputFreeText {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#searchContainer {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

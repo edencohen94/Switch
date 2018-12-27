@@ -308,5 +308,16 @@ const config = {
             "name": "Zambia Kwacha",
             "code": "ZMK"
         }
-    ]
+    ],
+    "preferredCurr":[
+        {
+            "name": "United States Dollars",
+            "code": "USD"
+        },
+        {
+            "name": "Euro",
+            "code": "EUR"
+        }
+        ]
 };
+
