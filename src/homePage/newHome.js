@@ -1,6 +1,9 @@
-// Select first tab
-$('.nav-tabs a:first').tab('show')
+//number of offers in the site
+var num= $("<div></div>").text("Currently there are "+(fill.numofOffers[0]).num+" relevent offers");
+$("#all").append(num);
 
+
+// previous- next : in results of search
 var maxrows=5;
 var page=0;
 var len= allOffers.offers.length;
@@ -9,7 +12,6 @@ $("#btn_next").click();
 function funAdd() {
     if(len-page>0) {
         page = page + maxrows;
-        console.log(page);
         if (page >maxrows) {
             for (var j = page - (2*maxrows); j < page-maxrows; j++) {
                 $("#results" + j).remove();
@@ -45,7 +47,6 @@ function funAdd() {
 function funRem(){
     if(page>maxrows) {
         page = page - maxrows;
-        console.log(page);
         for (var j = page; j < page+maxrows ; j++) {
            $("#results" + j).remove();
         }

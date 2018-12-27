@@ -11,6 +11,7 @@
 
     <!--script-->
     <script type="text/javascript" src="../../config/topOffers.js" defer></script>
+    <script type="text/javascript" src="../../config/defaultFill.js" defer></script>
     <script type="text/javascript" src="./newHome.js" defer/>
 
     <!-- Bootstrap CSS -->
@@ -56,7 +57,7 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="../signUp/signUpForm.html">Sign up</a></li>
-                            <li><a href="#section42">Profile</a></li>
+                            <li><a href="../profile/profile.html">Profile</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -100,23 +101,7 @@
         </form></div>
 
     </div><br><br>
-
-    <div class="tab container">
-        <div class="Tabs">
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">all offers</a>
-                </li>
-                <li class="nav-item">
-                      <a class="nav-link" id="checked-tab" data-toggle="tab" href="#checked" role="tab" aria-controls="checked" aria-selected="false">checked offers</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="tab-pane fade" id="all">
-            Currently there are <span id="main" style="font-weight:bold;">11967</span> relevent offers </div>
-    </div>
+    <div class="currently" id="all" style="font-weight:bold;"></div>
 
     <div class="topResults container">
         <div class = "resultTitle container">
@@ -126,6 +111,7 @@
             <div id="preferred" class ="Pcurrency">preffered currency</div>
             <div id="city" class="city">city</div>
             <div id="lastUpdate" class="lastUpdate">last update</div>
+
         </div>
 
     </div>
