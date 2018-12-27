@@ -4,42 +4,42 @@ let state = {
         {
             amount: 300,
             currency: "USD",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "21/12/2018"
         },
         {
             amount: 500,
             currency: "CAD",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "13/12/2018"
         },
         {
             amount: 340,
             currency: "HUF",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "04/12/2018"
         },
         {
             amount: 560,
             currency: "NZD",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "21/12/2018"
         },
         {
             amount: 340,
             currency: "HUF",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "04/12/2018"
         },
         {
             amount: 560,
             currency: "NZD",
-            "preferred-currency": "Shekel",
+            preferredCurrency: "Shekel",
             city: "Tel-Aviv",
             date: "21/12/2018"
         }

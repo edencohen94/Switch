@@ -1,3 +1,16 @@
+for (let currency of config.currencies) {
+    let element = $("<a></a>").addClass("dropdown-item");
+    element.text(currency.name + " - " + currency.code);
+    $("#currency-dropdown").append(element);
+}
+
+$("#currency-dropdown").click(function () {
+    console.log(event.target);
+    var selText = (event.target).text;
+    $("#dropdownMenuOffset").html(selText);
+});
+
+
 //number of offers in the site
 var num= $("<div></div>").text("Currently there are "+(fill.numofOffers[0]).num+" relevent offers");
 $("#all").append(num);
@@ -38,7 +51,7 @@ function funAdd() {
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/ad_detailspage_icon.gif", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
+            $('<img/>' ,{src:"../Images/details.png", width:'80', height:'30'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
         }
 
     }
@@ -71,7 +84,7 @@ function funRem(){
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/ad_detailspage_icon.gif", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
+            $('<img/>' ,{src:"../Images/details.png", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
         }
     }
 }
