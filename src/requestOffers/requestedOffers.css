@@ -1,0 +1,92 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page-body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.page-container {
+    padding-top: 15px;
+    overflow-y: auto;
+}
+
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+
+.offers-container > .offer-card:last-child {
+    margin-bottom: 0;
+}
+
+.ad-action-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0.5em 0;
+}
+
+.card-button {
+    margin-right: 1em;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+
+.text-in-center {
+    text-align: center;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+
+.offer-detail {
+    margin: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.offer-card {
+    margin-bottom: 12px;
+}
+
+.new-offer-button-container {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.no-focus:focus {
+    outline: none;
+}
+
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
