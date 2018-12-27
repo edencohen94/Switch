@@ -40,9 +40,11 @@
                 <div class="bg-dark p-3 menu-items">
                     <a class="text-white nav-item" href="../homePage/newHome.html">Home |</a>
                     <a class="text-white nav-item" href="../newOffer/offer.html">New Offer |</a>
+                    <a class="text-white nav-item" href="../openOffers/openOffers.html">open Offers |</a>
+                    <a class="text-white nav-item" href="../requestOffers/requestedOffers.html">requested offers |</a>
                     <a class="text-white nav-item" href="../profile/profile.html">My Profile |</a>
-                    <a class="text-white nav-item" href="../login/login.html">Login |</a>
                     <a class="text-white nav-item" href="../signUp/signUpForm.html">Sign up |</a>
+                    <a class="text-white nav-item" href="../login/login.html">Login |</a>
                     <a class="text-white nav-item" href="">Logout |</a>
                 </div>
             </div>
@@ -60,7 +62,7 @@
         <div class="form-col">
             <h1 style="color:white">Create New Offer</h1>
             <div class="dropdown mr-1">
-                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" required>
                         Select primary currency
                     </button>
                     <div id="dropdownCurrency" class="dropdown-menu" aria-labelledby="dropdownMainCurrency">
@@ -73,18 +75,22 @@
             </div>
             <div class="address">
                 <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                <input type="text" class="form-control" id="inputAddress" placeholder="Address" required>
             </div>
+            <div class="address2">
+                <label for="inputAddress">Alternative Address</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Address">
+            </div><br>
             <div classs=currency">
             <div class="dropdown mr-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown" required>
                     preferred currency
                 </button>
                 <div id="dropdown1" class="dropdown-menu" aria-labelledby="dropdownPreffered1">
                 </div>
             </div><br>
             <div class="dropdown mr-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown" required>
                     second preferred currency
                 </button>
                 <div id="dropdown2" class="dropdown-menu" aria-labelledby="dropdownPreffered2">
@@ -98,11 +104,11 @@
             </div>
             <div class="phoneNumber">
                 <label for="inputPhone">Phone</label>
-                <input type="phone" class="form-control" id="inputPhone" placeholder="Phone">
+                <input type="phone" class="form-control" id="inputPhone" placeholder="Phone" required>
             </div>
             <div class="emailAddress">
                 <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
             </div>
             <button type="submit" class="btn  btn-primary btn-block">Submit</button>
     </div>

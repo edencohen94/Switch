@@ -51,7 +51,7 @@ function funAdd() {
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/details.png", width:'80', height:'30'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
+            $('<img/>' ,{src:"../Images/details.png", width:'80', height:'30'}).appendTo($('<a/>', {href: "../requestedOffers/requestedOffers.html"}).appendTo($("#details"+i)));
         }
 
     }
@@ -84,7 +84,7 @@ function funRem(){
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/details.png", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
+            $('<img/>' ,{src:"../Images/details.png", width:'9', height:'9'}).appendTo($('<a/>', {href: "../requestedOffers/requestedOffers.html"}).appendTo($("#details"+i)));
         }
     }
 }
