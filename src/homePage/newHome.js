@@ -19,7 +19,6 @@ function funAdd() {
         }
         for (var i = page-maxrows; i < page && i<len ; i++) {
             var offer = allOffers.offers[i]
-            let check = $("<input type=\"checkbox\" id=\"chk4\" className=\"checkbox\"/>");
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.currency);
             let preferred = $("<a></a>").text(offer.preferredCurr);
@@ -27,18 +26,19 @@ function funAdd() {
             let lastUpdate = $("<a></a>").text(offer.lastUpdate);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'check' + i}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $("#check" + i).append(check);
+            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
+            $('<img/>' ,{src:"../Images/ad_detailspage_icon.gif", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
         }
 
     }
@@ -52,7 +52,6 @@ function funRem(){
         }
         for (var i = page - maxrows; i < page ; i++) {
             var offer = allOffers.offers[i]
-            let check = $("<input type=\"checkbox\" id=\"chk4\" className=\"checkbox\"/>");
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.currency);
             let preferred = $("<a></a>").text(offer.preferredCurr);
@@ -60,18 +59,19 @@ function funRem(){
             let lastUpdate = $("<a></a>").text(offer.lastUpdate);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'check' + i}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $("#check" + i).append(check);
+            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
+            $('<img/>' ,{src:"../Images/ad_detailspage_icon.gif", width:'9', height:'9'}).appendTo($('<a/>', {href:""}).appendTo($("#details"+i)));
         }
     }
 }

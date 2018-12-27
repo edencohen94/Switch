@@ -100,3 +100,4 @@ var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("inputdestinationCountry"), countries);
+
