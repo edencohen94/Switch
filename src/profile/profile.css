@@ -32,6 +32,13 @@ html,body{
     position: relative;
     margin-top: 15px;
 }
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
 .image {
     opacity: 1;
     display: block;
