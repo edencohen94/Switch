@@ -8,6 +8,7 @@ let state = {
     scurrency: "Euro",
     imgProfile: "https://bootdey.com/img/Content/avatar/avatar7.png"
 };
+
 $("#name").text(state.name);
 $("#email").text(state.email);
 $("#phone").text(state.phone);
