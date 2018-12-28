@@ -59,5 +59,4 @@ $(document).ready(function () {
     });
 });
 
-
-$('.nav-tabs a:first').tab('show');
+///$('.nav-tabs a:first').tab('show');
