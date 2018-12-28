@@ -9,3 +9,21 @@ for (let currency of config.currencies) {
     $("#dropdown1").append(element2);
     $("#dropdown2").append(element3);
 }
+
+    $("#dropdownCurrency").click(function () {
+        console.log(event.target);
+        var selText = (event.target).text;
+        $("#dropdownMainCurrency").html(selText);
+    });
+
+    $("#dropdown1").click(function () {
+        console.log(event.target);
+        var selText = (event.target).text;
+       $("#dropdownPreffered1").html(selText);
+    });
+
+    $("#dropdown2").click(function () {
+        console.log(event.target);
+        var selText = (event.target).text;
+        $("#dropdownPreffered2").html(selText);
+    });

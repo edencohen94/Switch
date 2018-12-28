@@ -19,47 +19,31 @@ html,body{
     height: 120%;
     font-family: 'Numans', sans-serif;
 }
-label {
-    color: white;
-}
+
 .dropdown-menu{
     height: auto;
     width: 400px;
     max-height: 200px;
     overflow-x: hidden;
 }
-
-#inputAddress{
-    margin-bottom: 1em;
+h1{
+    color: white;
 }
-
-#inputEmail{
-    margin-bottom: 1em;
+label {
+    color: white;
 }
-
-#inputFreeText{
-    width: 400px;
-    height:200px;
+.autocomplete {
+    /*the container must be positioned relative:*/
+    color: white;
 }
-
-#dropdownMainCurrency{
-    width: 400px;
+.flex-container{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+#signUpForm {
     margin-bottom: -1px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
-#dropdownPreffered1{
-    width: 400px;
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-#dropdownPreffered2{
-    width: 400px;
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
