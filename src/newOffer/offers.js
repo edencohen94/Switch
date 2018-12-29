@@ -27,3 +27,6 @@ for (let currency of config.currencies) {
         var selText = (event.target).text;
         $("#dropdownPreffered2").html(selText);
     });
+
+
+    uploadToServe()

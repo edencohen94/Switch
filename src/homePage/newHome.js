@@ -126,7 +126,7 @@ var page=0;
 var len= allOffers.offers.length;
 $("#btn_next").click();
 
-function funAdd() {
+function funAdd(offers) {
     if(len-page>0) {
         page = page + maxrows;
         if (page >maxrows) {
@@ -135,12 +135,13 @@ function funAdd() {
             }
         }
         for (var i = page-maxrows; i < page && i<len ; i++) {
-            var offer = allOffers.offers[i]
+            var offer = offers[i]
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.currency);
             let preferred = $("<a></a>").text(offer.preferredCurr);
             let city = $("<a></a>").text(offer.city);
             let lastUpdate = $("<a></a>").text(offer.lastUpdate);
+            convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
@@ -161,19 +162,20 @@ function funAdd() {
     }
 }
 
-function funRem(){
+function funRem(offers){
     if(page>maxrows) {
         page = page - maxrows;
         for (var j = page; j < page+maxrows ; j++) {
            $("#results" + j).remove();
         }
         for (var i = page - maxrows; i < page ; i++) {
-            var offer = allOffers.offers[i]
+            var offer = offers[i]
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.currency);
             let preferred = $("<a></a>").text(offer.preferredCurr);
             let city = $("<a></a>").text(offer.city);
             let lastUpdate = $("<a></a>").text(offer.lastUpdate);
+            convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
@@ -193,4 +195,49 @@ function funRem(){
     }
 }
 
+function convertCurreny (fromCurr, toCurr, amount,i){
+    // set endpoint and access key
+    endpoint = 'latest';
+    access_key = 'e3201b8ebf57138b968f3c9692754b28';
+    // get the most recent exchange rates via the "latest" endpoint:
+   $.ajax({
+        type:"GET",
+        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+        dataType: 'jsonp',
+        success: function(data) {
+            var finalRateExchange =  commitConversion(data,fromCurr,toCurr,amount)
+            $("#preferred" + i).html(finalRateExchange);
+        }
+    });
+}
 
+function commitConversion(data,fromCurr, toCurr, amount){
+    var exchangeRateTocurr=data.rates[toCurr];
+    var exchangeRateFromcurr= data.rates[fromCurr];
+    var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
+    return finalRateExchange
+}
+
+function getOffers() {
+    // get the most recent exchange rates via the "latest" endpoint:
+    $.ajax({
+        type:"GET",
+        url: '',
+        dataType: 'jsonp',
+        success: function(data) {
+            funAdd(data)
+        }
+    });
+}
+
+function getDiffrentPageOfOffers() {
+    // get the most recent exchange rates via the "latest" endpoint:
+    $.ajax({
+        type:"GET",
+        url: '',
+        dataType: 'jsonp',
+        success: function(data) {
+            funRem(data)
+        }
+    });
+}
