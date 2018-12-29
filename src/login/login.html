@@ -42,18 +42,18 @@
                 <h3>Sign In</h3>
             </div>
             <div class="card-body">
-                <form class="form-signin">
+                <form class="form-signin" action="../homePage/newHome.html"  method="post">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
                     </div>
                     <div class = "input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" id="inputPassword" class="form-control last-input" placeholder="Password" required>
+                        <input type="password" id="inputPassword" class="form-control last-input" placeholder="Password" name="password" required>
                     </div>
                     <div class="row align-items-center remember">
                         <input type="checkbox">Remember Me
