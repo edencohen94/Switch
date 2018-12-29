@@ -11,12 +11,10 @@ for (let currency of config.currencies) {
 }
 
 $("#currency-dropdown").click(function () {
-    console.log(event.target);
     var selText = (event.target).text;
     $("#dropdownMenuOffset1").html(selText);
 });
 $("#currency-dropdown2").click(function () {
-    console.log(event.target);
     var selText = (event.target).text;
     $("#dropdownMenuOffset2").html(selText);
 });
