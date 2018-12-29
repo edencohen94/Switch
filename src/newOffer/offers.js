@@ -1,3 +1,6 @@
+var main;
+var preferred1;
+var preferred2;
 for (let currency of config.currencies) {
     let element1 = $("<a></a>").addClass("dropdown-item");
     let element2 = $("<a></a>").addClass("dropdown-item");
@@ -11,19 +14,16 @@ for (let currency of config.currencies) {
 }
 
     $("#dropdownCurrency").click(function () {
-        console.log(event.target);
-        var selText = (event.target).text;
-        $("#dropdownMainCurrency").html(selText);
+        main = (event.target).text;
+        $("#dropdownMainCurrency").val(main);
     });
 
     $("#dropdown1").click(function () {
-        console.log(event.target);
-        var selText = (event.target).text;
-       $("#dropdownPreffered1").html(selText);
+       preferred1 = (event.target).text;
+       $("#dropdownPreffered1").val(preferred1);
     });
 
     $("#dropdown2").click(function () {
-        console.log(event.target);
-        var selText = (event.target).text;
-        $("#dropdownPreffered2").html(selText);
+        preferred2 = (event.target).text;
+        $("#dropdownPreffered2").val(preferred2);
     });

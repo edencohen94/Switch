@@ -1,3 +1,5 @@
+var preferred1;
+var preferred2;
 for (let currency of config.currencies) {
     let element = $("<a></a>").addClass("dropdown-item");
     element.text(currency.name + " - " + currency.code);
@@ -11,12 +13,10 @@ for (let currency of config.currencies) {
 }
 
 $("#currency-dropdown").click(function () {
-    console.log(event.target);
-    var selText = (event.target).text;
-    $("#dropdownMenuOffset1").html(selText);
+    preferred1 = (event.target).text;
+    $("#dropdownMenuOffset1").val(preferred1);
 });
 $("#currency-dropdown2").click(function () {
-    console.log(event.target);
-    var selText = (event.target).text;
-    $("#dropdownMenuOffset2").html(selText);
+    preferred2 = (event.target).text;
+    $("#dropdownMenuOffset2").val(preferred2);
 });
