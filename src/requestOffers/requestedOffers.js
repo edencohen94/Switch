@@ -98,7 +98,6 @@ function addRequested(offers) {
                 height: '60'
             })));
 
-
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.currency))
             .append(cardBody)

@@ -58,45 +58,43 @@
             </nav>
         </div>
     </div>
+
+
+    <form class="form-newOffer" action="http://77.126.1.218:3060/offer"  method="post">
     <div class="d-flex justify-content-center  h-100">
         <div class="form-col">
             <h1 style="color:white">Create New Offer</h1>
             <br><div class="dropdown mr-1">
-                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" required>
-                        Select primary currency
-                    </button>
-                    <div id="dropdownCurrency" class="dropdown-menu" aria-labelledby="dropdownMainCurrency">
+                    <input type="button" value="Select primary currency" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" name="offered_currency">
+                    <div id="dropdownCurrency" class="dropdown-menu">
                     </div>
                 </div><br>
 
             <div class="offeredAmount">
-                <label for="inputAddress">  Offered amount</label>
-                <input type="number" class="form-control" id="inputAmount" placeholder="Amount" required>
+                <label for="inputAmount">  Offered amount</label>
+                <input type="number" class="form-control" id="inputAmount" placeholder="Amount" required name="amount">
             </div><br>
             <div classs=currency">
             <div class="dropdown mr-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown" required>
-                    preferred currency
-                </button>
-                <div id="dropdown1" class="dropdown-menu" aria-labelledby="dropdownPreffered1">
+                <input type="button" value= "preferred currency" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown" name="main_currency">
+                <div id="dropdown1" class="dropdown-menu">
                 </div>
             </div><br>
             <div class="dropdown mr-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown" required>
-                    second preferred currency
-                </button>
-                <div id="dropdown2" class="dropdown-menu" aria-labelledby="dropdownPreffered2">
+                <input type="button" value="second preferred currency" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown" name="secondary_currency">
+                <div id="dropdown2" class="dropdown-menu">
                 </div>
             </div><br>
 
         </div>
             <div class="freeText">
                 <label for="inputFreeText">Free Text</label>
-                <input type="text" id="inputFreeText" class="form-control">
+                <textarea id="inputFreeText" class="form-control" name="description"></textarea>
             </div><br>
-            <button onclick="uploadOffer()" type="submit" class="btn  btn-primary btn-block">Submit</button>
-    </div>
-</div>
+            <input type="submit" value="submit" class="btn  btn-primary btn-block">
+        </div>
+        </div>
+    </form>
 
 </div>
 </body>

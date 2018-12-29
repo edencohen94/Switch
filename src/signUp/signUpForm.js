@@ -12,12 +12,11 @@ for (let currency of config.currencies) {
     $("#currency-dropdown2").append(element);
 }
 
-function preferredCurrency() {
-    preferred1 = $(this).val();
-    $("#dropdownMenuOffset1").html(preferred1);
-};
-
+$("#currency-dropdown").click(function () {
+    preferred1 = (event.target).text;
+    $("#dropdownMenuOffset1").val(preferred1);
+});
 $("#currency-dropdown2").click(function () {
     preferred2 = (event.target).text;
-    $("#dropdownMenuOffset2").html(preferred2);
+    $("#dropdownMenuOffset2").val(preferred2);
 });
