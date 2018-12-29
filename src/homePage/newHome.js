@@ -170,10 +170,10 @@ function funRem(offers){
         }
         for (var i = page - maxrows; i < page ; i++) {
             var offer = offers[i]
-            let amount = $("<a></a>").text(offer.amount);
-            let curr = $("<a></a>").text(offer.currency);
-            let preferred = $("<a></a>").text(offer.preferredCurr);
-            let city = $("<a></a>").text(offer.city);
+            let amount = $("<a></a>").text(offer["amount"]);
+            let curr = $("<a></a>").text(offer["currency"]);
+            let preferred = $("<a></a>").text(offer["preferredCurr"]);
+            let city = $("<a></a>").text(offer["city"]);
             let lastUpdate = $("<a></a>").text(offer.lastUpdate);
             convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
@@ -222,8 +222,8 @@ function getOffers() {
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type:"GET",
-        url: '',
-        dataType: 'jsonp',
+        url: 'http://79.178.27.141:3060/offer',
+        dataType: 'json',
         success: function(data) {
             funAdd(data)
         }
@@ -234,8 +234,8 @@ function getDiffrentPageOfOffers() {
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type:"GET",
-        url: '',
-        dataType: 'jsonp',
+        url: 'http://79.178.27.141:3060/offer',
+        dataType: 'json',
         success: function(data) {
             funRem(data)
         }
