@@ -222,7 +222,10 @@ function getNextOffers() {
         type:"GET",
         url: config.host + '/offer/all-offers',
         crossDomain: true,
-        dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
         success: function(data) {
             funAdd(data)
         }
@@ -234,7 +237,10 @@ function getPreviousOffers() {
         type:"GET",
         url: config.host + '/offer/all-offers',
         crossDomain: true,
-        dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
         success: function(data) {
             funRem(data)
         }
