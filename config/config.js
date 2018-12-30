@@ -1,5 +1,5 @@
 const config = {
-    host: "http://172.16.71.96:3060",
+    host: "http://77.126.1.218:3060",
     "currencies": [
         {
             "name": "Afghanistan Afghanis",
