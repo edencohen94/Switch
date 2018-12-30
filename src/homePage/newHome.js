@@ -227,7 +227,7 @@ function getNextOffers() {
         },
         dataType: 'json',
         success: function(data) {
-            funAdd(data)
+            funAdd(data.result)
         }
     });
 }
@@ -242,7 +242,7 @@ function getPreviousOffers() {
         },
         dataType: 'json',
         success: function(data) {
-            funRem(data)
+            funRem(data.result)
         }
 
     });
