@@ -12,12 +12,12 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            crossorigin="anonymous"
             defer></script>
 
     <!--script-->
-    <script type="text/javascript" src="../../config/currency.js" defer></script>
+    <script type="text/javascript" src="../../config/config.js" defer></script>
     <script type="text/javascript" src="./signUpForm.js" defer></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -76,8 +76,8 @@
                     <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" required>
                 </div>
                 <div class="password">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password" required>
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" required>
                 </div>
                 <div class="phoneNumber">
                     <label for="inputPhone">Phone</label>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <p style="margin-left:2.5em"></p>
-                    <button type="submit" class="btn  btn-primary btn-block">Sign up</button>
+                    <button type="button" onclick="signUpButton()" class="btn  btn-primary btn-block">Sign up</button>
 
 
             </div>

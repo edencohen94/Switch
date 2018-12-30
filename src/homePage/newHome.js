@@ -220,21 +220,30 @@ function commitConversion(data,fromCurr, toCurr, amount){
 function getNextOffers() {
     $.ajax({
         type:"GET",
-        url: 'http://77.126.1.218:3060/offer/all-offers',
-        success: function(data) {
-            funAdd(data)
+        url: config.host + '/offer/all-offers',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
         },
-        dataType: 'json'
+        dataType: 'json',
+        success: function(data) {
+            funAdd(data.result)
+        }
     });
 }
 
 function getPreviousOffers() {
     $.ajax({
         type:"GET",
-        url: 'http://77.126.1.218:3060/offer/all-offers',
-        success: function(data) {
-            funRem(data)
+        url: config.host + '/offer/all-offers',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
         },
-        dataType: 'json'
+        dataType: 'json',
+        success: function(data) {
+            funRem(data.result)
+        }
+
     });
 }
