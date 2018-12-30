@@ -1,13 +1,14 @@
 function loginButton() {
     $.ajax({
         type:"POST",
-        url: 'http://172.16.71.96:3060/login',
+        url: config.host + '/login',
         data: getDeatilsFromHtml(),
         crossDomain: true,
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {
             console.log(data);
+            window.location.href = '../homePage/newHome.html';
         },
         error: function(err) {
             console.error(err);

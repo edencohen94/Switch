@@ -220,7 +220,7 @@ function commitConversion(data,fromCurr, toCurr, amount){
 function getNextOffers() {
     $.ajax({
         type:"GET",
-        url: 'http://77.126.1.218:3060/offer/all-offers',
+        url: config.host + '/offer/all-offers',
         crossDomain: true,
         dataType: 'jsonp',
         success: function(data) {
@@ -232,7 +232,7 @@ function getNextOffers() {
 function getPreviousOffers() {
     $.ajax({
         type:"GET",
-        url: 'http://77.126.1.218:3060/offer/all-offers',
+        url: config.host + '/offer/all-offers',
         crossDomain: true,
         dataType: 'jsonp',
         success: function(data) {
