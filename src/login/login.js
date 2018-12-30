@@ -1,12 +1,16 @@
 function loginButton() {
     $.ajax({
         type:"POST",
-        url: 'http://192.168.43.91:3060/login',
+        url: 'http://172.16.71.96:3060/login',
         data: getDeatilsFromHtml(),
         crossDomain: true,
-        dataType: 'jsonp',
+        dataType: 'json',
+        "content-Type": 'application/json',
         success: function (data) {
             console.log(data);
+        },
+        error: function(err) {
+            console.error(err);
         }
 
     });
