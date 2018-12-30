@@ -65,7 +65,6 @@
 $.ajax({
     type:"POST",
     url: 'http://77.126.1.218:3060/user',
-    data: null,
     success: function(data) {
         $(".greetings").text(data.first_name + "'s requested offers");
     },
