@@ -15,32 +15,15 @@ for (let currency of config.currencies) {
 
     $("#dropdownCurrency").click(function () {
         main = (event.target).text;
-        $("#dropdownMainCurrency").html(main);
+        $("#dropdownMainCurrency").val(main);
     });
 
     $("#dropdown1").click(function () {
        preferred1 = (event.target).text;
-       $("#dropdownPreffered1").html(preferred1);
+       $("#dropdownPreffered1").val(preferred1);
     });
 
     $("#dropdown2").click(function () {
         preferred2 = (event.target).text;
-        $("#dropdownPreffered2").html(preferred2);
+        $("#dropdownPreffered2").val(preferred2);
     });
-
-
-
-function uploadOffer(){
-    $.ajax({
-           type: "POST",
-            url: 'http://77.126.1.218:3060/offer',
-            data: {offered_currency: main,
-                amount: $("#inputAmount").val(),
-                main_currency: preferred1,
-                secondary_currency: preferred2,
-                description: $("#inputFreeText").val()
-            },
-            success: null,
-            dataType: 'json'
-    });
-}
