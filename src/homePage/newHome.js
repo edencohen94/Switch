@@ -221,10 +221,11 @@ function getNextOffers() {
     $.ajax({
         type:"GET",
         url: 'http://77.126.1.218:3060/offer/all-offers',
+        crossDomain: true,
+        dataType: 'jsonp',
         success: function(data) {
             funAdd(data)
-        },
-        dataType: 'json'
+        }
     });
 }
 
@@ -232,9 +233,11 @@ function getPreviousOffers() {
     $.ajax({
         type:"GET",
         url: 'http://77.126.1.218:3060/offer/all-offers',
+        crossDomain: true,
+        dataType: 'jsonp',
         success: function(data) {
             funRem(data)
-        },
-        dataType: 'json'
+        }
+
     });
 }
