@@ -28,6 +28,9 @@ function signUpButton() {
         url: 'http://192.168.43.91:3060/login',
         data: getDeatilsFromHtml(),
         crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
         dataType: 'jsonp',
         success: function (data) {
             console.log(data);

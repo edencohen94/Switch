@@ -76,24 +76,8 @@ html,body{
     padding-top: 15px;
     overflow-y: auto;
 }
-.Name{
-    margin-right: 50px;
-}
-.Email{
-    margin-right: 50px;
-}
-.Phone{
-    margin-right: 50px;
-}
-.Address{
-    margin-right: 50px;
-}
-.Zip{
-    margin-right: 50px;
-}
-.Primary-Currency{
-    margin-right: 50px;
-}
-.Secondary-Currency{
-    margin-right: 50px;
+
+.info-container{
+    background-color: #e9f3f4;
+    width: 600px;
 }

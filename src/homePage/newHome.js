@@ -1,3 +1,5 @@
+var offers=[];
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -120,7 +122,7 @@ $("#all").append(num);
 
 
 // previous- next : in results of search
-var maxrows=5;
+var maxrows=2;
 var page=0;
 $("#btn_next").click();
 
@@ -136,11 +138,12 @@ function funAdd(offers) {
         for (var i = page-maxrows; i < page && i<len ; i++) {
             var offer = offers[i]
             let amount = $("<a></a>").text(offer.amount);
-            let curr = $("<a></a>").text(offer.currency);
-            let preferred = $("<a></a>").text(offer.preferredCurr);
+            let curr = $("<a></a>").text(offer.main_currency);
+            let preferred = $("<a></a>").text(offer.offered_currency);
+            let preferred2= $("<a></a>").text(offer.secondary_currency);
             let city = $("<a></a>").text(offer.city);
-            let lastUpdate = $("<a></a>").text(offer.lastUpdate);
-            convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
+            let lastUpdate = $("<a></a>").text(offer.date);
+            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
@@ -153,6 +156,7 @@ function funAdd(offers) {
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
+            $("#preferred" + i).append(preferred2);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
             $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
@@ -217,33 +221,24 @@ function commitConversion(data,fromCurr, toCurr, amount){
     return finalRateExchange
 }
 
+$.ajax({
+    type:"GET",
+    url: config.host + '/offer/all-offers',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    dataType: 'json',
+    success: function(data) {
+        offers=data.result;
+        funAdd(offers);
+    }
+}); 
+
 function getNextOffers() {
-    $.ajax({
-        type:"GET",
-        url: config.host + '/offer/all-offers',
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        dataType: 'json',
-        success: function(data) {
-            funAdd(data.result)
-        }
-    });
+   funAdd(offers);
 }
 
 function getPreviousOffers() {
-    $.ajax({
-        type:"GET",
-        url: config.host + '/offer/all-offers',
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        dataType: 'json',
-        success: function(data) {
-            funRem(data.result)
-        }
-
-    });
+   funRem(offers);
 }

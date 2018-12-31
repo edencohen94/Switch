@@ -75,6 +75,10 @@ $.ajax({
     type:"POST",
     url: 'http://77.126.1.218:3060/user',
     data: null,
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
     success: function(data) {
         $(".greetings").text(data.first_name + "'s offers");
     },
@@ -117,6 +121,10 @@ function addOpenOffers(offers) {
 $.ajax({
     type:"GET",
     url: 'http://77.126.1.218:3060/offer',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
     success: function(data) {
         addOpenOffers(data)
     },

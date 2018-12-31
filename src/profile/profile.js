@@ -1,21 +1,38 @@
-let state = {
-    name: "Ilan",
-    email: "ilan@gmail.com",
-    phone: "050-0000000",
-    address: "israel 123,tel aviv, israel",
-    zip: "123456",
-    pcurrency: "U.S Dollar",
-    scurrency: "Euro",
-    imgProfile: "https://bootdey.com/img/Content/avatar/avatar7.png"
+/*const state = {
+    "details": [
+        {
+            firstname: "Ilan",
+            lastname: "israeli",
+            email: "ilan@gmail.com",
+            phone: "050-0000000",
+            address: "israel 123,tel aviv, israel",
+            pcurrency: "U.S Dollar",
+            scurrency: "Euro",
+            imgProfile: "https://bootdey.com/img/Content/avatar/avatar7.png"
+        }
+    ]
 };
 
-$("#name").text(state.name);
-$("#email").text(state.email);
-$("#phone").text(state.phone);
-$("#address").text(state.address);
-$("#zip").text(state.zip);
-$("#pcurrency").text(state.pcurrency);
-$("#scurrency").text(state.scurrency);
+console.log(state.details.name);
+    let element1 = $("<a></a>").text(state.details.firstname);
+    let element2 = $("<a></a>").text(state.details.firstname);
+    let element2 = $("<a></a>").text(state.details.email);
+    let element3 = $("<a></a>").text(state.details.phone);
+    let element4 = $("<a></a>").text(state.details.address);
+    let element6 = $("<a></a>").text(state.details.pcurrency);
+    let element7 = $("<a></a>").text(state.details.scurrency);
+    let element7 = $("<a></a>").text(state.details.lastname);
+
+
+    $("#name").append(element1);
+    $("#email").append(element2);
+    $("#phone").append(element3);
+    $("#address").append(element4);
+    $("#zip").append(element5);
+    $("#pcurrency").append(element6);
+    $("#scurrency").append(element7);
+
+*/
 
 
 $(document).ready(function () {
@@ -59,4 +76,26 @@ $(document).ready(function () {
     });
 });
 
-$('.nav-tabs a:first').tab('show');
+
+$.ajax({
+        type:"POST",
+        url: config.host + '/user',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'jsonp',
+        success: function (data) {
+            $("#firstname").append(data.result.first_name);
+            $("#lastname").append(data.result.last_name);
+            $("#email").append(data.result.email);
+            $("#phone").append(data.result.phone);
+            $("#address").append(data.result.address_1);
+            $("#city").append(data.result.city_1);
+            $("#address2").append(data.result.address_2);
+            $("#city2").append(data.result.city_2);
+            $("#pcurrency").append(data.result.main_currency);
+            $("#scurrency").append(data.result.secondary_currency);
+        }
+   });
+

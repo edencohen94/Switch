@@ -60,32 +60,67 @@
     ]
 };*/
 
-
+var details=[];
+var allOffers=[];
 // get user's name for greeting
 $.ajax({
     type:"POST",
     url: 'http://77.126.1.218:3060/user',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
     success: function(data) {
-        $(".greetings").text(data.first_name + "'s requested offers");
+        details=data.result[0];
+        $(".greetings").text(details.first_name + "'s requested offers");
     },
     dataType: 'json'
 });
-
+// get all offers
+$.ajax({
+    type:"GET",
+    url: 'http://77.126.1.218:3060/offer/all-offers',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(data) {
+        allOffers=data.result;
+    },
+    dataType: 'json'
+});
+// get user's rquested offers from server
+$.ajax({
+    type:"GET",
+    url: 'http://77.126.1.218:3060/offer/requested',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(data) {
+        addRequested(data.result)
+    },
+    dataType: 'json'
+});
 
 function addRequested(offers) {
     for (i=0; i<offers.length; i++) {
         var offer=offers[i];
         let cardBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
-            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.preferredCurrency))
+            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + allOffers[offer.offer_id].amount))
+            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + allOffers[offer.offer_id].offered_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + allOffers[offer.offer_id].main_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + allOffers[offer.offer_id].secondary_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
         let textBody = $("<div></div>", {class: "text info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(offer.FreeText))
+            .append($("<span></span>", {class: "offer-detail"}).text(allOffers[offer.offer_id].description))
         let contectBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + state.detailsUsers[0].address))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + state.detailsUsers[0].Email))
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + state.detailsUsers[0].phone));
+            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone));
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
@@ -98,7 +133,7 @@ function addRequested(offers) {
             })));
 
         let card = $("<div></div>", {class: "card offer-card"})
-            .append($("<h5></h5>", {class: "card-header"}).text(offer.currency))
+            .append($("<h5></h5>", {class: "card-header"}).text(allOffers[offer.offer_id].amount))
             .append(cardBody)
             .append(textBody)
             .append(contectBody)
@@ -108,13 +143,4 @@ function addRequested(offers) {
     }
 }
 
-// get user's rquested offers from server
-$.ajax({
-    type:"GET",
-    url: 'http://77.126.1.218:3060/requested',
-    success: function(data) {
-        addRequested(data)
-    },
-    dataType: 'json'
-});
 
