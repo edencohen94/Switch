@@ -56,6 +56,13 @@ html,body{
     -ms-transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
 .image-container:hover .image {
     opacity: 0.3;
 }
@@ -76,24 +83,24 @@ html,body{
     padding-top: 15px;
     overflow-y: auto;
 }
-.Name{
+.inputName{
     margin-right: 50px;
 }
-.Email{
+.inputEmail{
     margin-right: 50px;
 }
-.Phone{
+.inputPhone{
     margin-right: 50px;
 }
-.Address{
+.inputAddress{
     margin-right: 50px;
 }
-.Zip{
+.inputZip{
     margin-right: 50px;
 }
-.Primary-Currency{
+.inputPcurrency{
     margin-right: 50px;
 }
-.Secondary-Currency{
+.inputScurrency{
     margin-right: 50px;
 }
