@@ -61,7 +61,9 @@
 };*/
 
 var details=[];
+var requestedOffers=[];
 var allOffers=[];
+var myrequested=[];
 // get user's name for greeting
 $.ajax({
     type:"POST",
@@ -76,19 +78,6 @@ $.ajax({
     },
     dataType: 'json'
 });
-// get all offers
-$.ajax({
-    type:"GET",
-    url: 'http://77.126.1.218:3060/offer/all-offers',
-    crossDomain: true,
-    xhrFields: {
-        withCredentials: true
-    },
-    success: function(data) {
-        allOffers=data.result;
-    },
-    dataType: 'json'
-});
 // get user's rquested offers from server
 $.ajax({
     type:"GET",
@@ -98,22 +87,57 @@ $.ajax({
         withCredentials: true
     },
     success: function(data) {
-        addRequested(data.result)
+        requestedOffers=data.result;
+        combine();
     },
     dataType: 'json'
 });
 
-function addRequested(offers) {
-    for (i=0; i<offers.length; i++) {
-        var offer=offers[i];
+// get my requested offers
+$.ajax({
+    type:"GET",
+    url: 'http://77.126.1.218:3060/offer/all-offers',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(data) {
+        allOffers=data.result;
+        combine();
+    },
+    dataType: 'json'
+});
+
+function combine() {
+    var k = 0;
+    var j = 0
+    var i = 0
+    if (requestedOffers != null && allOffers != null) {
+        for (j = 0; j < requestedOffers.length; j++) {
+            for (i = 0; i < allOffers.length; i++) {
+                if (allOffers[i].offer_id == requestedOffers[j].offer_id) {
+                    myrequested[k] = allOffers[i];
+                    k++;
+                }
+            }
+     }
+    }
+    addRequested();
+}
+
+
+function addRequested() {
+    for (i=0; i<requestedOffers.length; i++) {
+        var detailsOffer=myrequested[i];
+        var offer=requestedOffers[i];
         let cardBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + allOffers[offer.offer_id].amount))
-            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + allOffers[offer.offer_id].offered_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + allOffers[offer.offer_id].main_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + allOffers[offer.offer_id].secondary_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + detailsOffer.amount))
+            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + detailsOffer.offered_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + detailsOffer.main_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + detailsOffer.secondary_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
         let textBody = $("<div></div>", {class: "text info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(allOffers[offer.offer_id].description))
+            .append($("<span></span>", {class: "offer-detail"}).text(detailsOffer.description))
         let contectBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
             .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
@@ -133,7 +157,7 @@ function addRequested(offers) {
             })));
 
         let card = $("<div></div>", {class: "card offer-card"})
-            .append($("<h5></h5>", {class: "card-header"}).text(allOffers[offer.offer_id].amount))
+            .append($("<h5></h5>", {class: "card-header"}).text(detailsOffer.offered_currency))
             .append(cardBody)
             .append(textBody)
             .append(contectBody)
