@@ -28,6 +28,9 @@ function signUpButton() {
         url: config.host +'/signup',
         data: getDeatilsFromHtml(),
         crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {

@@ -70,31 +70,62 @@
     ]
 };*/
 
+var details=[];
+var openedOffers=[];
+var allOffers=[];
+var myOpen=[];
+
 // get user's name for greeting
 $.ajax({
     type:"POST",
     url: 'http://77.126.1.218:3060/user',
-    data: null,
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
     success: function(data) {
-        $(".greetings").text(data.first_name + "'s offers");
+        details=data.result[0];
+        $(".greetings").text(details.first_name + "'s offers");
     },
     dataType: 'json'
 });
 
-function addOpenOffers(offers) {
-    for (let offer of state.offers) {
+// get user's opened offers from server
+$.ajax({
+    type:"GET",
+    url: 'http://77.126.1.218:3060/offer',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(data) {
+        openedOffers=data.result;
+        addOpenOffers();
+        /*combine();*/
+    },
+    dataType: 'json'
+});
+
+
+
+function addOpenOffers() {
+    for (i=0; i<openedOffers.length; i++) {
+        var offer=openedOffers[i];
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
             .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
         let textBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + offer.address))
-            .append($("<span></span>", {class: "offer-detail"}).text("Alternative Address: " + offer.alternativeAdd))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
         let contactBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + offer.phone))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + offer.Email))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.Date));
+            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
@@ -102,7 +133,7 @@ function addOpenOffers(offers) {
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed"));
 
         let card = $("<div></div>", {class: "card offer-card"})
-            .append($("<h5></h5>", {class: "card-header"}).text(offer.currency))
+            .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
             .append(cardBody)
             .append(textBody)
             .append(contactBody)
@@ -112,13 +143,3 @@ function addOpenOffers(offers) {
     }
 }
 
-
-// get user's rquested offers from server
-$.ajax({
-    type:"GET",
-    url: config.host+ '/offer',
-    success: function(data) {
-        addOpenOffers(data)
-    },
-    dataType: 'json'
-});

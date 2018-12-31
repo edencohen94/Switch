@@ -31,6 +31,7 @@ html,body{
 .image-container{
     position: relative;
     margin-top: 15px;
+    width: 400px;
 }
 .logo-img {
     background-image: url("../../imgs/logo.png");
@@ -79,5 +80,4 @@ html,body{
 
 .info-container{
     background-color: #e9f3f4;
-    width: 600px;
 }

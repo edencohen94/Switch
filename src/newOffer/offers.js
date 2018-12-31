@@ -33,21 +33,21 @@ for (let currency of config.currencies) {
 function offerButton() {
     $.ajax({
         type:"POST",
-        url: 'http://192.168.43.91:3060/offer',
-        data: getDeatils(),
+        url: 'http://77.126.1.218:3060/offer',
+        data: getDetils(),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
-        dataType: 'jsonp',
+        dataType: 'json',
         success: function (data) {
-            console.log(data);
+            window.location.href = '../homePage/newHome.html';
         }
 
     });
 }
 
-function getDeatils() {
+function getDetils() {
     let data = {};
     data.offered_currency=$('#dropdownMainCurrency').val();
     data.amount = $('#inputAmount').val();
