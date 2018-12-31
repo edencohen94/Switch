@@ -136,11 +136,11 @@ function funAdd(offers) {
         for (var i = page-maxrows; i < page && i<len ; i++) {
             var offer = offers[i]
             let amount = $("<a></a>").text(offer.amount);
-            let curr = $("<a></a>").text(offer.offered_currency);
-            let preferred = $("<a></a>").text(offer.main_currency);
-            let city = $("<a></a>").text(offer.city_1);
-            let lastUpdate = $("<a></a>").text(offer.date);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+            let curr = $("<a></a>").text(offer.currency);
+            let preferred = $("<a></a>").text(offer.preferredCurr);
+            let city = $("<a></a>").text(offer.city);
+            let lastUpdate = $("<a></a>").text(offer.lastUpdate);
+            convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
@@ -169,12 +169,12 @@ function funRem(offers){
         }
         for (var i = page - maxrows; i < page ; i++) {
             var offer = offers[i]
-            let amount = $("<a></a>").text(offer.amount);
-            let curr = $("<a></a>").text(offer.offered_currency);
-            let preferred = $("<a></a>").text(offer.main_currency);
-            let city = $("<a></a>").text(offer.city_1);
-            let lastUpdate = $("<a></a>").text(offer.date);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+            let amount = $("<a></a>").text(offer["amount"]);
+            let curr = $("<a></a>").text(offer["currency"]);
+            let preferred = $("<a></a>").text(offer["preferredCurr"]);
+            let city = $("<a></a>").text(offer["city"]);
+            let lastUpdate = $("<a></a>").text(offer.lastUpdate);
+            convertCurreny(offer.preferredCurr,offer.currency,parseInt(offer.amount),i);
             var el = $('<div>', {id: 'results' + i, class: 'result container'});
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);

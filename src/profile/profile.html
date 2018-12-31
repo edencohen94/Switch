@@ -6,244 +6,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--login CSS-->
-    <link rel="stylesheet" href="">
-
-    <!--script-->
-    <script type="text/javascript" src="./profile.js" defer/>
+    <link rel="stylesheet" href="profile.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    <!--script-->
+    <script type="text/javascript" src="./profile.js" defer/>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            crossorigin="anonymous"
             defer></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
             defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
             defer></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+
     <title>SWITCH</title>
 </head>
 <body class="text-center">
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
+<div class="main-container">
+    <div class="navbar-container">
+        <div class="pos-f-t stick-to-top">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-dark p-3 menu-items">
+                    <span class="text-white nav-item" href="#">Home</span>
+                    <span class="text-white nav-item" href="#">Offers</span>
+                    <span class="text-white nav-item" href="#">My Profile</span>
+                    <span class="text-white nav-item" href="#">Logout</span>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        Kshiti Ghelani
-                    </h5>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Open Offers</a>
-                        </li>
-                    </ul>
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler no-focus" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="../../imgs/logo.png" class="logo-img no-focus"/>
+            </nav>
+        </div>
+    </div>
+    <div class ="container profile-container">
+        <div class="d-flex justify-content-center  h-100">
+            <div class ="row">
+                <div class="col-12">
+                    <div class="image-container">
+                        <img src="https://img.icons8.com/android/50/000000/user.png" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                        <div class="btn-change">
+                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                            <input type="file" style="display: none;" id="profilePicture" name="file" />
+                        </div>
+                    </div>
+                    <div class="container info-container">
+                        <div class = "row">
+                        <div class="col-md-6">
+                            <span class = "firstName" style="font-weight:bold;">First Name</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="firstname" class="firstname"></div>
+                        </div>
+                    </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "lastName" style="font-weight:bold;">Last Name</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="lastname" class="lastname"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Email" style="font-weight:bold;">Email</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="email" class="email"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Phone" style="font-weight:bold;">Phone</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="phone" class="phone"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Address" style="font-weight:bold;">Main Address</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="address" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "city" style="font-weight:bold;">Main City</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="city" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Address2" style="font-weight:bold;">Secondary Address</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="address2" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "city2" style="font-weight:bold;">Secondary City</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="city2" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Primary-Currency" style="font-weight:bold">Primary Currency</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="pcurrency" class="pcurrency"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Secondary-Currency" style="font-weight:bold;">Secondary Currency</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="scurrency" class="scurrency"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <input onclick="location.href='../profileEdit/profileEdit.html'" type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
             </div>
         </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Kshiti Ghelani</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>kshitighelani@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Phone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>123 456 7890</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <label>Address</label>
-                          </div>
-                            <div class="col-md-6">
-                                <p>israel 123,tel aviv, israel</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Zip</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>123456</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Primary Currency</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Dollars</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Secondary Currency</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Euro</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table id="mytable" class="table table-bordred table-striped">
-                                            <thead>
-                                            <th><input type="checkbox" id="checkall" /></th>
-                                            <th>Last Update</th>
-                                            <th>Amount</th>
-                                            <th>Currency</th>
-                                            <th>My preferred Currency</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkthis" /></td>
-                                                <td>13.12.2018</td>
-                                                <td>400</td>
-                                                <td>U.S Dollars</td>
-                                                <td>Euro</td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkthis" /></td>
-                                                <td>13.12.2018</td>
-                                                <td>400</td>
-                                                <td>U.S Dollars</td>
-                                                <td>Euro</td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkthis" /></td>
-                                                <td>13.12.2018</td>
-                                                <td>400</td>
-                                                <td>U.S Dollars</td>
-                                                <td>Euro</td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkthis" /></td>
-                                                <td>13.12.2018</td>
-                                                <td>400</td>
-                                                <td>U.S Dollars</td>
-                                                <td>Euro</td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkthis" /></td>
-                                                <td>13.12.2018</td>
-                                                <td>400</td>
-                                                <td>U.S Dollars</td>
-                                                <td>Euro</td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input class="form-control " type="text" placeholder="400">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea rows="2" class="form-control" placeholder="U.S Dollars"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control " type="text" placeholder="Euro">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer ">
-                                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-                                    </div>
-                                    <div class="modal-footer ">
-                                        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    </div>
+</div>
+</div>
 </body>
 </html>

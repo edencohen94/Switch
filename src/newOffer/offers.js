@@ -27,3 +27,33 @@ for (let currency of config.currencies) {
         preferred2 = (event.target).text;
         $("#dropdownPreffered2").val(preferred2);
     });
+
+
+
+function offerButton() {
+    $.ajax({
+        type:"POST",
+        url: 'http://192.168.43.91:3060/offer',
+        data: getDeatils(),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'jsonp',
+        success: function (data) {
+            console.log(data);
+        }
+
+    });
+}
+
+function getDeatils() {
+    let data = {};
+    data.offered_currency=$('#dropdownMainCurrency').val();
+    data.amount = $('#inputAmount').val();
+    data.main_currency=$('#dropdownPreffered1').val();
+    data.secondary_currency=$('#dropdownPreffered2').val();
+    data.description = $('#inputFreeText').val();
+    return data
+
+}

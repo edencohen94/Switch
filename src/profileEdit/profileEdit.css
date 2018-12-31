@@ -56,6 +56,13 @@ html,body{
     -ms-transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
 .image-container:hover .image {
     opacity: 0.3;
 }
@@ -76,8 +83,24 @@ html,body{
     padding-top: 15px;
     overflow-y: auto;
 }
-
-.info-container{
-    background-color: #e9f3f4;
-    width: 600px;
+.inputName{
+    margin-right: 50px;
+}
+.inputEmail{
+    margin-right: 50px;
+}
+.inputPhone{
+    margin-right: 50px;
+}
+.inputAddress{
+    margin-right: 50px;
+}
+.inputZip{
+    margin-right: 50px;
+}
+.inputPcurrency{
+    margin-right: 50px;
+}
+.inputScurrency{
+    margin-right: 50px;
 }
