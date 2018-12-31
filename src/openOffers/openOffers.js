@@ -85,10 +85,10 @@ function addOpenOffers(offers) {
     for (let offer of state.offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
-            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.preferredCurrency))
+            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
         let textBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(offer.FreeText))
+            .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
             .append($("<span></span>", {class: "offer-detail"}).text("Address: " + offer.address))
             .append($("<span></span>", {class: "offer-detail"}).text("Alternative Address: " + offer.alternativeAdd))
         let contactBody = $("<div></div>", {class: "card-body info-container"})
@@ -116,7 +116,7 @@ function addOpenOffers(offers) {
 // get user's rquested offers from server
 $.ajax({
     type:"GET",
-    url: 'http://77.126.1.218:3060/offer',
+    url: config.host+ '/offer',
     success: function(data) {
         addOpenOffers(data)
     },

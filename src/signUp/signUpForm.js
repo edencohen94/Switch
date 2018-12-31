@@ -25,12 +25,14 @@ $("#currency-dropdown2").click(function () {
 function signUpButton() {
     $.ajax({
         type:"POST",
-        url: 'http://192.168.43.91:3060/login',
+        url: config.host +'/signup',
         data: getDeatilsFromHtml(),
         crossDomain: true,
-        dataType: 'jsonp',
+        dataType: 'json',
+        "content-Type": 'application/json',
         success: function (data) {
             console.log(data);
+            window.location.href = '../homePage/newHome.html';
         }
 
     });
