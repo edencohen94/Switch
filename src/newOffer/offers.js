@@ -51,8 +51,8 @@ function getDetils() {
     let data = {};
     data.offered_currency=$('#dropdownMainCurrency').val();
     data.amount = $('#inputAmount').val();
-    data.main_currency=$('#dropdownPreffered1').val();
-    data.secondary_currency=$('#dropdownPreffered2').val();
+    data.main_currency=$('#dropdownPreffered1').val().split(" "))[3];;
+    data.secondary_currency=$('#dropdownPreffered2').val().split(" "))[3];;
     data.description = $('#inputFreeText').val();
     return data
 
