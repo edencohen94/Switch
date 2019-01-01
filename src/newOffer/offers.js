@@ -49,7 +49,7 @@ function offerButton() {
 
 function getDetils() {
     let data = {};
-    data.offered_currency=$('#dropdownMainCurrency').val();
+    data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[3];
     data.amount = $('#inputAmount').val();
     data.main_currency=($('#dropdownPreffered1').val().split(" "))[3];
     data.secondary_currency=($('#dropdownPreffered2').val().split(" "))[3];

@@ -34,7 +34,6 @@ function signUpButton() {
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {
-            console.log(data);
             window.location.href = '../homePage/newHome.html';
         }
 
