@@ -52,8 +52,8 @@ function getDeatilsFromHtml() {
     data.address_2 = $('#inputAddress2').val();
     data.city_1 = $('#inputCity').val();
     data.city_2 = $('#inputCity2').val();
-    data.main_currency=$('#dropdownMenuOffset1').val();
-    data.secondary_currency=$('#dropdownMenuOffset2').val();
+    data.main_currency=($('#dropdownMenuOffset1').val().split(" "))[3];
+    data.secondary_currency=($('#dropdownMenuOffset2').val().split(" "))[3];
     return data
 
 }
