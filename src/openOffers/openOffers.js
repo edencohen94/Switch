@@ -72,17 +72,20 @@
 
 // get user's name for greeting
 $.ajax({
-    type:"POST",
-    url: 'http://77.126.1.218:3060/user',
-    data: null,
-    success: function(data) {
-        $(".greetings").text(data.first_name + "'s offers");
+    type: "POST",
+    url: config.host + '/user',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
     },
-    dataType: 'json'
+    dataType: 'json',
+    success: function (data) {
+        $(".greetings").text(data.result.first_name + "'s offers");
+    }
 });
 
 function addOpenOffers(offers) {
-    for (let offer of state.offers) {
+    for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
             .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.currency))
@@ -96,10 +99,25 @@ function addOpenOffers(offers) {
             .append($("<span></span>", {class: "offer-detail"}).text("Email: " + offer.Email))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.Date));
 
+
+        // create a button
+        let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
+
+        // assign it some data (the relevant offer-id)
+        deleteButton.data('offer-id', offer.offer_id);
+
+        // add a click listener
+        deleteButton.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            deleteOffer(this.data('offer-id'));
+        });
+
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete"))
+            .append(deleteButton)
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed"));
+
 
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.currency))
@@ -117,8 +135,12 @@ function addOpenOffers(offers) {
 $.ajax({
     type: "GET",
     url: config.host + '/offer',
-    success: function(data) {
-        addOpenOffers(data)
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
     },
-    dataType: 'json'
+    dataType: 'json',
+    success: function (data) {
+        addOpenOffers(data.result);
+    }
 });
