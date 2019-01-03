@@ -115,8 +115,8 @@ function addOpenOffers(offers) {
 
 // get user's rquested offers from server
 $.ajax({
-    type:"GET",
-    url: 'http://77.126.1.218:3060/offer',
+    type: "GET",
+    url: config.host + '/offer',
     success: function(data) {
         addOpenOffers(data)
     },
