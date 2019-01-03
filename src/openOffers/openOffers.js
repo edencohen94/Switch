@@ -112,6 +112,8 @@ function addOpenOffers(offers) {
             // so we want to get that button's offer-id
             deleteOffer(this.data('offer-id'));
         });
+        // deleteOffer will be a function that gets an id as a parameter
+        // and deletes that offer.
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
