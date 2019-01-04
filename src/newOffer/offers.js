@@ -27,3 +27,52 @@ for (let currency of config.currencies) {
         preferred2 = (event.target).text;
         $("#dropdownPreffered2").val(preferred2);
     });
+
+var opened=null;
+
+function offerButton() {
+    // get user's rquested offers from server
+    $.ajax({
+        type: "GET",
+        url: config.host + '/offer',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        success: function (data) {
+            opened=data.result;
+            console.log(opened);
+        }
+    });
+    if(opened!=null && opened.length<=5) {
+        $.ajax({
+            type:"POST",
+            url: config.host+'/offer',
+            data: getDetils(),
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: 'json',
+            success: function (data) {
+                window.location.href = '../homePage/newHome.html';
+            }
+        });
+    }
+    else{
+        alert("You have more than 5 opened offers!")
+    }
+
+}
+
+function getDetils() {
+    let data = {};
+    data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[3];
+    data.amount = $('#inputAmount').val();
+    data.main_currency=($('#dropdownPreffered1').val().split(" "))[3];
+    data.secondary_currency=($('#dropdownPreffered2').val().split(" "))[3];
+    data.description = $('#inputFreeText').val();
+    return data
+
+}

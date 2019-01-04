@@ -12,13 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <!--script-->
-    <script type="text/javascript" src="./profile.js" defer/>
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            crossorigin="anonymous"
+            defer></script>
+
+    <script src="../../config/config.js" defer></script>
+
+    <script type="text/javascript" src="profile.js" defer></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
-            defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
             defer></script>
@@ -31,74 +34,130 @@
 </head>
 <body class="text-center">
 <div class="main-container">
-<div class="navbar-container">
-    <div class="pos-f-t stick-to-top">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-3 menu-items">
-                <span class="text-white nav-item" href="#">Home</span>
-                <span class="text-white nav-item" href="#">Offers</span>
-                <span class="text-white nav-item" href="#">My Profile</span>
-                <span class="text-white nav-item" href="#">Logout</span>
-            </div>
-        </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler no-focus" type="button" data-toggle="collapse"
-                    data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <img src="../../imgs/logo.png" class="logo-img no-focus"/>
-        </nav>
-    </div>
-</div>
-<div class ="container profile-container">
-    <div class="d-flex justify-content-center  h-100">
-    <div class ="row">
-        <div class="col-12">
-            <div class="image-container">
-                <img src="https://img.icons8.com/android/50/000000/user.png" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-                <div class="btn-change">
-                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
-                    <input type="file" style="display: none;" id="profilePicture" name="file" />
+    <div class="navbar-container">
+        <div class="pos-f-t stick-to-top">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-dark p-3 menu-items">
+                    <a class="text-white nav-item" href="../homePage/newHome.html">Home |</a>
+                    <a class="text-white nav-item" href="../newOffer/offer.html">New Offer |</a>
+                    <a class="text-white nav-item" href="../openOffers/openOffers.html">open Offers |</a>
+                    <a class="text-white nav-item" href="../requestOffers/requestedOffers.html">requested offers |</a>
+                    <a class="text-white nav-item" href="../profile/profile.html">My Profile |</a>
+                    <a class="text-white nav-item" href="../signUp/signUpForm.html">Sign up |</a>
+                    <a class="text-white nav-item" href="../login/login.html">Login |</a>
+                    <a class="text-white nav-item" href="">Logout |</a>
                 </div>
             </div>
-            <div class="container info-container">
-            <div class = "row">
-                <span class = "Name" style="font-weight:bold;">Name</span>
-                <div id="name" class="name">name</div>
-            </div>
-            <div class = "row">
-                <span class = "Email" style="font-weight:bold;">Email</span>
-                <div id="email" class="email">email</div>
-            </div>
-            <div class = "row">
-                <span class = "Phone" style="font-weight:bold;">Phone</span>
-                <div id="phone" class="phone">phone</div>
-            </div>
-            <div class = "row">
-                <span class = "Address" style="font-weight:bold;">Address</span>
-                <div id="address" class="address">address</div>
-            </div>
-            <div class = "row">
-                <span class = "Zip" style="font-weight:bold;">Zip</span>
-                <div id="zip" class="zip">zip</div>
-            </div>
-            <div class = "row">
-                <span class = "Primary-Currency" style="font-weight:bold;">Primary Currency</span>
-                <div id="pcurrency" class="pcurrency">pcurrency</div>
-            </div>
-            <div class = "row">
-                <span class = "Secondary-Currency" style="font-weight:bold;">Secondary Currency</span>
-                <div id="scurrency" class="scurrency">scurrency</div>
-            </div>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <input onclick="location.href='../profileEdit/profileEdit.html'" type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler no-focus" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="../../imgs/logo.png" class="logo-img no-focus"/>
+            </nav>
         </div>
     </div>
-</div>
+    <div class ="container profile-container">
+        <div class="d-flex justify-content-center  h-100">
+            <div class ="row">
+                <div class="col-12">
+                    <div class="image-container">
+                        <img src="https://img.icons8.com/android/50/000000/user.png" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                        <div class="btn-change">
+                            <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                            <input type="file" style="display: none;" id="profilePicture" name="file" />
+                        </div>
+                    </div>
+                    <div class="container info-container">
+                        <div class = "row">
+                        <div class="col-md-6">
+                            <span class = "firstName" style="font-weight:bold;">First Name</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="firstname" class="firstname"></div>
+                        </div>
+                    </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "lastName" style="font-weight:bold;">Last Name</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="lastname" class="lastname"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Email" style="font-weight:bold;">Email</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="email" class="email"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Phone" style="font-weight:bold;">Phone</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="phone" class="phone"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Address" style="font-weight:bold;">Main Address</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="address" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "city" style="font-weight:bold;">Main City</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="city" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Address2" style="font-weight:bold;">Secondary Address</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="address2" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "city2" style="font-weight:bold;">Secondary City</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="city2" class="address"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Primary-Currency" style="font-weight:bold">Primary Currency</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="pcurrency" class="pcurrency"></div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <span class = "Secondary-Currency" style="font-weight:bold;">Secondary Currency</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="scurrency" class="scurrency"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input onclick="location.href='../profileEdit/profileEdit.html'" type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 </body>
