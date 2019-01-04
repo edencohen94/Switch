@@ -150,9 +150,6 @@ function funAdd(offers) {
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
-            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
-
-
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
@@ -197,32 +194,10 @@ function funRem(offers){
     }
 }
 
-function postDeatils(){
-    $.ajax({
-        type:"POST",
-        url: config.host + '/offer/request-details',
-        data: getDeatils(),
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        dataType: 'json',
-        "content-Type": 'application/json',
-        success: function (data) {
-            console.log(data);
-            window.location.href = '../requestOffers/requestedOffers.html';
-        },
-        error: function(err) {
-            console.error(err);
-        }
-
-    });
-}
-
 function convertCurreny (fromCurr, toCurr, amount,i){
     // set endpoint and access key
-    endpoint = 'latest';
-    access_key = 'e3201b8ebf57138b968f3c9692754b28';
+    let endpoint = 'latest';
+    let access_key = 'e3201b8ebf57138b968f3c9692754b28';
     // get the most recent exchange rates via the "latest" endpoint:
    $.ajax({
         type:"GET",
@@ -233,6 +208,13 @@ function convertCurreny (fromCurr, toCurr, amount,i){
             $("#preferred" + i).html(finalRateExchange);
         }
     });
+}
+
+function commitConversion(data,fromCurr, toCurr, amount){
+    var exchangeRateTocurr=data.rates[toCurr];
+    var exchangeRateFromcurr= data.rates[fromCurr];
+    var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
+    return finalRateExchange
 }
 
 function getNextOffers() {
@@ -295,3 +277,8 @@ function getUserInfo(){
     });
 
 }
+
+$('#btn-next').click(getNextOffers);
+$('#btn-prev').click(getPreviousOffers);
+
+getNextOffers();
