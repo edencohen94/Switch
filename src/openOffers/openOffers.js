@@ -151,10 +151,23 @@ function addOpenOffers(offers) {
         // deleteOffer will be a function that gets an id as a parameter
         // and deletes that offer.
 
+        // create a button
+        let executeButton = ($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+
+        // assign it some data (the relevant offer-id)
+        executeButton.data('offer-id', offer.offer_id);
+
+        // add a click listener
+        executeButton.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            postStatus(this.data('offer-id'));
+        });
+
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append(deleteButton)
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed"));
+            .append(executeButton);
 
 
         let card = $("<div></div>", {class: "card offer-card"})
@@ -183,11 +196,14 @@ $.ajax({
         addOpenOffers(data.result);
     }
 });
-function postStatus(){
+    }
+}
+
+function postStatus(offer_id){
     $.ajax({
         type:"POST",
         url: 'http://77.126.1.218:3060/offer/claim-seller',
-        data: getOfferId(),
+        data: offer_id,
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -198,8 +214,21 @@ console.log("dffd")        },
     })
 }
 
-function getOfferId(){
-    data={}
-    data.offer_id = $('#offerId').val();
-    return data
+function deleteOffer(offer_id){
+    $.ajax({
+        type:"DELETE",
+        url: 'http://77.126.1.218:3060/offer',
+        data: offer_id,
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            console.log("dffd")
+        },
+        dataType: 'json'
+    })
 }
+
+
+
