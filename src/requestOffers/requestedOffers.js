@@ -148,7 +148,7 @@ function addRequested() {
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed"))
+            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).onclick(postStatus()).text("Executed"))
             .append($('<a/>', {href: ""}).append($('<img/>', {src: "../Images/like.png", width: '60', height: '60'})))
             .append($('<a/>', {href: ""}).append($('<img/>', {
                 src: "../Images/dislike.png",
@@ -165,6 +165,21 @@ function addRequested() {
 
         $(".offers-container").append(card);
     }
+}
+
+function postStatus(){
+    $.ajax({
+        type:"POST",
+        url: 'http://77.126.1.218:3060/offer/clain-buyer',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            //add to update status to pending to check both s
+        },
+        dataType: 'json'
+    })
 }
 
 

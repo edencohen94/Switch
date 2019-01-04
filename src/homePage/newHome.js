@@ -150,6 +150,9 @@ function funAdd(offers) {
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
+            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+
+
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
@@ -194,6 +197,28 @@ function funRem(offers){
     }
 }
 
+function postDeatils(){
+    $.ajax({
+        type:"POST",
+        url: config.host + '/offer/request-details',
+        data: getDeatils(),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        "content-Type": 'application/json',
+        success: function (data) {
+            console.log(data);
+            window.location.href = '../requestOffers/requestedOffers.html';
+        },
+        error: function(err) {
+            console.error(err);
+        }
+
+    });
+}
+
 function convertCurreny (fromCurr, toCurr, amount,i){
     // set endpoint and access key
     endpoint = 'latest';
@@ -208,13 +233,6 @@ function convertCurreny (fromCurr, toCurr, amount,i){
             $("#preferred" + i).html(finalRateExchange);
         }
     });
-}
-
-function commitConversion(data,fromCurr, toCurr, amount){
-    var exchangeRateTocurr=data.rates[toCurr];
-    var exchangeRateFromcurr= data.rates[fromCurr];
-    var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
-    return finalRateExchange
 }
 
 function getNextOffers() {
@@ -246,4 +264,34 @@ function getPreviousOffers() {
         }
 
     });
+}
+
+
+function getDeatils() {
+    let data = {};
+    data.amount = $('#amount').val();
+    data.offered_currency = $('#currency').val();
+    data.main_currency=$('#preferred').val();
+    data.date=$('#lastUpdate').val();
+    let user_id_to_look ={}
+    data.user_id = getUserInfo().find(x=>x.user_id === '1')
+
+    return data
+
+}
+
+function getUserInfo(){
+    $.ajax({
+        type:"GET",
+        url: config.host + '/offer/user',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        success: function(data) {
+            return data.result
+        }
+    });
+
 }

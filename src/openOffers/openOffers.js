@@ -116,6 +116,7 @@ function addOpenOffers() {
             .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("offerId" + offer.offer_id))
         let textBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
             .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
@@ -130,7 +131,22 @@ function addOpenOffers() {
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete"))
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed"));
+            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed").click(function (){
+                    $.ajax({
+                        type:"POST",
+                        url: 'http://77.126.1.218:3060/offer/claim-seller',
+                        data: getOfferId(),
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        success: function(data) {
+                            console.log("dffd")        },
+                        dataType: 'json'
+                    })
+            })
+
+            );
 
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
@@ -139,7 +155,29 @@ function addOpenOffers() {
             .append(contactBody)
             .append(cardButtons);
 
+
         $(".offers-container").append(card);
     }
 }
 
+
+function postStatus(){
+    $.ajax({
+        type:"POST",
+        url: 'http://77.126.1.218:3060/offer/claim-seller',
+        data: getOfferId(),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+console.log("dffd")        },
+        dataType: 'json'
+    })
+}
+
+function getOfferId(){
+    data={}
+    data.offer_id = $('#offerId').val();
+    return data
+}
