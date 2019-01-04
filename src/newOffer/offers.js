@@ -28,23 +28,42 @@ for (let currency of config.currencies) {
         $("#dropdownPreffered2").val(preferred2);
     });
 
-
+var opened=null;
 
 function offerButton() {
+    // get user's rquested offers from server
     $.ajax({
-        type:"POST",
-        url: 'http://77.126.1.218:3060/offer',
-        data: getDetils(),
+        type: "GET",
+        url: config.host + '/offer',
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         dataType: 'json',
         success: function (data) {
-            window.location.href = '../homePage/newHome.html';
+            opened=data.result;
+            console.log(opened);
         }
-
     });
+    if(opened!=null && opened.length<=5) {
+        $.ajax({
+            type:"POST",
+            url: config.host+'/offer',
+            data: getDetils(),
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: 'json',
+            success: function (data) {
+                window.location.href = '../homePage/newHome.html';
+            }
+        });
+    }
+    else{
+        alert("You have more than 5 opened offers!")
+    }
+
 }
 
 function getDetils() {

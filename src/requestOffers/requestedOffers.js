@@ -60,6 +60,17 @@
     ]
 };*/
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('-');
+}
 var details=[];
 var requestedOffers=[];
 var allOffers=[];
@@ -67,13 +78,13 @@ var myrequested=[];
 // get user's name for greeting
 $.ajax({
     type:"POST",
-    url: 'http://77.126.1.218:3060/user',
+    url: config.host +'/user',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
     },
     success: function(data) {
-        details=data.result[0];
+        details=data.result;
         $(".greetings").text(details.first_name + "'s requested offers");
     },
     dataType: 'json'
@@ -81,7 +92,7 @@ $.ajax({
 // get user's rquested offers from server
 $.ajax({
     type:"GET",
-    url: 'http://77.126.1.218:3060/offer/requested',
+    url: config.host + '/offer/requested',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
@@ -96,7 +107,7 @@ $.ajax({
 // get my requested offers
 $.ajax({
     type:"GET",
-    url: 'http://77.126.1.218:3060/offer/all-offers',
+    url: config.host + '/offer/all-offers',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
@@ -131,11 +142,11 @@ function addRequested() {
         var detailsOffer=myrequested[i];
         var offer=requestedOffers[i];
         let cardBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + detailsOffer.amount))
+            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + String(detailsOffer.amount)))
             .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + detailsOffer.offered_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + detailsOffer.main_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + detailsOffer.secondary_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
+            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
         let textBody = $("<div></div>", {class: "text info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text(detailsOffer.description))
         let contectBody = $("<div></div>", {class: "card-body info-container"})

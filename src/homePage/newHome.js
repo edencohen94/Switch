@@ -1,3 +1,16 @@
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
+
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -125,6 +138,7 @@ var page=0;
 $("#btn_next").click();
 
 function funAdd(offers) {
+    var el;
     var len= offers.length;
     if(len-page>0) {
         page = page + maxrows;
@@ -134,14 +148,17 @@ function funAdd(offers) {
             }
         }
         for (var i = page-maxrows; i < page && i<len ; i++) {
-            var offer = offers[i]
+            var offer = offers[i];
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.offered_currency);
-            let preferred = $("<a></a>").text(offer.main_currency);
             let city = $("<a></a>").text(offer.city_1);
-            let lastUpdate = $("<a></a>").text(offer.date);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
-            var el = $('<div>', {id: 'results' + i, class: 'result container'});
+            let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+            if(offer.isActive){
+                el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
+            }
+            else{
+                el = $('<div>', {id: 'results' + i, class: 'result container'});
+            }
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
@@ -152,7 +169,10 @@ function funAdd(offers) {
 
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
-            $("#preferred" + i).append(preferred);
+            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+            if (offer.secondary_currency){
+                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+            }
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
             $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
@@ -162,6 +182,7 @@ function funAdd(offers) {
 }
 
 function funRem(offers){
+    var el;
     if(page>maxrows) {
         page = page - maxrows;
         for (var j = page; j < page+maxrows ; j++) {
@@ -171,11 +192,14 @@ function funRem(offers){
             var offer = offers[i]
             let amount = $("<a></a>").text(offer.amount);
             let curr = $("<a></a>").text(offer.offered_currency);
-            let preferred = $("<a></a>").text(offer.main_currency);
             let city = $("<a></a>").text(offer.city_1);
-            let lastUpdate = $("<a></a>").text(offer.date);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
-            var el = $('<div>', {id: 'results' + i, class: 'result container'});
+            let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+            if(offer.isActive){
+                el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
+            }
+            else{
+                el = $('<div>', {id: 'results' + i, class: 'result container'});
+            }
             var result = $(".topResults").append(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
@@ -186,7 +210,10 @@ function funRem(offers){
 
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
-            $("#preferred" + i).append(preferred);
+            convertCurreny(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
+            if (offer.secondary_currency){
+                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+            }
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
             $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
@@ -199,13 +226,16 @@ function convertCurreny (fromCurr, toCurr, amount,i){
     let endpoint = 'latest';
     let access_key = 'e3201b8ebf57138b968f3c9692754b28';
     // get the most recent exchange rates via the "latest" endpoint:
+    let preferred = $("<a></a>");
    $.ajax({
         type:"GET",
         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
         dataType: 'jsonp',
         success: function(data) {
             var finalRateExchange =  commitConversion(data,fromCurr,toCurr,amount)
-            $("#preferred" + i).html(finalRateExchange);
+            finalRateExchange = finalRateExchange.toFixed(2);
+            preferred.text(toCurr+'=' +finalRateExchange+ ' ');
+            $("#preferred" + i).append(preferred);
         }
     });
 }

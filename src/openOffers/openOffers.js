@@ -133,7 +133,7 @@ function addOpenOffers(offers) {
 }
 
 
-// get user's rquested offers from server
+// get user's opened offers from server
 $.ajax({
     type: "GET",
     url: config.host + '/offer',
