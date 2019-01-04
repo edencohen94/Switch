@@ -146,9 +146,23 @@ function addRequested() {
             .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
             .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone));
 
+
+        // create a button
+        let executeButton = ($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+
+        // assign it some data (the relevant offer-id)
+        executeButton.data('offer-id', offer.offer_id);
+
+        // add a click listener
+        executeButton.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            postStatus(this.data('offer-id'));
+        });
+
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).onclick(postStatus()).text("Executed"))
+            .append(executeButton)
             .append($('<a/>', {href: ""}).append($('<img/>', {src: "../Images/like.png", width: '60', height: '60'})))
             .append($('<a/>', {href: ""}).append($('<img/>', {
                 src: "../Images/dislike.png",
@@ -170,7 +184,7 @@ function addRequested() {
 function postStatus(){
     $.ajax({
         type:"POST",
-        url: 'http://77.126.1.218:3060/offer/clain-buyer',
+        url: config.host +'/offer/clain-buyer',
         crossDomain: true,
         xhrFields: {
             withCredentials: true

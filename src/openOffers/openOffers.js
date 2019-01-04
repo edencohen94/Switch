@@ -69,6 +69,7 @@
         }
     ]
 };*/
+var details=[];
 
 // get user's name for greeting
 $.ajax({
@@ -80,20 +81,10 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
-        $(".greetings").text(data.result.first_name + "'s offers");
-    }
-    type:"POST",
-    url: 'http://77.126.1.218:3060/user',
-    crossDomain: true,
-    xhrFields: {
-        withCredentials: true
-    },
-    success: function(data) {
         details=data.result[0];
-        $(".greetings").text(details.first_name + "'s offers");
-    },
-    dataType: 'json'
-});
+
+        $(".greetings").text(data.result.first_name + "'s offers");
+    }});
 
 // get user's opened offers from server
 $.ajax({
@@ -113,9 +104,7 @@ $.ajax({
 
 
 
-function addOpenOffers() {
-    for (i=0; i<openedOffers.length; i++) {
-        var offer=openedOffers[i];
+
 function addOpenOffers(offers) {
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
@@ -196,20 +185,20 @@ $.ajax({
         addOpenOffers(data.result);
     }
 });
-    }
-}
+
 
 function postStatus(offer_id){
     $.ajax({
         type:"POST",
-        url: 'http://77.126.1.218:3060/offer/claim-seller',
+        url: config.host+ '/offer/claim-seller',
         data: offer_id,
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         success: function(data) {
-console.log("dffd")        },
+        console.log("dffd")
+        },
         dataType: 'json'
     })
 }
@@ -217,7 +206,7 @@ console.log("dffd")        },
 function deleteOffer(offer_id){
     $.ajax({
         type:"DELETE",
-        url: 'http://77.126.1.218:3060/offer',
+        url: config.host+ '/offer',
         data: offer_id,
         crossDomain: true,
         xhrFields: {
