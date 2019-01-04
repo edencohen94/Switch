@@ -1,7 +1,4 @@
 
-var details=[];
-var openedOffers=[];
-
 
 // get user's name for greeting
 $.ajax({
@@ -77,7 +74,7 @@ function addOpenOffers(offers) {
         executeButton.click(function () {
             // here, this stands for the button that was clicked
             // so we want to get that button's offer-id
-            postStatus($(executeButton).data('offer-id'))    ;
+            postStatus($(this).data('offer-id'));
         });
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
@@ -106,7 +103,7 @@ function postStatus(offer_id){
     $.ajax({
         type:"POST",
         url: config.host+ '/offer/claim-seller',
-        data: offer_id,
+        data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -122,7 +119,7 @@ function deleteOffer(offer_id){
     $.ajax({
         type:"DELETE",
         url: config.host+ '/offer',
-        data: offer_id,
+        data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -132,6 +129,11 @@ function deleteOffer(offer_id){
         },
         dataType: 'json'
     });
+}
+function createNew(offer_id){
+    let data={}
+    data.offer_id=offer_id
+    return data
 }
 
 

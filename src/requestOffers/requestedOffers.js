@@ -1,154 +1,77 @@
-/*let state = {
-    username: "Ilan",
-    offers: [
-        {
-            amount: 300,
-            currency: "USD",
-            preferredCurrency: "Shekel",
-            city: "Tel-Aviv",
-            FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-            date: "21/12/2018"
-       },
-       {
-           amount: 500,
-           currency: "CAD",
-           preferredCurrency: "Shekel",
-          city: "Tel-Aviv",
-            FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-            date: "13/12/2018"
-        },
-        {
-            amount: 340,
-            currency: "HUF",
-            preferredCurrency: "Shekel",
-            city: "Tel-Aviv",
-            FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-           date: "04/12/2018"
-        },
-        {
-            amount: 560,
-            currency: "NZD",
-            preferredCurrency: "Shekel",
-            city: "Tel-Aviv",
-           FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-           date: "21/12/2018"
-      },
-     {
-       amount: 340,
-     currency: "HUF",
-            preferredCurrency: "Shekel",
-            city: "Tel-Aviv",
-            FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-           date: "04/12/2018"
-        },
-        {
-            amount: 560,
-            currency: "NZD",
-            preferredCurrency: "Shekel",
-            city: "Tel-Aviv",
-            FreeText: '"can meet on afternoon hours, please call me every day except sunday"',
-            date: "21/12/2018"
-        }
-    ],
-    detailsUsers:[
-        {
-            address: "Rabin 58, Tel Aviv",
-            phone: "0554958374",
-            Email: "blabla@gmail.com",
 
-    }
-    ]
-};*/
-
-var details=[];
-var requestedOffers=[];
-var allOffers=[];
-var myrequested=[];
 // get user's name for greeting
 $.ajax({
-    type:"POST",
-    url: 'http://77.126.1.218:3060/user',
+    type: "POST",
+    url: config.host + '/user',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
     },
-    success: function(data) {
-        details=data.result[0];
-        $(".greetings").text(details.first_name + "'s requested offers");
-    },
-    dataType: 'json'
+    dataType: 'json',
+    success: function (data) {
+        $(".greetings").text(data.result.first_name + "'s offers");
+    }
 });
+
 // get user's rquested offers from server
 $.ajax({
     type:"GET",
-    url: 'http://77.126.1.218:3060/offer/requested',
+    url: config.host+ '/offer/requested',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
     },
     success: function(data) {
-        requestedOffers=data.result;
-        combine();
+        addRequested(data.result);
     },
     dataType: 'json'
 });
 
-// get my requested offers
-$.ajax({
-    type:"GET",
-    url: 'http://77.126.1.218:3060/offer/all-offers',
-    crossDomain: true,
-    xhrFields: {
-        withCredentials: true
-    },
-    success: function(data) {
-        allOffers=data.result;
-        combine();
-    },
-    dataType: 'json'
-});
 
-function combine() {
-    var k = 0;
-    var j = 0
-    var i = 0
-    if (requestedOffers != null && allOffers != null) {
-        for (j = 0; j < requestedOffers.length; j++) {
-            for (i = 0; i < allOffers.length; i++) {
-                if (allOffers[i].offer_id == requestedOffers[j].offer_id) {
-                    myrequested[k] = allOffers[i];
-                    k++;
-                }
-            }
-     }
-    }
-    addRequested();
+// get offer
+function getOfferDetails(offer_id){
+    $.ajax({
+        type:"POST",
+        url: config.host+'/offer/specific',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        success: function(data) {
+            addSingleRequest(data.result)
+        }
+    });
 }
 
 
-function addRequested() {
-    for (i=0; i<requestedOffers.length; i++) {
-        var detailsOffer=myrequested[i];
-        var offer=requestedOffers[i];
-        let cardBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + detailsOffer.amount))
-            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + detailsOffer.offered_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + detailsOffer.main_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + detailsOffer.secondary_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
-        let textBody = $("<div></div>", {class: "text info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(detailsOffer.description))
-        let contectBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone));
+function addRequested(offers) {
+    for (let requestedoffer of offers) {
+        getOfferDetails(requestedoffer.offer_id);
+    }
 
+}
+
+    function addSingleRequest(offer) {
+        let cardBody = $("<div></div>", {class: "card-body info-container"})
+            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
+            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
+            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
+        let textBody = $("<div></div>", {class: "card-body info-container"})
+            .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + offer.address_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("City: " + offer.city_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + offer.address_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + offer.city_2))
+        let contactBody = $("<div></div>", {class: "card-body info-container"})
+            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + offer.phone))
+            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + offer.email))
+            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
 
         // create a button
-        let executeButton = ($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+        let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
 
         // assign it some data (the relevant offer-id)
         executeButton.data('offer-id', offer.offer_id);
@@ -171,29 +94,37 @@ function addRequested() {
             })));
 
         let card = $("<div></div>", {class: "card offer-card"})
-            .append($("<h5></h5>", {class: "card-header"}).text(detailsOffer.offered_currency))
+            .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
             .append(cardBody)
             .append(textBody)
-            .append(contectBody)
+            .append(contactBody)
             .append(cardButtons);
 
         $(".offers-container").append(card);
     }
-}
 
-function postStatus(){
+
+function postStatus(offer_id){
     $.ajax({
         type:"POST",
-        url: config.host +'/offer/clain-buyer',
+        url: config.host+ '/offer/claim-seller',
+        data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         success: function(data) {
-            //add to update status to pending to check both s
+            console.log("dffd")
         },
         dataType: 'json'
     });
+}
+
+
+function createNew(offer_id){
+    let data={}
+    data.offer_id=offer_id
+    return data
 }
 
 

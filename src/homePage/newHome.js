@@ -148,14 +148,17 @@ function funAdd(offers) {
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+            $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el);
+
 
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
+
             $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
+            el.getElementById("#details").addEventListener("click",postToRequestedOffers(offer.offer_id));
         }
 
     }
@@ -248,7 +251,6 @@ function getPreviousOffers() {
     });
 }
 
-
 function getDeatils() {
     let data = {};
     data.amount = $('#amount').val();
@@ -262,20 +264,26 @@ function getDeatils() {
 
 }
 
-function getUserInfo(){
+function postToRequestedOffers(offer_id){
     $.ajax({
-        type:"GET",
-        url: config.host + '/offer/user',
+        type:"POST",
+        url: config.host+ '/offer/request-details',
+        data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
-        dataType: 'json',
         success: function(data) {
-            return data.result
-        }
+            console.log("dffd")
+        },
+        dataType: 'json'
     });
+}
 
+function createNew(offer_id){
+    let data={}
+    data.offer_id=offer_id
+    return data
 }
 
 $('#btn-next').click(getNextOffers);
