@@ -193,7 +193,7 @@ function postStatus(){
             //add to update status to pending to check both s
         },
         dataType: 'json'
-    })
+    });
 }
 
 
