@@ -196,8 +196,8 @@ function funRem(offers){
 
 function convertCurreny (fromCurr, toCurr, amount,i){
     // set endpoint and access key
-    endpoint = 'latest';
-    access_key = 'e3201b8ebf57138b968f3c9692754b28';
+    let endpoint = 'latest';
+    let access_key = 'e3201b8ebf57138b968f3c9692754b28';
     // get the most recent exchange rates via the "latest" endpoint:
    $.ajax({
         type:"GET",
@@ -247,3 +247,8 @@ function getPreviousOffers() {
 
     });
 }
+
+$('#btn-next').click(getNextOffers);
+$('#btn-prev').click(getPreviousOffers);
+
+getNextOffers();
