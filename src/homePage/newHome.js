@@ -151,14 +151,28 @@ function funAdd(offers) {
             $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
 
+            // create a button
+            let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+
+            // assign it some data (the relevant offer-id)
+            askForDeatils.data('offer-id', offer.offer_id);
+
+
+            // add a click listener
+            askForDeatils.click(function () {
+                // here, this stands for the button that was clicked
+                // so we want to get that button's offer-id
+                postToRequestedOffers($(this).data('offer-id'));
+            });
+
+
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             $("#preferred" + i).append(preferred);
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
+            $("#details"+i).append(askForDeatils);
 
-            $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
-            el.getElementById("#details").addEventListener("click",postToRequestedOffers(offer.offer_id));
         }
 
     }
@@ -251,18 +265,7 @@ function getPreviousOffers() {
     });
 }
 
-function getDeatils() {
-    let data = {};
-    data.amount = $('#amount').val();
-    data.offered_currency = $('#currency').val();
-    data.main_currency=$('#preferred').val();
-    data.date=$('#lastUpdate').val();
-    let user_id_to_look ={}
-    data.user_id = getUserInfo().find(x=>x.user_id === '1')
 
-    return data
-
-}
 
 function postToRequestedOffers(offer_id){
     $.ajax({
@@ -275,6 +278,8 @@ function postToRequestedOffers(offer_id){
         },
         success: function(data) {
             console.log("dffd")
+            window.location.herf= "./requestOffers/requestedOffers.html"
+
         },
         dataType: 'json'
     });

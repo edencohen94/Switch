@@ -1,5 +1,5 @@
 
-
+var details =[];
 // get user's name for greeting
 $.ajax({
     type: "POST",
@@ -10,6 +10,7 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
+        details=data.result;
         $(".greetings").text(data.result.first_name + "'s offers");
     }
 });
@@ -38,13 +39,13 @@ function addOpenOffers(offers) {
             .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
         let textBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + offer.address_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("City: " + offer.city_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + offer.address_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + offer.city_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
         let contactBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + offer.phone))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + offer.email))
+            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
 
 
@@ -58,7 +59,7 @@ function addOpenOffers(offers) {
         deleteButton.click(function () {
             // here, this stands for the button that was clicked
             // so we want to get that button's offer-id
-            deleteOffer(this.data('offer-id'));
+            deleteOffer($(this).data('offer-id'));
         });
         //deleteOffer will be a function that gets an id as a parameter
         //and deletes that offer.
