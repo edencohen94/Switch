@@ -1,13 +1,13 @@
 // get user's name for greeting
 $.ajax({
     type:"POST",
-    url: 'http://77.126.1.218:3060/user',
+    url: config.host+ '/user',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
     },
     success: function(data) {
-        details=data.result[0];
+        details=data.result;
         $(".greetings").text(details.first_name +"'s profile");
         $("#inputFirstName").val(details.first_name);
         $("#inputLastName").val(details.last_name);
@@ -26,7 +26,7 @@ $.ajax({
 function submitChanges(){
     $.ajax({
         type:"POST",
-        url: 'http://77.126.1.218:3060/user',
+        url: config.host+ '/user',
         crossDomain: true,
         xhrFields: {
             withCredentials: true
