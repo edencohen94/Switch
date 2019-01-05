@@ -153,7 +153,6 @@ function funAdd(offers) {
 
             // create a button
             let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
-
             // assign it some data (the relevant offer-id)
             askForDeatils.data('offer-id', offer.offer_id);
 
@@ -277,9 +276,8 @@ function postToRequestedOffers(offer_id){
             withCredentials: true
         },
         success: function(data) {
+            window.location.herf= "../requestOffers/requestedOffers.html"
             console.log("dffd")
-            window.location.herf= "./requestOffers/requestedOffers.html"
-
         },
         dataType: 'json'
     });
