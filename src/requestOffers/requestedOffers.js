@@ -44,10 +44,12 @@ function getOfferDetails(offer_id){
         }
     });
 }
+
 function getUserDetails(offer_data, user_id){
     $.ajax({
         type: "POST",
         url: config.host + '/user',
+        data: createUser(user_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -187,6 +189,12 @@ function createRank(user_id, rank){
 function createNew(offer_id){
     let data={}
     data.offer_id=offer_id
+    return data
+}
+
+function createUser(user_id){
+    let data={}
+    data.user_id=user_id
     return data
 }
 
