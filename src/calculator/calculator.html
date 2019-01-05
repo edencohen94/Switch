@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--login CSS-->
-    <script type="text/javascript" src="../../config/config.js" defer></script>
-
-    <link rel="stylesheet" href="requestedOffers.css">
+    <link rel="stylesheet" href="calculator.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -19,8 +17,9 @@
             crossorigin="anonymous"
             defer></script>
 
+
     <script src="../../config/config.js" defer></script>
-    <script type="text/javascript" src="requestedOffers.js" defer></script>
+    <script type="text/javascript" src="calculator.js" defer></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -66,10 +65,25 @@
             <div class="greetings-container">
                 <h1 class="greetings text-in-center"></h1>
             </div>
-            <p class="lead text-in-center">Here you can see the offers you were interested in, verify that the switch was made or not, and rate your experience</p>
+            <p class="lead text-in-center" style="font-size: 50px;">Currency Converter Calculator</p>
             <hr class="my-4">
 
-            <div class="offers-container"></div>
+            <div class="calculator-container">
+                <div>
+                    <br><input  placeholder="Amount" id="inputAmount" type="text">
+                </div>
+                <br><div class="dropdown mr-1">
+                    <input type="button" value="From currency" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency" data-toggle="dropdown" >
+                    <div id="dropdownCurrency" class="dropdown-menu"></div>
+                </div>
+                <div id="imagediv"> <img src="../Images/arrow.jpg" height="60" width="60" /></div>
+                <div><br><div class="dropdown mr-1">
+                    <input type="button" value="To currency" class="btn btn-primary dropdown-toggle" id="dropdownMainCurrency2" data-toggle="dropdown" >
+                    <div id="dropdownCurrency2" class="dropdown-menu">
+                    </div>
+                </div><br>
+                <div> <button type="button" onclick="convertCurreny()" class="btn">convert</button></div><br>
+                <div id="result"></div>
 
         </div>
     </div>

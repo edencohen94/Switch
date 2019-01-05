@@ -110,7 +110,7 @@ function postStatus(offer_id){
             withCredentials: true
         },
         success: function(data) {
-        console.log("dffd")
+            console.log("dffd")
         },
         dataType: 'json'
     });

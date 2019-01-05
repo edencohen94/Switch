@@ -69,65 +69,79 @@ function addRequested(offers) {
 
 }
 
-    function addSingleRequest(offer,details) {
-        let cardBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
-            .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
-            .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
-        let textBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
-        let contactBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
+function addSingleRequest(offer,details) {
+    let cardBody = $("<div></div>", {class: "card-body info-container"})
+        .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
+        .append($("<span></span>", {class: "offer-detail"}).text("Currency: " + offer.offered_currency))
+        .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
+        .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
+    let textBody = $("<div></div>", {class: "card-body info-container"})
+        .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
+        .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+        .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+        .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+        .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+    let contactBody = $("<div></div>", {class: "card-body info-container"})
+        .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+        .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+        .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
 
-        // create a button
-        let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+    // create a button
+    let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
 
-        // assign it some data (the relevant offer-id)
-        executeButton.data('offer-id', offer.offer_id);
+    // assign it some data (the relevant offer-id)
+    executeButton.data('offer-id', offer.offer_id);
 
-        // add a click listener
-        executeButton.click(function () {
-            // here, this stands for the button that was clicked
-            // so we want to get that button's offer-id
-            postStatus($(this).data('offer-id'));
-        });
+    // add a click listener
+    executeButton.click(function () {
+        // here, this stands for the button that was clicked
+        // so we want to get that button's offer-id
+        postStatus($(this).data('offer-id'));
+    });
 
-        // create a button
-        let likebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}, {src: "../Images/like.png", width: '60', height: '60'});
+    // create a button
+    let likebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}, {src: "../Images/like.png", width: '60', height: '60'});
 
-        // assign it some data (the relevant offer-id)
-        likebutton.data('user-id',details.user_id);
-        likebutton.data('rank',1);
+    // assign it some data (the relevant offer-id)
+    likebutton.data('user-id',details.user_id);
+    likebutton.data('rank',1);
 
-        // add a click listener
-        likebutton.click(function () {
-            // here, this stands for the button that was clicked
-            // so we want to get that button's offer-id
-            postRank($(this).data('user-id'),$(this).data('rank'));
-        });
+    // add a click listener
+    likebutton.click(function () {
+        // here, this stands for the button that was clicked
+        // so we want to get that button's offer-id
+        postRank($(this).data('user-id'),$(this).data('rank'));
+    });
 
-        let cardButtons = $("<div></div>", {class: "ad-action-container"})
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
-            .append(executeButton)
-            .append(likebutton)
-            .append($('<a/>', {href: ""}).append($('<img/>', {src: "../Images/dislike.png", width: '60', height: '60'})));
+    // create a button
+    let unlikebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}, {src: "../Images/like.png", width: '60', height: '60'});
 
-        let card = $("<div></div>", {class: "card offer-card"})
-            .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
-            .append(cardBody)
-            .append(textBody)
-            .append(contactBody)
-            .append(cardButtons);
+    // assign it some data (the relevant offer-id)
+    unlikebutton.data('user-id',details.user_id);
+    unlikebutton.data('rank',-1);
 
-        $(".offers-container").append(card);
-    }
+    // add a click listener
+    unlikebutton.click(function () {
+        // here, this stands for the button that was clicked
+        // so we want to get that button's offer-id
+        postRank($(this).data('user-id'),$(this).data('rank'));
+    });
+
+    let cardButtons = $("<div></div>", {class: "ad-action-container"})
+        .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
+        .append(executeButton)
+        .append(likebutton)
+        .append($('<a/>', {href: ""}).append($('<img/>', {src: "../Images/dislike.png", width: '60', height: '60'})));
+
+    let card = $("<div></div>", {class: "card offer-card"})
+        .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
+        .append(cardBody)
+        .append(textBody)
+        .append(contactBody)
+        .append(cardButtons);
+
+    $(".offers-container").append(card);
+}
 
 
 function postStatus(offer_id){

@@ -1,13 +1,13 @@
-// get user's name for greeting
+
 $.ajax({
     type:"POST",
-    url: 'http://77.126.1.218:3060/user',
+    url: config.host+'/user',
     crossDomain: true,
     xhrFields: {
         withCredentials: true
     },
     success: function(data) {
-        details=data.result[0];
+        details=data.result;
         $(".greetings").text(details.first_name +"'s profile");
         $("#firstname").append(details.first_name);
         $("#lastname").append(details.last_name);
