@@ -1,6 +1,7 @@
 
 var details =[];
 // get user's name for greeting
+
 $.ajax({
     type: "POST",
     url: config.host + '/user',
@@ -25,12 +26,12 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
-        addOpenOffers(data.result);
+        addOpenOffers(data.result,details);
     }
 });
 
 
-function addOpenOffers(offers) {
+function addOpenOffers(offers,details) {
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
