@@ -48,7 +48,7 @@ function getOfferDetails(offer_id){
 function getUserDetails(offer_data, user_id){
     $.ajax({
         type: "POST",
-        url: config.host + '/user',
+        url: config.host + '/user/specific',
         data: createUser(user_id),
         crossDomain: true,
         xhrFields: {
@@ -56,7 +56,7 @@ function getUserDetails(offer_data, user_id){
         },
         dataType: 'json',
         success: function (data) {
-            addSingleRequest(offer_data, data.result[0])
+            addSingleRequest(offer_data, data.result)
             $(".greetings").text(data.result.first_name + "'s offers");
         }
     });
@@ -98,11 +98,11 @@ function addSingleRequest(offer,details) {
     executeButton.click(function () {
         // here, this stands for the button that was clicked
         // so we want to get that button's offer-id
-        postStatus($(this).data('offer-id'));
+            postStatus($(this).data('offer-id'));
     });
 
     // create a button
-    let likebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}, {src: "../Images/like.png", width: '60', height: '60'});
+    let likebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"});
 
     // assign it some data (the relevant offer-id)
     likebutton.data('user-id',details.user_id);
@@ -116,7 +116,7 @@ function addSingleRequest(offer,details) {
     });
 
     // create a button
-    let unlikebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}, {src: "../Images/like.png", width: '60', height: '60'});
+    let unlikebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"});
 
     // assign it some data (the relevant offer-id)
     unlikebutton.data('user-id',details.user_id);
@@ -133,7 +133,7 @@ function addSingleRequest(offer,details) {
         .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
         .append(executeButton)
         .append(likebutton)
-        .append($('<a/>', {href: ""}).append($('<img/>', {src: "../Images/dislike.png", width: '60', height: '60'})));
+        .append(unlikebutton)
 
     let card = $("<div></div>", {class: "card offer-card"})
         .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
@@ -149,14 +149,14 @@ function addSingleRequest(offer,details) {
 function postStatus(offer_id){
     $.ajax({
         type:"POST",
-        url: config.host+ '/offer/claim-seller',
+        url: config.host+ '/offer/claim-buyer',
         data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         success: function(data) {
-            console.log("dffd")
+            console.log("success to update claim by the buyer")
         },
         dataType: 'json'
     });
@@ -180,21 +180,21 @@ function postRank(user_id, rank){
 
 
 function createRank(user_id, rank){
-    let data={}
-    data.user_id=user_id
-    data.rank=rank
+    let data={};
+    data.user_id=user_id;
+    data.rank=rank;
     return data
 }
 
 function createNew(offer_id){
-    let data={}
-    data.offer_id=offer_id
+    let data={};
+    data.offer_id=offer_id;
     return data
 }
 
 function createUser(user_id){
-    let data={}
-    data.user_id=user_id
+    let data={};
+    data.user_id=user_id;
     return data
 }
 
