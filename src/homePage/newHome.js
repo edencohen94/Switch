@@ -165,7 +165,22 @@ function funAdd(offers) {
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+            $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el);
+
+
+            // create a button
+            let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+            // assign it some data (the relevant offer-id)
+            askForDeatils.data('offer-id', offer.offer_id);
+
+
+            // add a click listener
+            askForDeatils.click(function () {
+                // here, this stands for the button that was clicked
+                // so we want to get that button's offer-id
+                postToRequestedOffers($(this).data('offer-id'));
+            });
+
 
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
@@ -175,7 +190,8 @@ function funAdd(offers) {
             }
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
+            $("#details"+i).append(askForDeatils);
+
         }
 
     }
@@ -276,6 +292,31 @@ function getPreviousOffers() {
         }
 
     });
+}
+
+
+
+function postToRequestedOffers(offer_id){
+    $.ajax({
+        type:"POST",
+        url: config.host+ '/offer/request-details',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            window.location.herf= "../requestOffers/requestedOffers.html"
+            console.log("dffd")
+        },
+        dataType: 'json'
+    });
+}
+
+function createNew(offer_id){
+    let data={}
+    data.offer_id=offer_id
+    return data
 }
 
 $('#btn-next').click(getNextOffers);

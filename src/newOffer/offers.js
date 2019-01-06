@@ -41,31 +41,32 @@ function offerButton() {
         },
         dataType: 'json',
         success: function (data) {
-            opened=data.result;
-            console.log(opened);
+            opened=data.result.length;
+            if(opened<5){
+                postNewRequest()
+            }
+            else{
+                alert("You have more than 5 opened offers!")
+            }
         }
     });
-    if(opened!=null && opened.length<=5) {
-        $.ajax({
-            type:"POST",
-            url: config.host+'/offer',
-            data: getDetils(),
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
-            dataType: 'json',
-            success: function (data) {
-                window.location.href = '../homePage/newHome.html';
-            }
-        });
-    }
-    else{
-        alert("You have more than 5 opened offers!")
-    }
-
 }
 
+function postNewRequest(){
+    $.ajax({
+        type:"POST",
+        url: config.host+'/offer',
+        data: getDetils(),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        success: function (data) {
+            window.location.href = '../homePage/newHome.html';
+        }
+    });
+}
 function getDetils() {
     let data = {};
     data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[3];
