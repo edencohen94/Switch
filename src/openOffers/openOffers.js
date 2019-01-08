@@ -16,6 +16,21 @@ $.ajax({
     }
 });
 
+function getName(user_id){
+    $.ajax({
+        type:"POST",
+        url: config.host + '/user',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            $.text(data.result.first_name);
+        }
+    });
+}
+
+
 // get user's rquested offers from server
 $.ajax({
     type: "GET",
@@ -27,8 +42,55 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         addOpenOffers(data.result,details);
+        addPopUp(data.result,details);
     }
 });
+
+let temp ={
+    "executed_lst": [{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
+    {"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
+    {"user_id":1,"offer_id":10,"claimed_by_buyer":true,"claimed_by_seller":true,"date":"2018-12-27T22:00:00.000Z"}
+]
+}
+
+function addPopUp(offers,details) {
+    for (let offer of offers) {
+        if(offer.executed_lst.size !=0 ) {
+            for (let user of temp.executed_lst){
+                let textBody = $("<div></div>", {class: "card-body info-container"})
+                    .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
+                        "  <div class=\"modal-dialog\" role=\"document\">\n" +
+                        "    <div class=\"modal-content\">\n" +
+                        "      <div class=\"modal-header\">\n" +
+                        "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                        "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
+                        "      </div>\n" +
+                        "      <div class=\"modal-body\">\n" +
+                        //$("<span></span>".text(getName.data(user.user_id) + "says an exchange was made for this offer do you confirm?"))
+                        "      </div>\n" +
+                        //let modalFooter = $("<div></div>", {class: "modal-footer"})
+                        "      <div class=\"modal-footer\">\n" +
+                        "        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">No</button>   \n" +
+                        "        <button type=\"button\" class=\"btn btn-primary\">Yes</button>\n" +
+                        "      </div>\n" +
+                        "    </div><!-- /.modal-content -->\n" +
+                        "  </div><!-- /.modal-dialog -->\n" +
+                        "</div><!-- /.modal -->")
+            }
+        }
+        // create a button
+        let confirmButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+        // assign it some data (the relevant offer-id)
+        confirmButton.data('offer-id', offer.offer_id);
+        // add a click listener
+        confirmButton.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            postStatus($(this).data('offer-id'));
+        });
+    }
+}
+
 
 
 function addOpenOffers(offers,details) {
@@ -48,7 +110,6 @@ function addOpenOffers(offers,details) {
             .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
             .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
-
 
         // create a button
         let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
