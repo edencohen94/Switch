@@ -57,7 +57,8 @@ function addPopUp(offers,details) {
     for (let offer of offers) {
         if(offer.executed_lst.size !=0 ) {
             for (let user of temp.executed_lst){
-                let textBody = $("<div></div>", {class: "card-body info-container"})
+                varName = getName.data(user.user_id);
+                let popBody = $("<div></div>", {class: "main-container"})
                     .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
                         "  <div class=\"modal-dialog\" role=\"document\">\n" +
                         "    <div class=\"modal-content\">\n" +
@@ -66,7 +67,7 @@ function addPopUp(offers,details) {
                         "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
                         "      </div>\n" +
                         "      <div class=\"modal-body\">\n" +
-                        //$("<span></span>".text(getName.data(user.user_id) + "says an exchange was made for this offer do you confirm?"))
+                        "          <p> .text(varName + \"says an exchange was made for this offer. Do you confirm?\") </p>\n" +
                         "      </div>\n" +
                         //let modalFooter = $("<div></div>", {class: "modal-footer"})
                         "      <div class=\"modal-footer\">\n" +
