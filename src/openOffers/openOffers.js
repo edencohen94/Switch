@@ -53,50 +53,49 @@ let temp ={
 ]
 }
 
-$('#modal-fade').modal('toggle')
 
 
-function addPopUp(offers,details) {
-    //for (let offer of offers) {
-    //if(offer.executed_lst.size !=0 ) {
-    //for (let user of temp.executed_lst){
-    varName = getName.data(user.user_id);
-    let popBody = $("<div></div>", {class: "main-container"})
-        .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
-            "  <div class=\"modal-dialog\" role=\"document\">\n" +
-            "    <div class=\"modal-content\">\n" +
-            "      <div class=\"modal-header\">\n" +
-            "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
-            "        <span aria-hidden=\"true\">&times;</span></button>\n" +
-    "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
-    "      </div>\n" +
-    "      <div class=\"modal-body\">\n" +
-    "          <p> .text(varName + \"says an exchange was made for this offer. Do you confirm?\") </p>\n" +
-    "      </div>\n" +
-    "      <div class=\"modal-footer\">\n" +
-    "      </div>\n" +
-    "    </div><!-- /.modal-content -->\n" +
-    "  </div><!-- /.modal-dialog -->\n" +
-    "</div><!-- /.modal -->")
-    //}
-    //}
-    // create a button
-    let confirmButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-    // assign it some data (the relevant offer-id)
-    confirmButton.data('offer-id', offer.offer_id);
-    // add a click listener
-    confirmButton.click(function () {
-        // here, this stands for the button that was clicked
-        // so we want to get that button's offer-id
-        postStatus($(this).data('offer-id'));
-    });
-
-    $(".modal-footer").append($("<button></button>", {class: "btn btn-default"}).text("NO"));
-    $(".modal-footer").append(confirmButton)
-
-    $(".main-container").append(popBody);
-    //}
-}
+// function addPopUp(offers,details) {
+//     //for (let offer of offers) {
+//     //if(offer.executed_lst.size !=0 ) {
+//     //for (let user of temp.executed_lst){
+//     varName = getName.data(user.user_id);
+//     let popBody = $("<div></div>", {class: "main-container"})
+//         .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
+//             "  <div class=\"modal-dialog\" role=\"document\">\n" +
+//             "    <div class=\"modal-content\">\n" +
+//             "      <div class=\"modal-header\">\n" +
+//             "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
+//             "        <span aria-hidden=\"true\">&times;</span></button>\n" +
+//     "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
+//     "      </div>\n" +
+//     "      <div class=\"modal-body\">\n" +
+//     "          <p> .text(varName + \"says an exchange was made for this offer. Do you confirm?\") </p>\n" +
+//     "      </div>\n" +
+//     "      <div class=\"modal-footer\">\n" +
+//     "      </div>\n" +
+//     "    </div><!-- /.modal-content -->\n" +
+//     "  </div><!-- /.modal-dialog -->\n" +
+//     "</div><!-- /.modal -->")
+//     //}
+//     //}
+//     // create a button
+//     let confirmButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+//     // assign it some data (the relevant offer-id)
+//     confirmButton.data('offer-id', offer.offer_id);
+//     // add a click listener
+//     confirmButton.click(function () {
+//         // here, this stands for the button that was clicked
+//         // so we want to get that button's offer-id
+//         postStatus($(this).data('offer-id'));
+//     });
+//
+//     $(".modal-footer").append($("<button></button>", {class: "btn btn-default"}).text("NO"));
+//     $(".modal-footer").append(confirmButton)
+//
+//     $(".main-container").append(popBody);
+//     //}
+// }
 
 function addOpenOffers(offers,details) {
     for (let offer of offers) {
@@ -165,6 +164,7 @@ function addOpenOffers(offers,details) {
 }
 
 
+$('#modal-fade').modal('toggle');
 
 
 
