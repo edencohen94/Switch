@@ -100,6 +100,7 @@ $('#myModal').modal('toggle')
 // }
 
 function addOpenOffers(offers,details) {
+    let requestedOffers =  $("<div></div>", {class: "info-container"})
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
@@ -138,7 +139,6 @@ function addOpenOffers(offers,details) {
         // assign it some data (the relevant offer-id)
         executeButton.data('offer-id', offer.offer_id);
 
-
         // add a click listener
         executeButton.click(function () {
             // here, this stands for the button that was clicked
@@ -146,11 +146,43 @@ function addOpenOffers(offers,details) {
             postStatus($(this).data('offer-id'));
         });
 
+        //there are users that claimed the offer done
+        if(offer.requestedBy.length>0){
+            //need to add all users
+            for(i=0;i<offer.requestedBy.length;i++){
+                let userStatus = // add div for user
+                    let user_name= getName(offer.requestedBy[i].user_id);
+                    let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+
+                    executeButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                executeButton.click(function () {
+                    // here, this stands for the button that was clicked
+                    // so we want to get that button's offer-id
+                    postStatus($(this).data('offer-id'));
+                });
+                let NotexecuteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("NotExecuted");
+
+                NotexecuteButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                NotexecuteButton.click(function () {
+                    //ask tamir which route should i put
+                    postStatus($(this).data('offer-id'));
+                });
+                userStatus.append(user_name+"user name claim the offer.......")
+                userStatus.append(executeButton)
+                userStatus.append(NotexecuteButton)
+                requestedOffers.append(userStatus)
+            }
+
+        }
+
+
+
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append(deleteButton)
             .append(executeButton);
-
 
 
         let card = $("<div></div>", {class: "card offer-card"})
@@ -163,6 +195,9 @@ function addOpenOffers(offers,details) {
 
         $(".offers-container").append(card);
     }
+
+    $(".modal-body").append(requestedOffers);
+
 }
 
 
