@@ -53,6 +53,8 @@ let temp ={
 ]
 }
 
+$('#myModal').modal('toggle')
+
 
 
 // function addPopUp(offers,details) {
@@ -164,7 +166,6 @@ function addOpenOffers(offers,details) {
 }
 
 
-$('#modal-fade').modal('toggle');
 
 
 
