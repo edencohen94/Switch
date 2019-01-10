@@ -46,14 +46,8 @@ $.ajax({
     }
 });
 
-let temp ={
-    "executed_lst": [{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
-    {"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
-    {"user_id":1,"offer_id":10,"claimed_by_buyer":true,"claimed_by_seller":true,"date":"2018-12-27T22:00:00.000Z"}
-]
-}
 
-$('#myModal').modal('toggle')
+$('#myModal').modal('toggle');
 
 
 
