@@ -71,13 +71,18 @@ let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"d
 
 $('#myModal').modal('toggle');
 
+addRequested(offers)
 function addRequested(offers) {
-    var currTime = + new Date();
+
+    let currDay = new Date().toLocaleDateString()
     let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
-        getOfferDetails(requestedoffer.offer_id);
-
-        var timeDiff = Math.abs(currTime.getTime() - requestedoffer.date );
+        //getOfferDetails(requestedoffer.offer_id);
+        //let offerDay = requestedoffer.date.toLocaleDateString()
+        let da= offer.date.split("T");
+        let dd= da[0].split("-");
+        let offerDay = new Date("dd[2]/dd[1]/dd[0]")
+        var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
         console.log(diffDays)
 
