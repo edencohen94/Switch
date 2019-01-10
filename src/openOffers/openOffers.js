@@ -39,7 +39,7 @@ function getUserDetails(user_id){
         dataType: 'json',
         success: function (data) {
             userRes++;
-            addDeatilsToModal(data.result.first_name);
+           // addDeatilsToModal(data.result.first_name);
 
         }
     });
@@ -64,12 +64,10 @@ $.ajax({
     }
 });
 
-/*
 $('#myModal').modal({
     backdrop: 'static',
     keyboard: false
 });
-*/
 
 
 
@@ -163,7 +161,7 @@ function addpopUp(offers){
                     let userStatus = getUserDetails(offer.requestedBy[i].user_id);
                     requestedOffers.append(userStatus);
 
-                    /* //let user_name = "dkfls";
+                    let user_name = "dkfls";
                      let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
                      executeButton.data('offer-id', offer.offer_id);
@@ -187,7 +185,7 @@ function addpopUp(offers){
                      userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
                      userStatus.append(executeButton)
                      userStatus.append(NotexecuteButton)
-                     requestedOffers.append(userStatus)*/
+                     requestedOffers.append(userStatus)
                 }
             }
         }
@@ -209,41 +207,13 @@ function addpopUp(offers){
     });
 */
 
-if(totalClaims==numOfAnswers){
+/*if(totalClaims==numOfAnswers){
     $('#myModal').modal('hide');
-}
+}*/
 
-function addDeatilsToModal (user_name){
 
-    let userStatus = $("<div></div>", {class: "card-body info-container"});
-    let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-    executeButton.data('offer-id', offer.offer_id);
-    // add a click listener
-    executeButton.click(function () {
-        // here, this stands for the button that was clicked
-        // so we want to get that button's offer-id
-        numOfAnswers++;
-        postStatus($(this).data('offer-id'));
-    });
+$('#myModal').modal('toggle');
 
-    let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
-
-    NotexecuteButton.data('offer-id', offer.offer_id);
-    // add a click listener
-    NotexecuteButton.click(function () {
-        //ask tamir which route should i put
-        numOfAnswers++;
-        postNotclaimByBuyer($(this).data('offer-id'));
-    });
-    userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
-    userStatus.append(executeButton)
-    userStatus.append(NotexecuteButton);
-    if(userRes==totalClaims){
-        $('#myModal').modal('toggle');
-
-    }
-    return userStatus
-}
 function postNotclaimByBuyer(offer_id){
     $.ajax({
         type:"POST",
