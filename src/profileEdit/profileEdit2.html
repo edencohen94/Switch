@@ -65,9 +65,6 @@
                 <h1 class="greetings text-in-center"></h1>
             </div>
             <p class="lead text-in-center">Here you can see and edit your personal details</p>
-            <div class="col-md-2">
-                <input onclick="location.href='../profileEdit/profileEdit.html'" type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-            </div>
             <hr class="my-4">
 
             <div class ="container profile-container">
@@ -75,45 +72,43 @@
                     <div class="col-12">
                         <div class="container info-container">
                             <div class = "row">
-                                <span class = "first_Name" style="font-weight:bold;">First Name</span>
+                                <span class = "label" style="font-weight:bold;">First Name</span>
                                 <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
                             </div>
                             <div class = "row">
-                                <span class = "last_Name" style="font-weight:bold;">Last Name</span>
+                                <span class = "label" style="font-weight:bold;">Last Name</span>
                                 <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
                             </div>
                             <div class = "row">
-                                <span class = "Email" style="font-weight:bold;">Email</span>
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-                            </div>
-                            <div class = "row">
-                                <span class = "Phone" style="font-weight:bold;">Phone</span>
+                                <span class = "label" style="font-weight:bold;">Phone</span>
                                 <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number">
                             </div>
                             <div class = "row">
-                                <span class = "Address" style="font-weight:bold;">Main Address</span>
+                                <span class = "label" style="font-weight:bold;">Main Address</span>
                                 <input type="text" class="form-control" id="inputMainAddress" placeholder="Main Address">
                             </div>
                             <div class = "row">
-                                <span class = "City" style="font-weight:bold;">Main City</span>
+                                <span class = "label" style="font-weight:bold;">Main City</span>
                                 <input type="text" class="form-control" id="inputCity" placeholder="Main City">
                             </div>
                             <div class = "row">
-                                <span class = "Address" style="font-weight:bold;">Second Address</span>
+                                <span class = "label" style="font-weight:bold;">Second Address</span>
                                 <input type="text" class="form-control" id="inputSecondAddress" placeholder="Second Address">
                             </div>
                             <div class = "row">
-                                <span class = "City" style="font-weight:bold;">Second City</span>
+                                <span class = "label" style="font-weight:bold;">Second City</span>
                                 <input type="text" class="form-control" id="inputCity2" placeholder="Second City">
                             </div>
-                            <div class = "row">
-                                <span class = "Primary-Currency" style="font-weight:bold;">Primary Currency</span>
-                                <input type="text" class="form-control" id="inputPcurrency" placeholder="Primary Currency">
-                            </div>
-                            <div class = "row">
-                                <span class = "Secondary-Currency" style="font-weight:bold;">Secondary Currency</span>
-                                <input type="text" class="form-control" id="inputScurrency" placeholder="Secondary Currency">
-                            </div>
+                            <div class="dropdown mr-1">
+                                <br><input type="button" value= "preferred currency" class="btn btn-primary dropdown-toggle" id="dropdownPreffered1" data-toggle="dropdown" >
+                                <div id="dropdown1" class="dropdown-menu">
+                                </div>
+                            </div><br>
+                            <div class="dropdown mr-1">
+                                <input type="button" value="second preferred currency" class="btn btn-primary dropdown-toggle" id="dropdownPreffered2" data-toggle="dropdown" >
+                                <div id="dropdown2" class="dropdown-menu">
+                                </div>
+                            </div><br>
                         </div>
                     </div>
                     <div class="col-md-2">
