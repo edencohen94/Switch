@@ -63,14 +63,18 @@ function getUserDetails(offer_data, user_id){
 
 }
 
+$('#myModal').modal('toggle')
 
 function addRequested(offers) {
-    currTime = + new Date();
+    var currTime = + new Date();
     let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
-        //find out how to check the time gap correctly
-        if(requestedoffer - currTime > 7){
+
+        var timeDiff = Math.abs(currTime.getTime() - requestedoffer.date );
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if(diffDays >= 7){
 
             let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
@@ -79,7 +83,7 @@ function addRequested(offers) {
             executeButtonB.click(function () {
                 // here, this stands for the button that was clicked
                 // so we want to get that button's offer-id
-                postStatusB($(this).data('offer-id'));
+                postStatus($(this).data('offer-id'));
             });
             let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
 
@@ -87,7 +91,7 @@ function addRequested(offers) {
             // add a click listener
             notExecutedButtonB.click(function () {
                 //ask tamir which route should i put
-                postStatusB($(this).data('offer-id'));
+                postStatus($(this).data('offer-id'));
             });
             reminderOffers.append("You were interested in this offer a week ago. Was the exchange made?")
             reminderOffers.append(executeButtonB)
@@ -99,21 +103,6 @@ function addRequested(offers) {
 }
 
 
-function postStatusB(offer_id){
-    $.ajax({
-        type:"POST",
-        url: config.host+ '/offer/claim-buyer',
-        data: createNew(offer_id),
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            console.log("dffd")
-        },
-        dataType: 'json'
-    });
-}
 
 
 function addSingleRequest(offer,details) {
