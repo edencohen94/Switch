@@ -16,8 +16,8 @@ var details=[];
 var userRes=0;
 var numOfAnswers=0;
 var totalClaims=0;
-// get user's name for greeting
 
+// get user's name for greeting
 
 $.ajax({
     type: "POST",
@@ -46,8 +46,6 @@ function getUserDetails(user_id,offer){
         success: function (data) {
             userRes++;
             addsingleAlert(offer,data.result.first_name);
-           // addDeatilsToModal(data.result.first_name);
-
         }
     });
 
@@ -67,6 +65,7 @@ $.ajax({
     success: function (data) {
         addOpenOffers(data.result,details);
         addpopUp(data.result);
+        checkNum();
 
     }
 });
@@ -85,6 +84,13 @@ $('#myModal').modal({
 
 });*/
 
+function checkNum(){
+   if(numOfAnswers==totalClaims){
+        $('#myModal').modal('hide');
+
+    }
+
+}
 
 function addOpenOffers(offers,details) {
     //let requestedOffers =  $("<div></div>", {class: "info-container"});
@@ -243,7 +249,7 @@ function addsingleAlert(offer,user_name){
                 NotexecuteButton.click(function () {
                     //ask tamir which route should i put
                     numOfAnswers++;
-                    postNotclaimByBuyer($(this).data('offer-id'));
+                   // postNotclaimByBuyer($(this).data('offer-id'));
                 });
                 userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
                 userStatus.append(executeButton)
