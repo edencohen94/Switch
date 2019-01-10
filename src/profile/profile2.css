@@ -10,9 +10,15 @@
     width: 100%;
 }
 
+.page-container .jumbotron {
+    padding: 24px;
+    max-width: 960px;
+    position: center;
+    margin: 24px auto 24px auto;
+}
+
 .page-container {
-    padding-top: 15px;
-    overflow-y: auto;
+    max-width: 960px;
 }
 
 .nav-item {
@@ -40,7 +46,6 @@
 
 .menu-items {
     display: flex;
-    flex-direction: column;
 }
 
 .nav-item:hover {
@@ -108,9 +113,10 @@
 }
 html,body{
     background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-    background-size: cover;
+    /*background-size: cover;*/
     background-repeat: no-repeat;
-    height: 140%;
+    /*height: 100%;*/
+    /*padding: 0;*/
     font-family: 'Numans', sans-serif;
 }
 .nav-item {
@@ -118,10 +124,6 @@ html,body{
 }
 .nav-item:last-child {
     margin-bottom: 0;
-}
-.menu-items {
-    display: flex;
-    flex-direction: column;
 }
 .nav-item:hover {
     cursor: pointer;
