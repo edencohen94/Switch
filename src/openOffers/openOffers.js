@@ -147,7 +147,7 @@ function addOpenOffers(offers,details) {
 
                 let userStatus = // add div for user
                     let user_name= getName(offer.requestedBy[i].user_id);
-                    let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+                    let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
                     executeButton.data('offer-id', offer.offer_id);
                 // add a click listener
@@ -156,7 +156,7 @@ function addOpenOffers(offers,details) {
                     // so we want to get that button's offer-id
                     postStatus($(this).data('offer-id'));
                 });
-                let NotexecuteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("NotExecuted");
+                let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
 
                 NotexecuteButton.data('offer-id', offer.offer_id);
                 // add a click listener
