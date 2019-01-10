@@ -65,11 +65,56 @@ function getUserDetails(offer_data, user_id){
 
 
 function addRequested(offers) {
+    currTime = + new Date();
+    let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
-    }
+        //find out how to check the time gap correctly
+        if(requestedoffer - currTime > 7){
 
+            let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+
+            executeButtonB.data('offer-id', requestedoffer.offer_id);
+            // add a click listener
+            executeButtonB.click(function () {
+                // here, this stands for the button that was clicked
+                // so we want to get that button's offer-id
+                postStatusB($(this).data('offer-id'));
+            });
+            let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
+
+            notExecutedButtonB.data('offer-id', requestedoffer.offer_id);
+            // add a click listener
+            notExecutedButtonB.click(function () {
+                //ask tamir which route should i put
+                postStatusB($(this).data('offer-id'));
+            });
+            reminderOffers.append("You were interested in this offer a week ago. Was the exchange made?")
+            reminderOffers.append(executeButtonB)
+            reminderOffers.append(notExecutedButtonB)
+
+        }
+    }
+    $(".modal-body").append(reminderOffers);
 }
+
+
+function postStatusB(offer_id){
+    $.ajax({
+        type:"POST",
+        url: config.host+ '/offer/claim-buyer',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            console.log("dffd")
+        },
+        dataType: 'json'
+    });
+}
+
 
 function addSingleRequest(offer,details) {
     let cardBody = $("<div></div>", {class: "card-body info-container"})

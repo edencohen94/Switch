@@ -42,11 +42,59 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         addOpenOffers(data.result,details);
+        //addPopUp(data.result,details);
     }
 });
 
 
+$('#myModal').modal('toggle');
+
+
+
+// function addPopUp(offers,details) {
+//     //for (let offer of offers) {
+//     //if(offer.executed_lst.size !=0 ) {
+//     //for (let user of temp.executed_lst){
+//     varName = getName.data(user.user_id);
+//     let popBody = $("<div></div>", {class: "main-container"})
+//         .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
+//             "  <div class=\"modal-dialog\" role=\"document\">\n" +
+//             "    <div class=\"modal-content\">\n" +
+//             "      <div class=\"modal-header\">\n" +
+//             "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
+//             "        <span aria-hidden=\"true\">&times;</span></button>\n" +
+//     "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
+//     "      </div>\n" +
+//     "      <div class=\"modal-body\">\n" +
+//     "          <p> .text(varName + \"says an exchange was made for this offer. Do you confirm?\") </p>\n" +
+//     "      </div>\n" +
+//     "      <div class=\"modal-footer\">\n" +
+//     "      </div>\n" +
+//     "    </div><!-- /.modal-content -->\n" +
+//     "  </div><!-- /.modal-dialog -->\n" +
+//     "</div><!-- /.modal -->")
+//     //}
+//     //}
+//     // create a button
+//     let confirmButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+//     // assign it some data (the relevant offer-id)
+//     confirmButton.data('offer-id', offer.offer_id);
+//     // add a click listener
+//     confirmButton.click(function () {
+//         // here, this stands for the button that was clicked
+//         // so we want to get that button's offer-id
+//         postStatus($(this).data('offer-id'));
+//     });
+//
+//     $(".modal-footer").append($("<button></button>", {class: "btn btn-default"}).text("NO"));
+//     $(".modal-footer").append(confirmButton)
+//
+//     $(".main-container").append(popBody);
+//     //}
+// }
+
 function addOpenOffers(offers,details) {
+    let requestedOffers =  $("<div></div>", {class: "info-container"});
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
@@ -85,13 +133,46 @@ function addOpenOffers(offers,details) {
         // assign it some data (the relevant offer-id)
         executeButton.data('offer-id', offer.offer_id);
 
-
         // add a click listener
         executeButton.click(function () {
             // here, this stands for the button that was clicked
             // so we want to get that button's offer-id
             postStatus($(this).data('offer-id'));
         });
+
+        //there are users that claimed the offer done
+        if(offer.requestedBy.length>0){
+            //need to add all users
+            for(i=0;i<offer.requestedBy.length;i++){
+
+                let userStatus = // add div for user
+                    let user_name= getName(offer.requestedBy[i].user_id);
+                    let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+
+                    executeButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                executeButton.click(function () {
+                    // here, this stands for the button that was clicked
+                    // so we want to get that button's offer-id
+                    postStatus($(this).data('offer-id'));
+                });
+                let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
+
+                NotexecuteButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                NotexecuteButton.click(function () {
+                    //ask tamir which route should i put
+                    postStatus($(this).data('offer-id'));
+                });
+                userStatus.append(user_name+" says an exchange was made for this offer. Do you confirm?")
+                userStatus.append(executeButton)
+                userStatus.append(NotexecuteButton)
+                requestedOffers.append(userStatus)
+            }
+
+        }
+
+
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
@@ -125,6 +206,9 @@ function addOpenOffers(offers,details) {
             }
         }
     }
+
+    $(".modal-body").append(requestedOffers);
+
 }
 
 
