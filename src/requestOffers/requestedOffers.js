@@ -107,7 +107,7 @@ function addRequested(offers) {
                 //ask tamir which route should i put
                 postStatus($(this).data('offer-id'));
             });
-            userStatus.append("You were interested in this offer a week ago. Was the exchange made?")
+            userStatus.append("You were interested in this offer with amount : " + requestedoffer.amount +" and currency : " +requestedoffer.offered_currency+ " over a week ago. Was the exchange made?")
             userStatus.append(executeButtonB)
             userStatus.append(notExecutedButtonB)
             reminderOffers.append(userStatus)
