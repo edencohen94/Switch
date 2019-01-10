@@ -1,6 +1,13 @@
 
 var details ={"user_id":"1", "requested":"dfsf","address_1":"fsf","city_1":"email","city_2":"gjdg"};
-let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"date":"2019-01-06T21:18:56.000Z","main_currency":"ARS","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":22,"user_id":1,"offered_currency":"DZD","amount":1,"date":"2019-01-06T21:16:58.000Z","main_currency":"ALL","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":21,"user_id":1,"offered_currency":"ALL","amount":200,"date":"2019-01-06T21:16:12.000Z","main_currency":"ALL","secondary_currency":"ALL","description":"aa","requestedBy":[]},{"offer_id":16,"user_id":1,"offered_currency":"MXN","amount":1000,"date":"2019-01-04T12:25:18.000Z","main_currency":"DZD","secondary_currency":"ARS","description":"call me after 10","requestedBy":[{"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]},{"offer_id":15,"user_id":1,"offered_currency":"AFN","amount":12,"date":"2019-01-01T20:52:43.000Z","main_currency":"AFN","secondary_currency":"AFN","description":"sd","requestedBy":[{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]}]
+
+let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"date":"2019-01-06T21:18:56.000Z","main_currency":"ARS","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":22,"user_id":1,"offered_currency":"DZD","amount":1,"date":"2019-01-06T21:16:58.000Z","main_currency":"ALL","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":21,"user_id":1,"offered_currency":"ALL","amount":200,"date":"2019-01-06T21:16:12.000Z","main_currency":"ALL","secondary_currency":"ALL","description":"aa","requestedBy":[]},{"offer_id":16,"user_id":1,"offered_currency":"MXN","amount":1000,"date":"2019-01-04T12:25:18.000Z","main_currency":"DZD","secondary_currency":"ARS","description":"call me after 10","requestedBy":[{"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]},{"offer_id":15,"user_id":1,"offered_currency":"AFN","amount":12,"date":"2019-01-01T20:52:43.000Z","main_currency":"AFN","secondary_currency":"AFN","description":"sd","requestedBy":[{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]}];
+
+
+
+
+var numOfAnswers=0;
+var totalClaims=0;
 // get user's name for greeting
 
 /*
@@ -51,7 +58,7 @@ $.ajax({
 */
 
 
-$('#myModal').modal('toggle');
+
 
 
 
@@ -115,7 +122,9 @@ function addOpenOffers(offers,details) {
         let contactBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
             .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
+            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date))
+            .append($("<span></span>", {class: "offer-detail"}).text("Num of users that was intrested in your offer: " + offer.requestedBy.length));
+
 
         // create a button
         let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
@@ -149,11 +158,11 @@ function addOpenOffers(offers,details) {
         if(offer.requestedBy.length>0){
             //need to add all users
             for(i=0;i<offer.requestedBy.length;i++){
-                if(offer.requestedBy[i].claimed_by_buyer==true){
+                if(offer.requestedBy[i].claimed_by_buyer){
                     let userStatus = $("<div></div>", {class: "card-body info-container"})
 
                     ///let user_name= getName(offer.requestedBy[i].user_id);
-                    let user_name = "dkfls"
+                    let user_name = "dkfls";
                     let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
                     executeButton.data('offer-id', offer.offer_id);
@@ -170,7 +179,7 @@ function addOpenOffers(offers,details) {
                     // add a click listener
                     NotexecuteButton.click(function () {
                         //ask tamir which route should i put
-                        postStatus($(this).data('offer-id'));
+                        postNotclaimByBuyer($(this).data('offer-id'));
                     });
                     userStatus.append(user_name+" says an exchange was made for offer with amount : " + offer.amount +" and currency : " +offer.offered_currency+ " .Do you confirm?")
                     userStatus.append(executeButton)
@@ -203,6 +212,28 @@ function addOpenOffers(offers,details) {
     $(".modal-body").append(requestedOffers);
 
 }
+$('#myModal').modal({
+    backdrop: 'static',
+    keyboard: false
+})
+/*
+function postNotclaimByBuyer(offer_id){
+    $.ajax({
+        type:"POST",
+        url: config.host+ '/offer/not-claim-buyer',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            console.log("success to update claim by the buyer");
+            numOfAnswers++;
+        },
+        dataType: 'json'
+    });
+}
+*/
 
 /*
 function postStatus(offer_id){
