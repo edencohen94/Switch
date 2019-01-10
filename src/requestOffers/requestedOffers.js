@@ -1,5 +1,6 @@
 
 // get user's name for greeting
+/*
 $.ajax({
     type: "POST",
     url: config.host + '/user',
@@ -62,15 +63,26 @@ function getUserDetails(offer_data, user_id){
     });
 
 }
+*/
 
+var details ={"user_id":"1", "requested":"dfsf","address_1":"fsf","city_1":"email","city_2":"gjdg"};
+let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"date":"2019-01-06T21:18:56.000Z","main_currency":"ARS","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":22,"user_id":1,"offered_currency":"DZD","amount":1,"date":"2019-01-06T21:16:58.000Z","main_currency":"ALL","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":21,"user_id":1,"offered_currency":"ALL","amount":200,"date":"2019-01-06T21:16:12.000Z","main_currency":"ALL","secondary_currency":"ALL","description":"aa","requestedBy":[]},{"offer_id":16,"user_id":1,"offered_currency":"MXN","amount":1000,"date":"2019-01-04T12:25:18.000Z","main_currency":"DZD","secondary_currency":"ARS","description":"call me after 10","requestedBy":[{"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]},{"offer_id":15,"user_id":1,"offered_currency":"AFN","amount":12,"date":"2019-01-01T20:52:43.000Z","main_currency":"AFN","secondary_currency":"AFN","description":"sd","requestedBy":[{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-01T22:00:00.000Z"}]}]
+
+
+$('#myModal').modal('toggle');
 
 function addRequested(offers) {
-    currTime = + new Date();
+    var currTime = + new Date();
     let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
-        //find out how to check the time gap correctly
-        if(requestedoffer - currTime > 7){
+
+        var timeDiff = Math.abs(currTime.getTime() - requestedoffer.date );
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        console.log(diffDays)
+
+        if(diffDays >= 7){
+            let userStatus = $("<div></div>", {class: "card-body info-container"})
 
             let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
@@ -79,7 +91,7 @@ function addRequested(offers) {
             executeButtonB.click(function () {
                 // here, this stands for the button that was clicked
                 // so we want to get that button's offer-id
-                postStatusB($(this).data('offer-id'));
+                postStatus($(this).data('offer-id'));
             });
             let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
 
@@ -87,33 +99,18 @@ function addRequested(offers) {
             // add a click listener
             notExecutedButtonB.click(function () {
                 //ask tamir which route should i put
-                postStatusB($(this).data('offer-id'));
+                postStatus($(this).data('offer-id'));
             });
-            reminderOffers.append("You were interested in this offer a week ago. Was the exchange made?")
-            reminderOffers.append(executeButtonB)
-            reminderOffers.append(notExecutedButtonB)
-
+            userStatus.append("You were interested in this offer a week ago. Was the exchange made?")
+            userStatus.append(executeButtonB)
+            userStatus.append(notExecutedButtonB)
+            reminderOffers.append(userStatus)
         }
     }
     $(".modal-body").append(reminderOffers);
 }
 
 
-function postStatusB(offer_id){
-    $.ajax({
-        type:"POST",
-        url: config.host+ '/offer/claim-buyer',
-        data: createNew(offer_id),
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            console.log("dffd")
-        },
-        dataType: 'json'
-    });
-}
 
 
 function addSingleRequest(offer,details) {
@@ -190,7 +187,7 @@ function addSingleRequest(offer,details) {
     $(".offers-container").append(card);
 }
 
-
+/*
 function postStatus(offer_id){
     $.ajax({
         type:"POST",
@@ -226,7 +223,7 @@ function postRank(user_id, rank){
     });
 }
 
-
+*/
 function createRank(user_id, rank){
     let data={};
     data.user_id=user_id;
