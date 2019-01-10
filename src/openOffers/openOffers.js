@@ -169,7 +169,7 @@ function addOpenOffers(offers,details) {
                     //ask tamir which route should i put
                     postStatus($(this).data('offer-id'));
                 });
-                userStatus.append(user_name+"user name claim the offer.......")
+                userStatus.append(user_name+" says an exchange was made for this offer. Do you confirm?")
                 userStatus.append(executeButton)
                 userStatus.append(NotexecuteButton)
                 requestedOffers.append(userStatus)
