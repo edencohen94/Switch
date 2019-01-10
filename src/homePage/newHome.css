@@ -41,6 +41,11 @@
     background-color: #e9f3f4;
 }
 
+.topResults.container{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 .home_page{
     display: flex;
     flex-direction: column;
@@ -163,4 +168,9 @@ input:hover {
 .menu-items {
     display: flex;
     justify-content: center;
+}
+
+.btn-danger{
+    width: 120px;
+    height: 30px;
 }
