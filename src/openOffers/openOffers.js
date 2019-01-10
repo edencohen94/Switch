@@ -144,6 +144,7 @@ function addOpenOffers(offers,details) {
         if(offer.requestedBy.length>0){
             //need to add all users
             for(i=0;i<offer.requestedBy.length;i++){
+
                 let userStatus = // add div for user
                     let user_name= getName(offer.requestedBy[i].user_id);
                     let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
