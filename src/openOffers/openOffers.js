@@ -176,15 +176,9 @@ function addOpenOffers(offers,details) {
                     userStatus.append(executeButton)
                     userStatus.append(NotexecuteButton)
                     requestedOffers.append(userStatus)
-
                 }
-
-
             }
-
         }
-
-
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
