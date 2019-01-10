@@ -72,7 +72,7 @@ function addRequested(offers) {
         //find out how to check the time gap correctly
         if(requestedoffer - currTime > 7){
 
-            let executeButtonB = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+            let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
             executeButtonB.data('offer-id', requestedoffer.offer_id);
             // add a click listener
@@ -81,7 +81,7 @@ function addRequested(offers) {
                 // so we want to get that button's offer-id
                 postStatusB($(this).data('offer-id'));
             });
-            let notExecutedButtonB = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("NotExecuted");
+            let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
 
             notExecutedButtonB.data('offer-id', requestedoffer.offer_id);
             // add a click listener
