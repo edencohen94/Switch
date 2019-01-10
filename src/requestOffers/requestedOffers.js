@@ -151,6 +151,9 @@ function addSingleRequest(offer,details) {
         contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
         contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
 
+    let da= offer.date.split("T");
+    let dd= da[0].split("-");
+
     // create a button
     let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
 
