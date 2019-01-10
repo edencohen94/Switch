@@ -100,7 +100,7 @@ $('#myModal').modal('toggle')
 // }
 
 function addOpenOffers(offers,details) {
-    let requestedOffers =  $("<div></div>", {class: "info-container"})
+    let requestedOffers =  $("<div></div>", {class: "info-container"});
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
