@@ -201,11 +201,14 @@ function postStatus(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("success to update claim by the buyer")
+            console.log("success to update claim by the buyer");
         },
         dataType: 'json'
     });
 }
+
+
+
 
 function postRank(user_id, rank){
     $.ajax({
