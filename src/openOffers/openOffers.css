@@ -12,8 +12,20 @@
 
 .page-container {
     padding-top: 15px;
-    overflow-y: auto;
 }
+
+.page-container  .jumbotron {
+    background-color: initial;
+}
+
+.page-container .greetings-container {
+    color: white;
+}
+
+.page-container .lead {
+    color: white;
+}
+
 
 .nav-item {
     margin-bottom: 0.25rem;
@@ -40,9 +52,8 @@
 
 .menu-items {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
-
 .nav-item:hover {
     cursor: pointer;
 }
@@ -77,8 +88,18 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 36px;
 }
 
 .no-focus:focus {
     outline: none;
+}
+
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    /*background-size: cover;*/
+    background-repeat: no-repeat;
+    overflow: auto;
+    /*height: 140%;*/
+    font-family: 'Numans', sans-serif;
 }

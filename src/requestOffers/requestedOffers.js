@@ -1,4 +1,14 @@
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('-');
+}
 // get user's name for greeting
 
 $.ajax({
@@ -58,7 +68,7 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result)
-            $(".greetings").text(data.result.first_name + "'s offers");
+            $(".greetings").text(data.result.first_name + "'s requested offers");
         }
     });
 
@@ -124,15 +134,26 @@ function addSingleRequest(offer,details) {
         .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
         .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
     let textBody = $("<div></div>", {class: "card-body info-container"})
-        .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-        .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-        .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
-        .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
-        .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+        if(offer.description){
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
+        }
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+    if (details.address_2) {
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+    }
+    if(details.city_2) {
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+    }
     let contactBody = $("<div></div>", {class: "card-body info-container"})
-        .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
-        .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-        .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
+        if(details.phone){
+            contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+        }
+        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
+
+    let da= offer.date.split("T");
+    let dd= da[0].split("-");
 
     // create a button
     let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");

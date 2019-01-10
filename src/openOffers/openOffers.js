@@ -1,9 +1,23 @@
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-var details ={"user_id":"1", "requested":"dfsf","address_1":"fsf","city_1":"email","city_2":"gjdg"};
-let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"date":"2019-01-06T21:18:56.000Z","main_currency":"ARS","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":22,"user_id":1,"offered_currency":"DZD","amount":1,"date":"2019-01-06T21:16:58.000Z","main_currency":"ALL","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":21,"user_id":1,"offered_currency":"ALL","amount":200,"date":"2019-01-06T21:16:12.000Z","main_currency":"ALL","secondary_currency":"ALL","description":"aa","requestedBy":[]},{"offer_id":16,"user_id":1,"offered_currency":"MXN","amount":1000,"date":"2019-01-04T12:25:18.000Z","main_currency":"DZD","secondary_currency":"ARS","description":"call me after 10","requestedBy":[{"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]},{"offer_id":15,"user_id":1,"offered_currency":"AFN","amount":12,"date":"2019-01-01T20:52:43.000Z","main_currency":"AFN","secondary_currency":"AFN","description":"sd","requestedBy":[{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]}]
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('-');
+}
+
+
+
+var details=[];
+var userRes=0;
+var numOfAnswers=0;
+var totalClaims=0;
+
 // get user's name for greeting
-
-/*
 
 $.ajax({
     type: "POST",
@@ -19,22 +33,27 @@ $.ajax({
     }
 });
 
-function getName(user_id){
+function getUserDetails(user_id,offer){
     $.ajax({
-        type:"POST",
-        url: config.host + '/user',
+        type: "POST",
+        url: config.host + '/user/specific',
+        data: createUser(user_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
-        success: function(data) {
-            $.text(data.result.first_name);
+        dataType: 'json',
+        success: function (data) {
+            userRes++;
+            addsingleAlert(offer,data.result.first_name);
         }
     });
+
 }
 
 
-// get user's rquested offers from server
+
+// get user's offers from server
 $.ajax({
     type: "GET",
     url: config.host + '/offer',
@@ -45,61 +64,36 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         addOpenOffers(data.result,details);
-        //addPopUp(data.result,details);
+        addpopUp(data.result);
+        checkNum();
+
     }
 });
-*/
+
+$('#myModal').modal({
+    backdrop: 'static',
+    keyboard: false
+});
 
 
-$('#myModal').modal('toggle');
 
+/*$("#myModal").on("hide", function () {
+    if(numOfAnswers==totalClaims){
+        return true;
+    }
 
+});*/
 
-// function addPopUp(offers,details) {
-//     //for (let offer of offers) {
-//     //if(offer.executed_lst.size !=0 ) {
-//     //for (let user of temp.executed_lst){
-//     varName = getName.data(user.user_id);
-//     let popBody = $("<div></div>", {class: "main-container"})
-//         .append("<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n" +
-//             "  <div class=\"modal-dialog\" role=\"document\">\n" +
-//             "    <div class=\"modal-content\">\n" +
-//             "      <div class=\"modal-header\">\n" +
-//             "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
-//             "        <span aria-hidden=\"true\">&times;</span></button>\n" +
-//     "        <h4 class=\"modal-title\">Exchange Confirmation</h4>\n" +
-//     "      </div>\n" +
-//     "      <div class=\"modal-body\">\n" +
-//     "          <p> .text(varName + \"says an exchange was made for this offer. Do you confirm?\") </p>\n" +
-//     "      </div>\n" +
-//     "      <div class=\"modal-footer\">\n" +
-//     "      </div>\n" +
-//     "    </div><!-- /.modal-content -->\n" +
-//     "  </div><!-- /.modal-dialog -->\n" +
-//     "</div><!-- /.modal -->")
-//     //}
-//     //}
-//     // create a button
-//     let confirmButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-//     // assign it some data (the relevant offer-id)
-//     confirmButton.data('offer-id', offer.offer_id);
-//     // add a click listener
-//     confirmButton.click(function () {
-//         // here, this stands for the button that was clicked
-//         // so we want to get that button's offer-id
-//         postStatus($(this).data('offer-id'));
-//     });
-//
-//     $(".modal-footer").append($("<button></button>", {class: "btn btn-default"}).text("NO"));
-//     $(".modal-footer").append(confirmButton)
-//
-//     $(".main-container").append(popBody);
-//     //}
-// }
+function checkNum(){
+   if(numOfAnswers==totalClaims){
+        $('#myModal').modal('hide');
 
-addOpenOffers(offers,details)
+    }
+
+}
+
 function addOpenOffers(offers,details) {
-    let requestedOffers =  $("<div></div>", {class: "info-container"});
+    //let requestedOffers =  $("<div></div>", {class: "info-container"});
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
@@ -107,15 +101,29 @@ function addOpenOffers(offers,details) {
             .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
         let textBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+            if(offer.description){
+                textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
+            }
+
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+        if (details.address_2) {
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+        }
+        if(details.city_2) {
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+        }
         let contactBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
-            .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-            .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date));
+            if(details.phone){
+                contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+            }
+            contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+            contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
+            if(offer.requestedBy.length>0){
+                contactBody.append($("<span></span>", {class: "offer-detail"}).text("Num of users that was intrested in your offer: " + offer.requestedBy.length));
+
+
+            }
 
         // create a button
         let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
@@ -145,47 +153,10 @@ function addOpenOffers(offers,details) {
             postStatus($(this).data('offer-id'));
         });
 
-        //there are users that claimed the offer done
-        if(offer.requestedBy.length>0){
-            //need to add all users
-            for(i=0;i<offer.requestedBy.length;i++){
-                if(offer.requestedBy[i].claimed_by_buyer==true){
-                    let userStatus = $("<div></div>", {class: "card-body info-container"})
-
-                    ///let user_name= getName(offer.requestedBy[i].user_id);
-                    let user_name = "dkfls"
-                    let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-
-                    executeButton.data('offer-id', offer.offer_id);
-                    // add a click listener
-                    executeButton.click(function () {
-                        // here, this stands for the button that was clicked
-                        // so we want to get that button's offer-id
-                        postStatus($(this).data('offer-id'));
-                    });
-
-                    let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
-
-                    NotexecuteButton.data('offer-id', offer.offer_id);
-                    // add a click listener
-                    NotexecuteButton.click(function () {
-                        //ask tamir which route should i put
-                        postStatus($(this).data('offer-id'));
-                    });
-                    userStatus.append(user_name+" says an exchange was made for offer with amount : " + offer.amount +" and currency : " +offer.offered_currency+ " .Do you confirm?")
-                    userStatus.append(executeButton)
-                    userStatus.append(NotexecuteButton)
-                    requestedOffers.append(userStatus)
-                }
-            }
-        }
-
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append(deleteButton)
             .append(executeButton);
-
-
 
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
@@ -200,11 +171,134 @@ function addOpenOffers(offers,details) {
 
     }
 
+//    $(".modal-body").append(requestedOffers);
+
+}
+let requestedOffers =  $("<div></div>", {class: "info-container"});
+
+function addpopUp(offers){
+    for (let offer of offers) {
+        if (offer.requestedBy.length > 0) {
+            //need to add all users
+            for (i = 0; i < offer.requestedBy.length; i++) {
+                if (offer.requestedBy[i].claimed_by_buyer) {
+                    requestedOffers.append(getUserDetails(offer.requestedBy[i].user_id,offer));
+       /*             totalClaims++;
+                    let userStatus = $("<div></div>", {class: "card-body info-container"})
+
+                    const user_name =  getUserDetails(offer.requestedBy[i].user_id).done;
+                    requestedOffers.append(userStatus);
+
+                   // let user_name = "dkfls";
+                     let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+
+                     executeButton.data('offer-id', offer.offer_id);
+                     // add a click listener
+                     executeButton.click(function () {
+                         // here, this stands for the button that was clicked
+                         // so we want to get that button's offer-id
+                         numOfAnswers++;
+                         postStatus($(this).data('offer-id'));
+                     });
+
+                     let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
+
+                     NotexecuteButton.data('offer-id', offer.offer_id);
+                     // add a click listener
+                     NotexecuteButton.click(function () {
+                         //ask tamir which route should i put
+                         numOfAnswers++;
+                         postNotclaimByBuyer($(this).data('offer-id'));
+                     });
+                     userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
+                     userStatus.append(executeButton)
+                     userStatus.append(NotexecuteButton)
+                     requestedOffers.append(userStatus)*/
+                }
+            }
+        }
+
+    }
     $(".modal-body").append(requestedOffers);
+
 
 }
 
-/*
+function addsingleAlert(offer,user_name){
+    if (offer.requestedBy.length > 0) {
+        //need to add all users
+                let userStatus = $("<div></div>", {class: "card-body info-container"})
+                //const user_name =  getUserDetails(offer.requestedBy[i].user_id).done;
+
+                // let user_name = "dkfls";
+                let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+
+                executeButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                executeButton.click(function () {
+                    // here, this stands for the button that was clicked
+                    // so we want to get that button's offer-id
+                    numOfAnswers++;
+                    postStatus($(this).data('offer-id'));
+                });
+
+                let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
+
+                NotexecuteButton.data('offer-id', offer.offer_id);
+                // add a click listener
+                NotexecuteButton.click(function () {
+                    //ask tamir which route should i put
+                    numOfAnswers++;
+                   // postNotclaimByBuyer($(this).data('offer-id'));
+                });
+                userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
+                userStatus.append(executeButton)
+                userStatus.append(NotexecuteButton);
+                requestedOffers.append(userStatus);
+            }
+
+
+
+}
+
+
+$('#myModal').modal('toggle');
+
+
+ /* /!*  $('#myModal').on('data-dismiss='modal', function(e){
+        if( numOfAnswers==totalClaims ) {
+            $('#myModal').('hide');
+            //e.preventDefault();
+            //e.stopImmediatePropagation();
+            //return false;
+        }
+    });
+*/
+
+
+
+
+function postNotclaimByBuyer(offer_id){
+    $.ajax({
+        type:"POST",
+        url: config.host+ '/offer/not-claim-buyer',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            numOfAnswers++;
+            console.log("success to update claim by the buyer");
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
+        },
+        dataType: 'json'
+    });
+}
+
+
 function postStatus(offer_id){
     $.ajax({
         type:"POST",
@@ -215,7 +309,10 @@ function postStatus(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("dffd")
+            console.log("dffd");
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
         },
         dataType: 'json'
     });
@@ -240,7 +337,12 @@ function createNew(offer_id){
     let data={}
     data.offer_id=offer_id
     return data
-}*/
+}
+function createUser(user_id){
+    let data={};
+    data.user_id=user_id;
+    return data
+}
 
 
 
