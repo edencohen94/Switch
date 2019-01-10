@@ -46,14 +46,8 @@ $.ajax({
     }
 });
 
-let temp ={
-    "executed_lst": [{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
-    {"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"},
-    {"user_id":1,"offer_id":10,"claimed_by_buyer":true,"claimed_by_seller":true,"date":"2018-12-27T22:00:00.000Z"}
-]
-}
 
-$('#myModal').modal('toggle')
+$('#myModal').modal('toggle');
 
 
 
@@ -100,7 +94,7 @@ $('#myModal').modal('toggle')
 // }
 
 function addOpenOffers(offers,details) {
-    let requestedOffers =  $("<div></div>", {class: "info-container"})
+    let requestedOffers =  $("<div></div>", {class: "info-container"});
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
@@ -150,6 +144,7 @@ function addOpenOffers(offers,details) {
         if(offer.requestedBy.length>0){
             //need to add all users
             for(i=0;i<offer.requestedBy.length;i++){
+
                 let userStatus = // add div for user
                     let user_name= getName(offer.requestedBy[i].user_id);
                     let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
