@@ -1,4 +1,16 @@
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('-');
+}
+/*var details ={"user_id":"1", "requested":"dfsf","address_1":"fsf","city_1":"email","city_2":"gjdg"};
+let offers =[{"offer_id":24,"user_id":1,"offered_currency":"ALL","amount":130,"date":"2019-01-06T21:18:56.000Z","main_currency":"ARS","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":22,"user_id":1,"offered_currency":"DZD","amount":1,"date":"2019-01-06T21:16:58.000Z","main_currency":"ALL","secondary_currency":"AFN","description":"","requestedBy":[]},{"offer_id":21,"user_id":1,"offered_currency":"ALL","amount":200,"date":"2019-01-06T21:16:12.000Z","main_currency":"ALL","secondary_currency":"ALL","description":"aa","requestedBy":[]},{"offer_id":16,"user_id":1,"offered_currency":"MXN","amount":1000,"date":"2019-01-04T12:25:18.000Z","main_currency":"DZD","secondary_currency":"ARS","description":"call me after 10","requestedBy":[{"user_id":1,"offer_id":16,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]},{"offer_id":15,"user_id":1,"offered_currency":"AFN","amount":12,"date":"2019-01-01T20:52:43.000Z","main_currency":"AFN","secondary_currency":"AFN","description":"sd","requestedBy":[{"user_id":1,"offer_id":15,"claimed_by_buyer":true,"claimed_by_seller":false,"date":"2019-01-03T22:00:00.000Z"}]}]
 /*
 var details ={"user_id":"1", "requested":"dfsf","address_1":"fsf","city_1":"email","city_2":"gjdg"};
 
@@ -12,6 +24,7 @@ var numOfAnswers=0;
 var totalClaims=0;
 // get user's name for greeting
 
+/*
 
 $.ajax({
     type: "POST",
@@ -48,7 +61,7 @@ function getUserDetails(user_id){
 
 
 
-// get user's rquested offers from server
+// get user's offers from server
 $.ajax({
     type: "GET",
     url: config.host + '/offer',
@@ -88,12 +101,24 @@ function addOpenOffers(offers,details) {
             .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
             .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
         let textBody = $("<div></div>", {class: "card-body info-container"})
-            .append($("<span></span>", {class: "offer-detail"}).text(offer.description))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
-            .append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
-            .append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+            if(offer.description){
+                textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
+            }
+
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+        if (details.address_2) {
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
+        }
+        if(details.city_2) {
+            textBody.append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
+        }
         let contactBody = $("<div></div>", {class: "card-body info-container"})
+            if(details.phone){
+                contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+            }
+            contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+            contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
             .append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
             .append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
             .append($("<span></span>", {class: "offer-detail"}).text("Date: " + offer.date))
@@ -233,6 +258,7 @@ function postNotclaimByBuyer(offer_id){
     });
 }
 
+/*
 function postStatus(offer_id){
     $.ajax({
         type:"POST",

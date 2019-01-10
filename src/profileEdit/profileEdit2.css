@@ -12,8 +12,20 @@
 
 .page-container {
     padding-top: 15px;
-    overflow-y: auto;
 }
+
+.page-container  .jumbotron {
+    background-color: initial;
+}
+
+.page-container .greetings-container {
+    color: white;
+}
+
+.page-container .lead {
+    color: white;
+}
+
 
 .nav-item {
     margin-bottom: 0.25rem;
@@ -40,7 +52,7 @@
 
 .menu-items {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .nav-item:hover {
@@ -65,7 +77,6 @@
     flex-wrap: wrap;
     padding-top: 15px;
     overflow-y: auto;
-    background-color: #e9f3f4;
 }
 
 .offer-detail {
@@ -107,20 +118,18 @@
 }
 html,body{
     background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
-    height: 140%;
+    background-size: cover;
+    overflow: auto;
+    /*height: 140%;*/
     font-family: 'Numans', sans-serif;
 }
+
 .nav-item {
     margin-bottom: 0.25rem;
 }
 .nav-item:last-child {
     margin-bottom: 0;
-}
-.menu-items {
-    display: flex;
-    flex-direction: column;
 }
 .nav-item:hover {
     cursor: pointer;
@@ -176,4 +185,31 @@ html,body{
 }
 .inputScurrency{
     margin-right: 50px;
+}
+
+.row{
+    margin-left: 0px;
+}
+
+.label{
+    color: white;
+}
+#dropdownPreffered1{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#dropdownPreffered2{
+    width: 400px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.dropdown-menu{
+    height: auto;
+    width: 400px;
+    max-height: 200px;
+    overflow-x: hidden;
 }

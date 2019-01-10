@@ -307,7 +307,6 @@ function postToRequestedOffers(offer_id){
         },
         success: function(data) {
             window.location.herf= "../requestOffers/requestedOffers.html"
-            console.log("dffd")
         },
         dataType: 'json'
     });

@@ -12,6 +12,10 @@
     margin-bottom: 0;
 }
 
+.container{
+    display: contents;
+}
+
 html,body{
     background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
     background-size: cover;
@@ -63,3 +67,7 @@ label {
     border-bottom-right-radius: 0;
 }
 
+.menu-items {
+    display: flex;
+    justify-content: center;
+}
