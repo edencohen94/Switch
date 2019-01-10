@@ -14,6 +14,19 @@
     padding-top: 15px;
 }
 
+.page-container  .jumbotron {
+    background-color: initial;
+}
+
+.page-container .greetings-container {
+    color: white;
+}
+
+.page-container .lead {
+    color: white;
+}
+
+
 .nav-item {
     margin-bottom: 0.25rem;
 }
@@ -39,8 +52,8 @@
 
 .menu-items {
     display: flex;
+    justify-content: center;
 }
-
 .nav-item:hover {
     cursor: pointer;
 }

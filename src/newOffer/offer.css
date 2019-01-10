@@ -67,3 +67,7 @@ label {
     border-bottom-right-radius: 0;
 }
 
+.menu-items {
+    display: flex;
+    justify-content: center;
+}

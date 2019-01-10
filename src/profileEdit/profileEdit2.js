@@ -11,7 +11,6 @@ $.ajax({
         $(".greetings").text(details.first_name +"'s profile");
         $("#inputFirstName").val(details.first_name);
         $("#inputLastName").val(details.last_name);
-        $("#inputEmail").val(details.email);
         $("#inputPhone").val(details.phone);
         $("#inputMainAddress").val(details.address_1);
         $("#inputCity").val(details.city_1);
@@ -37,3 +36,23 @@ function submitChanges(){
         dataType: 'json'
     });
 }
+
+for (let currency of config.currencies) {
+    let element2 = $("<a></a>").addClass("dropdown-item");
+    let element3 = $("<a></a>").addClass("dropdown-item");
+    element2.text(currency.name + " - " + currency.code);
+    element3.text(currency.name + " - " + currency.code);
+    $("#dropdown1").append(element2);
+    $("#dropdown2").append(element3);
+}
+
+
+$("#dropdown1").click(function () {
+    preferred1 = (event.target).text;
+    $("#dropdownPreffered1").val(preferred1);
+});
+
+$("#dropdown2").click(function () {
+    preferred2 = (event.target).text;
+    $("#dropdownPreffered2").val(preferred2);
+});

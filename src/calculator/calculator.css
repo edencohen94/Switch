@@ -7,7 +7,18 @@
 
 .page-container {
     padding-top: 15px;
-    overflow-y: auto;
+}
+
+.page-container  .jumbotron {
+    background-color: initial;
+}
+
+.page-container .greetings-container {
+    color: white;
+}
+
+.page-container .lead {
+    color: white;
 }
 
 .nav-item {
@@ -20,6 +31,7 @@
 
 .menu-items {
     display: flex;
+    justify-content: center;
 }
 
 .nav-item:hover {
@@ -73,4 +85,10 @@ html,body{
     background-repeat: no-repeat;
     height: 140%;
     font-family: 'Numans', sans-serif;
+}
+
+#btndiv{
+    margin: auto;
+    width: 100px;
+    padding: 10px;
 }

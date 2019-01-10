@@ -46,6 +46,7 @@
 
 .menu-items {
     display: flex;
+    justify-content: center;
 }
 
 .nav-item:hover {
@@ -66,11 +67,10 @@
 .info-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: space-around;
     padding-top: 15px;
     overflow-y: auto;
-    background-color: #e9f3f4;
+
 }
 
 .offer-detail {
@@ -151,4 +151,29 @@ html,body{
     margin: 10px;
     text-align: center;
     line-height: 75px;
+}
+
+.page-container  .jumbotron {
+    background-color: initial;
+}
+
+.page-container .greetings-container {
+    color: white;
+}
+
+.page-container .lead {
+    color: white;
+}
+
+.row{
+    background-color: #e9f3f4;
+}
+
+.col-md-2{
+    margin: auto;
+
+}
+
+.profile-edit-btn{
+    width: 100px;
 }
