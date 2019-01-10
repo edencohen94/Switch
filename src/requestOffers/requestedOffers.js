@@ -79,9 +79,9 @@ function addRequested(offers) {
     for (let requestedoffer of offers) {
         //getOfferDetails(requestedoffer.offer_id);
         //let offerDay = requestedoffer.date.toLocaleDateString()
-        let da= offer.date.split("T");
+        let da= requestedoffer.date.split("T");
         let dd= da[0].split("-");
-        let offerDay = new Date("dd[2]/dd[1]/dd[0]")
+        let offerDay = new Date(dd[2]/dd[1]/dd[0])
         var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
         console.log(diffDays)
