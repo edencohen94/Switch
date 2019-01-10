@@ -74,7 +74,8 @@ $('#myModal').modal('toggle');
 addRequested(offers)
 function addRequested(offers) {
 
-    let currDay = new Date().toLocaleDateString()
+    let Day = new Date().toLocaleDateString()
+    let currDay = new Date(Day)
     let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         //getOfferDetails(requestedoffer.offer_id);
