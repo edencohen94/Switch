@@ -157,8 +157,9 @@ function addpopUp(offers){
             for (i = 0; i < offer.requestedBy.length; i++) {
                 if (offer.requestedBy[i].claimed_by_buyer) {
                     totalClaims++;
+                    let userStatus = $("<div></div>", {class: "card-body info-container"})
 
-                    let userStatus = getUserDetails(offer.requestedBy[i].user_id);
+                   // let user_name = getUserDetails(offer.requestedBy[i].user_id);
                     requestedOffers.append(userStatus);
 
                     let user_name = "dkfls";
@@ -196,6 +197,8 @@ function addpopUp(offers){
 }
 
 
+$('#myModal').modal('toggle');
+
 
   /*  $('#myModal').on('data-dismiss='modal', function(e){
         if( numOfAnswers==totalClaims ) {
@@ -207,12 +210,8 @@ function addpopUp(offers){
     });
 */
 
-/*if(totalClaims==numOfAnswers){
-    $('#myModal').modal('hide');
-}*/
 
 
-$('#myModal').modal('toggle');
 
 function postNotclaimByBuyer(offer_id){
     $.ajax({
@@ -224,8 +223,11 @@ function postNotclaimByBuyer(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("success to update claim by the buyer");
             numOfAnswers++;
+            console.log("success to update claim by the buyer");
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
         },
         dataType: 'json'
     });
@@ -241,7 +243,10 @@ function postStatus(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("dffd")
+            console.log("dffd");
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
         },
         dataType: 'json'
     });
