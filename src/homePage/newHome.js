@@ -351,7 +351,7 @@ function postToRequestedOffers(offer_id){
         },
         success: function(data) {
             console.log("successed to post requested offer")
-            window.location.herf= "../requestOffers/requestedOffers.html"
+            window.location.href = '../requestOffers/requestedOffers.html';
         },
         dataType: 'json'
     });
