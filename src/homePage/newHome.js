@@ -10,6 +10,21 @@
         return [day, month, year].join('-');
     }
 
+    $.ajax({
+        type:"GET",
+        url: config.host + '/offer/all-offers',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        success: function(data) {
+            funAdd(data.result);
+            //number of offers in the site
+            var num= $("<h3 style='color:white'></h3>").text("Currently there are "+data.result.length+" relevent offers");
+            $("#all").append(num);
+        }
+    });
 
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
@@ -127,16 +142,12 @@ $("#currency-dropdown").click(function () {
 });
 
 
-//number of offers in the site
-var num= $("<div></div>").text("Currently there are "+(fill.numofOffers[0]).num+" relevent offers");
-$("#all").append(num);
-
 
 // previous- next : in results of search
 var maxrows=5;
 var page=0;
 $("#btn_next").click();
-
+var rank={};
 function funAdd(offers) {
     var el;
     var len= offers.length;
@@ -153,6 +164,14 @@ function funAdd(offers) {
             let curr = $("<a></a>").text(offer.offered_currency);
             let city = $("<a></a>").text(offer.city_1);
             let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+            let rankUser;
+            if(offer.rank<0){
+                rankUser = $("<a style='color: red'></a>").text(offer.rank);
+            }
+            else{
+                rankUser = $("<a style='color: green'></a>").text(offer.rank);
+            }
+
             if(offer.isActive){
                 el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
             }
@@ -160,6 +179,7 @@ function funAdd(offers) {
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
@@ -181,7 +201,7 @@ function funAdd(offers) {
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-
+            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
@@ -193,9 +213,9 @@ function funAdd(offers) {
             $("#details"+i).append(askForDeatils);
 
         }
-
     }
 }
+
 
 function funRem(offers){
     var el;
@@ -210,6 +230,14 @@ function funRem(offers){
             let curr = $("<a></a>").text(offer.offered_currency);
             let city = $("<a></a>").text(offer.city_1);
             let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+            let rankUser;
+            if(offer.rank<0){
+                rankUser = $("<a style='color: red'></a>").text(offer.rank);
+            }
+            else{
+                rankUser = $("<a style='color: green'></a>").text(offer.rank);
+            }
+
             if(offer.isActive){
                 el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
             }
@@ -217,6 +245,7 @@ function funRem(offers){
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
@@ -239,6 +268,7 @@ function funRem(offers){
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
+            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             convertCurreny(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
@@ -248,6 +278,7 @@ function funRem(offers){
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
+
         }
     }
 }
@@ -288,7 +319,7 @@ function getNextOffers() {
         },
         dataType: 'json',
         success: function(data) {
-            funAdd(data.result)
+            funAdd(data.result);
         }
     });
 }
@@ -308,8 +339,6 @@ function getPreviousOffers() {
 
     });
 }
-
-
 
 function postToRequestedOffers(offer_id){
     $.ajax({
@@ -338,3 +367,142 @@ $('#btn-next').click(getNextOffers);
 $('#btn-prev').click(getPreviousOffers);
 
 getNextOffers();
+
+
+transOffers ={
+        "offers":[
+            {
+                "rank": "0",
+                "amount": "10",
+                "offered_currency": "USD",
+                "city_1":"Tel-Aviv",
+                "date": "19/12/2018",
+                "rank2": "0",
+                "amount2": "20",
+                "offered_currency2": "USD",
+                "city_1_2":"Tel-Aviv",
+                "date2": "19/12/2018"
+
+            },
+            {
+                "rank": "0",
+                "amount": "30",
+                "offered_currency": "USD",
+                "city_1":"Tel-Aviv",
+                "date": "19/12/2018",
+                "rank2": "0",
+                "amount2": "40",
+                "offered_currency2": "USD",
+                "city_1_2":"Tel-Aviv",
+                "date2": "19/12/2018"
+            }
+
+        ]
+    };
+funAddTrans(transOffers);
+////////////////////transitivity/////////////////////////////////////////
+    function funAddTrans(transOffers) {
+        let offers= transOffers.offers;
+        var el;
+        var len= offers.length;
+        for (var i = 0; i <len ; i++) {
+                var offer = offers[i];
+                let amount = $("<a></a>").text(offer.amount);
+                let curr = $("<a></a>").text(offer.offered_currency);
+                let city = $("<a></a>").text(offer.city_1);
+                let lastUpdate = $("<a></a>").text(offer.date);
+                let rankUser;
+                if(offer.rank<0){
+                    rankUser = $("<a style='color: red'></a>").text(offer.rank);
+                }
+                else{
+                    rankUser = $("<a style='color: green'></a>").text(offer.rank);
+                }
+
+                el = $('<div>', {id: 'results' + i, class: 'resultTrans container'});
+                var result = $(".transitive").append(el);
+                var el_first= $('<div>', {id: 'results1' + i, class: 'result1 container'});
+                el_first.appendTo(el);
+                $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
+                $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el_first);
+                $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el_first);
+                $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el_first);
+                $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el_first);
+                $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el_first);
+                $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
+
+
+                // create a button
+                let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+                // assign it some data (the relevant offer-id)
+                askForDeatils.data('offer-id', offer.offer_id);
+
+
+                // add a click listener
+                askForDeatils.click(function () {
+                    // here, this stands for the button that was clicked
+                    // so we want to get that button's offer-id
+                    postToRequestedOffers($(this).data('offer-id'));
+                });
+
+                $("#rank"+i).append(rankUser);
+                $("#amount" + i).append(amount);
+                $("#currency" + i).append(curr);
+                convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+                if (offer.secondary_currency){
+                    convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+                }
+                $("#city" + i).append(city);
+                $("#lastUpdate" + i).append(lastUpdate);
+                $("#details"+i).append(askForDeatils);
+
+
+                // second offer
+            let amount2 = $("<a></a>").text(offer.amount2);
+            let curr2 = $("<a></a>").text(offer.offered_currency2);
+            let city2 = $("<a></a>").text(offer.city_1_2);
+            let lastUpdate2 = $("<a></a>").text(offer.date2);
+            let rankUser2;
+            if(offer.rank<0){
+                rankUser2 = $("<a style='color: red'></a>").text(offer.rank);
+            }
+            else{
+                rankUser2 = $("<a style='color: green'></a>").text(offer.rank);
+            }
+            var el_second= $('<div>', {id: 'results2' + i, class: 'result2 container'});
+            el_second.appendTo(el);
+            $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
+            $('<div>', {id: 'amount2' + i, class: 'amount'}).appendTo(el_second);
+            $('<div>', {id: 'currency2' + i, class: 'currency'}).appendTo(el_second);
+            $('<div>', {id: 'preferred2' + i, class: 'Pcurrency'}).appendTo(el_second);
+            $('<div>', {id: 'city2' + i, class: 'city'}).appendTo(el_second);
+            $('<div>', {id: 'lastUpdate2' + i, class: 'lastUpdate'}).appendTo(el_second);
+            $('<button>', {id: 'details2' + i, class: 'details'}).appendTo(el_second);
+
+
+            // create a button
+            let askForDeatils2 = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+            // assign it some data (the relevant offer-id)
+            askForDeatils2.data('offer-id', offer.offer_id);
+
+
+            // add a click listener
+            askForDeatils2.click(function () {
+                // here, this stands for the button that was clicked
+                // so we want to get that button's offer-id
+                postToRequestedOffers($(this).data('offer-id'));
+            });
+
+            $("#rank2"+i).append(rankUser2);
+            $("#amount2" + i).append(amount2);
+            $("#currency2" + i).append(curr2);
+            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+            if (offer.secondary_currency){
+                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+            }
+            $("#city2" + i).append(city2);
+            $("#lastUpdate2" + i).append(lastUpdate2);
+            $("#details2"+i).append(askForDeatils2);
+
+            }
+    }
