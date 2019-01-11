@@ -296,9 +296,6 @@ function postStatus(offer_id){
         },
         success: function(data) {
             console.log("dffd");
-           // if(totalClaims==numOfAnswers){
-             //   $('#myModal').modal('hide');
-            //}
         },
         dataType: 'json'
     });
@@ -314,7 +311,8 @@ function deleteOffer(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("dffd")
+            console.log("dffd");
+            window.location.href = '../openOffers/openOffers.html';
         },
         dataType: 'json'
     });

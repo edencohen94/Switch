@@ -96,11 +96,8 @@
                             <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             </div>
                         </div>
-                        <div class="minAmount">
-                            <input type="number" id="inputMinAmount" class="form-control" placeholder="Min" required>
-                        </div>
-                        <div class="maxAmount">
-                            <input type="number" id="inputMaxAmount" class="form-control" placeholder="Max" required>
+                        <div class="estimated">
+                            <input type="number" id="inputEstimated" class="form-control" placeholder="Estimated Amount" required>
                         </div>
                         <div class="freeText">
                             <input type="text" id="inputFreeText" class="form-control" placeholder="Free Text">
@@ -120,6 +117,7 @@
 
         <div class="topResults container">
             <div class="resultTitle container">
+                <div id="rankUser" class="rankUser">rank User</div>
                 <div id="amount" class="amount">amount</div>
                 <div id="currency" class="currency">currency</div>
                 <div id="preferred" class="Pcurrency">preffered currency</div>
@@ -139,6 +137,23 @@
                 next
             </button>
         </div>
+
+        <br><br>
+        <h1 style="color:white">Transitivity</h1>
+        <div class="transitive container">
+            <div class="resultTitle container">
+                <div id="rankUser2" class="rankUser">rank User</div>
+                <div id="amount2" class="amount">amount</div>
+                <div id="currency2" class="currency">currency</div>
+                <div id="preferredTrans" class="Pcurrency">preffered currency</div>
+                <div id="city2" class="city">city</div>
+                <div id="lastUpdate2" class="lastUpdate">last update</div>
+                <div id="details_btn2" class="details">details</div>
+
+            </div>
+        </div>
+
+
     </div>
 </div>
 </body>
