@@ -376,14 +376,14 @@ transOffers ={
                 "amount": "10",
                 "offered_currency": "USD",
                 "main_currency" : "USD",
-                "secondary_currency": "Euro",
+                "secondary_currency": "EUR",
                 "city_1":"Tel-Aviv",
                 "date": "19/12/2018",
                 "rank2": "0",
                 "amount2": "20",
                 "offered_currency2": "USD",
                 "main_currency2" : "USD",
-                "secondary_currency2": "Euro",
+                "secondary_currency2": "EUR",
                 "city_1_2":"Tel-Aviv",
                 "date2": "19/12/2018"
 
@@ -393,14 +393,14 @@ transOffers ={
                 "amount": "30",
                 "offered_currency": "USD",
                 "main_currency" : "USD",
-                "secondary_currency": "Euro",
+                "secondary_currency": "EUR",
                 "city_1":"Tel-Aviv",
                 "date": "19/12/2018",
                 "rank2": "0",
                 "amount2": "40",
                 "offered_currency2": "USD",
                 "main_currency2" : "USD",
-                "secondary_currency2": "Euro",
+                "secondary_currency2": "EUR",
                 "city_1_2":"Tel-Aviv",
                 "date2": "19/12/2018"
             }
@@ -416,6 +416,7 @@ funAddTrans(transOffers);
         var len= offers.length;
         for (var i = 0; i <len ; i++) {
                 var offer = offers[i];
+                flag=1;
                 let amount = $("<a></a>").text(offer.amount);
                 let curr = $("<a></a>").text(offer.offered_currency);
                 let city = $("<a></a>").text(offer.city_1);
@@ -435,7 +436,7 @@ funAddTrans(transOffers);
                 $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
                 $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el_first);
                 $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el_first);
-                $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el_first);
+                $('<div>', {id: 'preferred1' + i, class: 'Pcurrency'}).appendTo(el_first);
                 $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el_first);
                 $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el_first);
                 $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
@@ -457,16 +458,18 @@ funAddTrans(transOffers);
                 $("#rank"+i).append(rankUser);
                 $("#amount" + i).append(amount);
                 $("#currency" + i).append(curr);
-                convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+                convertCurrenyTrans(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i,flag);
                 if (offer.secondary_currency){
-                    convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+                    convertCurrenyTrans(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i, flag);
                 }
+
                 $("#city" + i).append(city);
                 $("#lastUpdate" + i).append(lastUpdate);
                 $("#details"+i).append(askForDeatils);
 
 
                 // second offer
+            flag=2;
             let amount2 = $("<a></a>").text(offer.amount2);
             let curr2 = $("<a></a>").text(offer.offered_currency2);
             let city2 = $("<a></a>").text(offer.city_1_2);
@@ -505,9 +508,9 @@ funAddTrans(transOffers);
             $("#rank2"+i).append(rankUser2);
             $("#amount2" + i).append(amount2);
             $("#currency2" + i).append(curr2);
-            convertCurreny(offer.offered_currency,offer.main_currency2,parseInt(offer.amount),i);
+            convertCurrenyTrans(offer.offered_currency2,offer.main_currency2,parseInt(offer.amount2),i,flag);
             if (offer.secondary_currency2){
-                convertCurreny(offer.offered_currency, offer.secondary_currency2, parseInt(offer.amount), i);
+                convertCurrenyTrans(offer.offered_currency2, offer.secondary_currency2, parseInt(offer.amount2), i, flag);
             }
             $("#city2" + i).append(city2);
             $("#lastUpdate2" + i).append(lastUpdate2);
@@ -517,7 +520,7 @@ funAddTrans(transOffers);
     }
 
 
-    function convertCurreny (fromCurr, toCurr, amount,i){
+    function convertCurrenyTrans (fromCurr, toCurr, amount,i,flag){
         // set endpoint and access key
         let endpoint = 'latest';
         let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
@@ -528,15 +531,20 @@ funAddTrans(transOffers);
             url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
             dataType: 'jsonp',
             success: function(data) {
-                var finalRateExchange =  commitConversion(data,fromCurr,toCurr,amount)
+                var finalRateExchange =  commitConversionTrans(data,fromCurr,toCurr,amount)
                 finalRateExchange = finalRateExchange.toFixed(2);
                 preferred.text(toCurr+'=' +finalRateExchange+ ' ');
-                $("#preferred" + i).append(preferred);
+                if(flag==1) {
+                    $("#preferred1" + i).append(preferred);
+                }
+                if(flag==2){
+                    $("#preferred2" + i).append(preferred);
+                }
             }
         });
     }
 
-    function commitConversion(data,fromCurr, toCurr, amount){
+    function commitConversionTrans(data,fromCurr, toCurr, amount){
         var exchangeRateTocurr=data.rates[toCurr];
         var exchangeRateFromcurr= data.rates[fromCurr];
         var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
