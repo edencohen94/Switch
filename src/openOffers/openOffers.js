@@ -11,7 +11,6 @@ function formatDate(date) {
 }
 
 
-
 var details=[];
 var userRes=0;
 var numOfAnswers=0;
@@ -143,7 +142,6 @@ function addOpenOffers(offers,details) {
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
             .append(deleteButton)
-            .append(executeButton);
 
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
@@ -238,7 +236,7 @@ function addsingleAlert(offer,user_name){
                    // postNotclaimByBuyer($(this).data('offer-id'));
                 });
                 userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
-                userStatus.append(executeButton)
+                userStatus.append(executeButton);
                 userStatus.append(NotexecuteButton);
                 requestedOffers.append(userStatus);
             }
@@ -248,7 +246,6 @@ function addsingleAlert(offer,user_name){
 }
 
 
-//$('#myModal').modal('toggle');
 
 
  /* /!*  $('#myModal').on('data-dismiss='modal', function(e){
@@ -263,6 +260,7 @@ function addsingleAlert(offer,user_name){
 
 
 
+//$('#myModal').modal('toggle');
 
 function postNotclaimByBuyer(offer_id){
     $.ajax({
@@ -276,13 +274,15 @@ function postNotclaimByBuyer(offer_id){
         success: function(data) {
             numOfAnswers++;
             console.log("success to update claim by the buyer");
-            if(totalClaims==numOfAnswers){
-                $('#myModal').modal('hide');
-            }
+           // if(totalClaims==numOfAnswers){
+             //   $('#myModal').modal('hide');
+            //}
         },
         dataType: 'json'
     });
 }
+$('#myModal').modal('toggle');
+
 
 
 function postStatus(offer_id){
@@ -296,9 +296,9 @@ function postStatus(offer_id){
         },
         success: function(data) {
             console.log("dffd");
-            if(totalClaims==numOfAnswers){
-                $('#myModal').modal('hide');
-            }
+           // if(totalClaims==numOfAnswers){
+             //   $('#myModal').modal('hide');
+            //}
         },
         dataType: 'json'
     });
