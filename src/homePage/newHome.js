@@ -9,7 +9,26 @@
 
         return [day, month, year].join('-');
     }
+/*
+//get ranking of the user that uploaded the offer
+    function getUserDetails(user_id,offer){
+        $.ajax({
+            type: "POST",
+            url: config.host + '/user/specific',
+            data: createUser(user_id),
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: 'json',
+            success: function (data) {
+                data.result.rank
+        }
+        });
 
+    }
+
+*/
 
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
@@ -153,6 +172,7 @@ function funAdd(offers) {
             let curr = $("<a></a>").text(offer.offered_currency);
             let city = $("<a></a>").text(offer.city_1);
             let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+            //let userRank = $("<a></a>").text(getUserDetails(offer.user_id,offer));
             if(offer.isActive){
                 el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
             }
