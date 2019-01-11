@@ -195,16 +195,12 @@ input:hover {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-#inputMinAmount {
+#inputEstimated {
     margin-top: 1em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-#inputMaxAmount {
-    margin-top: 1em;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+
 #inputFreeText {
     margin-top: 1em;
     border-bottom-left-radius: 5px;

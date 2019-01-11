@@ -286,7 +286,7 @@ function funRem(offers){
 function convertCurreny (fromCurr, toCurr, amount,i){
     // set endpoint and access key
     let endpoint = 'latest';
-    let access_key = 'e3201b8ebf57138b968f3c9692754b28';
+    let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
     // get the most recent exchange rates via the "latest" endpoint:
     let preferred = $("<a></a>");
    $.ajax({
@@ -375,11 +375,15 @@ transOffers ={
                 "rank": "0",
                 "amount": "10",
                 "offered_currency": "USD",
+                "main_currency" : "USD",
+                "secondary_currency": "Euro",
                 "city_1":"Tel-Aviv",
                 "date": "19/12/2018",
                 "rank2": "0",
                 "amount2": "20",
                 "offered_currency2": "USD",
+                "main_currency2" : "USD",
+                "secondary_currency2": "Euro",
                 "city_1_2":"Tel-Aviv",
                 "date2": "19/12/2018"
 
@@ -388,11 +392,15 @@ transOffers ={
                 "rank": "0",
                 "amount": "30",
                 "offered_currency": "USD",
+                "main_currency" : "USD",
+                "secondary_currency": "Euro",
                 "city_1":"Tel-Aviv",
                 "date": "19/12/2018",
                 "rank2": "0",
                 "amount2": "40",
                 "offered_currency2": "USD",
+                "main_currency2" : "USD",
+                "secondary_currency2": "Euro",
                 "city_1_2":"Tel-Aviv",
                 "date2": "19/12/2018"
             }
@@ -402,6 +410,7 @@ transOffers ={
 funAddTrans(transOffers);
 ////////////////////transitivity/////////////////////////////////////////
     function funAddTrans(transOffers) {
+        var flag=0; // 1-first user, 2 second user
         let offers= transOffers.offers;
         var el;
         var len= offers.length;
@@ -496,13 +505,40 @@ funAddTrans(transOffers);
             $("#rank2"+i).append(rankUser2);
             $("#amount2" + i).append(amount2);
             $("#currency2" + i).append(curr2);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
-            if (offer.secondary_currency){
-                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+            convertCurreny(offer.offered_currency,offer.main_currency2,parseInt(offer.amount),i);
+            if (offer.secondary_currency2){
+                convertCurreny(offer.offered_currency, offer.secondary_currency2, parseInt(offer.amount), i);
             }
             $("#city2" + i).append(city2);
             $("#lastUpdate2" + i).append(lastUpdate2);
             $("#details2"+i).append(askForDeatils2);
 
             }
+    }
+
+
+    function convertCurreny (fromCurr, toCurr, amount,i){
+        // set endpoint and access key
+        let endpoint = 'latest';
+        let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
+        // get the most recent exchange rates via the "latest" endpoint:
+        let preferred = $("<a></a>");
+        $.ajax({
+            type:"GET",
+            url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+            dataType: 'jsonp',
+            success: function(data) {
+                var finalRateExchange =  commitConversion(data,fromCurr,toCurr,amount)
+                finalRateExchange = finalRateExchange.toFixed(2);
+                preferred.text(toCurr+'=' +finalRateExchange+ ' ');
+                $("#preferred" + i).append(preferred);
+            }
+        });
+    }
+
+    function commitConversion(data,fromCurr, toCurr, amount){
+        var exchangeRateTocurr=data.rates[toCurr];
+        var exchangeRateFromcurr= data.rates[fromCurr];
+        var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
+        return finalRateExchange
     }
