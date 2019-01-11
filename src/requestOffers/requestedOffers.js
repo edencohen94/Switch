@@ -79,6 +79,8 @@ function getOfferDetails(offer_id){
 
 
 
+$('#myModal').modal('toggle');
+
 $('#myModal').modal({
     backdrop: 'static',
     keyboard: false
