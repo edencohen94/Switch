@@ -70,10 +70,10 @@ $.ajax({
     }
 });
 
-$('#myModal').modal({
-    backdrop: 'static',
-    keyboard: false
-});
+// $('#myModal').modal({
+//     backdrop: 'static',
+//     keyboard: false
+// });
 
 
 
@@ -140,21 +140,8 @@ function addOpenOffers(offers,details) {
         //deleteOffer will be a function that gets an id as a parameter
         //and deletes that offer.
 
-        // create a button
-        let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
-
-        // assign it some data (the relevant offer-id)
-        executeButton.data('offer-id', offer.offer_id);
-
-        // add a click listener
-        executeButton.click(function () {
-            // here, this stands for the button that was clicked
-            // so we want to get that button's offer-id
-            postStatus($(this).data('offer-id'));
-        });
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
-            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append(deleteButton)
             .append(executeButton);
 
@@ -168,7 +155,6 @@ function addOpenOffers(offers,details) {
 
         $(".offers-container").append(card);
         //request claimed to happen by some users
-
     }
 
 //    $(".modal-body").append(requestedOffers);
@@ -262,7 +248,7 @@ function addsingleAlert(offer,user_name){
 }
 
 
-$('#myModal').modal('toggle');
+//$('#myModal').modal('toggle');
 
 
  /* /!*  $('#myModal').on('data-dismiss='modal', function(e){

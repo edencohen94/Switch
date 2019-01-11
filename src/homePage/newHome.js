@@ -224,6 +224,21 @@ function funRem(offers){
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
+
+            // create a button
+            let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+            // assign it some data (the relevant offer-id)
+            askForDeatils.data('offer-id', offer.offer_id);
+
+
+            // add a click listener
+            askForDeatils.click(function () {
+                // here, this stands for the button that was clicked
+                // so we want to get that button's offer-id
+                //if(offer.user_id!=)
+                postToRequestedOffers($(this).data('offer-id'));
+            });
+
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             convertCurreny(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
@@ -232,7 +247,7 @@ function funRem(offers){
             }
             $("#city" + i).append(city);
             $("#lastUpdate" + i).append(lastUpdate);
-            $('<img/>' ,{src:"../Images/details.png", width:'90', height:'30'}).appendTo($('<a/>', {href: "../requestOffers/requestedOffers.html"}).appendTo($("#details"+i)));
+            $("#details"+i).append(askForDeatils);
         }
     }
 }
@@ -306,6 +321,7 @@ function postToRequestedOffers(offer_id){
             withCredentials: true
         },
         success: function(data) {
+            console.log("successed to post requested offer")
             window.location.herf= "../requestOffers/requestedOffers.html"
         },
         dataType: 'json'

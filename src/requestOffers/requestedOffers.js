@@ -19,7 +19,7 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
-        $(".greetings").text(data.result.first_name + "'s offers");
+        $(".greetings").text(data.result.first_name + "'s requested offers");
     }
 });
 
@@ -67,7 +67,6 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result)
-            $(".greetings").text(data.result.first_name + "'s requested offers");
         }
     });
 
@@ -168,11 +167,12 @@ function addSingleRequest(offer,details) {
     });
 
     // create a button
-    let likebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"});
+    let likebutton = $("<button></button>");
 
     // assign it some data (the relevant offer-id)
     likebutton.data('user-id',details.user_id);
     likebutton.data('rank',1);
+    likebutton.append($('<img/>', {src: "../Images/like.png", width: '60', height: '60'}))
 
     // add a click listener
     likebutton.click(function () {
@@ -182,11 +182,13 @@ function addSingleRequest(offer,details) {
     });
 
     // create a button
-    let unlikebutton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"});
+    let unlikebutton = $("<button></button>");
 
     // assign it some data (the relevant offer-id)
     unlikebutton.data('user-id',details.user_id);
     unlikebutton.data('rank',-1);
+    unlikebutton.append($('<img/>', {src: "../Images/dislike.png", width: '60', height: '60'}));
+
 
     // add a click listener
     unlikebutton.click(function () {
