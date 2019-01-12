@@ -5,6 +5,11 @@
     width: 200%;
     border-style: groove;
     padding:5px;
+    color: black;
+    margin: 0.2em;
+    background-color: white;
+
+    border-radius: 5px;
 }
 
 .result >div{
@@ -13,6 +18,8 @@
     margin: 5px;
     text-align: left;
     line-height: 20px;
+    border-radius: 5px;
+
 
 }
 
@@ -21,12 +28,20 @@
     flex-direction: column;
     justify-content: space-between;
     width: 200%;
-    border-style: groove;
-    padding:5px;
+    padding: 5px;
+    border: 4px outset;
+    margin: 0.2em;
+    background-color: snow;
+    border-radius: 5px;
+
+
 }
 
 
+
 .result1 {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -35,6 +50,8 @@
 }
 
 .result1 >div{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     text-align:center;
     width: 300px;
     margin: 5px;
@@ -43,6 +60,8 @@
 
 }
 .result2 {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -51,6 +70,8 @@
 }
 
 .result2 >div{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     text-align:center;
     width: 300px;
     margin: 5px;
@@ -62,9 +83,11 @@
 
 
 .resultTitle {
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: white;
     width: 100%;
     border-style: groove;
     font-weight: bold;
@@ -83,7 +106,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-color: #e9f3f4;
 }
 
 .topResults.container{
@@ -94,7 +116,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-color: #e9f3f4;
 }
 .transitive.container{
     padding-right: 0px;
@@ -158,6 +179,7 @@ html,body{
     position: relative;
     display: inline-block;
     color: white;
+    width:220px;
 
 }
 
@@ -166,14 +188,14 @@ html,body{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-#dropdownMenuOffset {
-    margin-top: 1em;
+#dropdownMenuOffset1 {
+    width:220px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 .searchoffers-body span{
     margin: 0 auto;
-    width: 50px;
+    width: 2000px;
     background-color: #FFC312;
     color: black;
     border:0 !important;
@@ -183,7 +205,9 @@ html,body{
     max-height: 200px;
     overflow-x: hidden;
 }
+
 #inputRigion-City {
+    margin-top: 1em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -200,7 +224,10 @@ input:hover {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+#btn-next{
+    margin-right: 40px;
 
+}
 #inputFreeText {
     margin-top: 1em;
     border-bottom-left-radius: 5px;
@@ -221,6 +248,7 @@ input:hover {
     display: flex;
     justify-content: center;
 }
+
 
 .btn-danger{
     width: 120px;
