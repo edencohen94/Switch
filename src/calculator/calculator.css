@@ -73,6 +73,7 @@
     width: 630px;
 }
 #result{
+    font-size: 150%;
     color : white;
 }
 .dropdown-menu{

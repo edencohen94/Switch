@@ -79,8 +79,8 @@ $('#myModal').modal('toggle');
 let reminderOffers =  $("<div></div>", {class: "info-container"})
 
 function addRequested(offers) {
-    let Day = new Date()
-    let currDay = new Date(Day)
+    //let Day = new Date()
+    //let currDay = new Date(Day)
     //let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
@@ -124,6 +124,8 @@ function addRequested(offers) {
 
 function addPop(ruquestedoffer,details){
     //let reminderOffers =  $("<div></div>", {class: "info-container"})
+    let Day = new Date()
+    let currDay = new Date(Day)
     let offerDay = new Date(requestedoffer.date)
     var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
     var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
