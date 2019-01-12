@@ -11,6 +11,7 @@ function formatDate(date) {
 }
 
 
+var firstTime=false;
 var details=[];
 var userRes=0;
 var numOfAnswers=0;
@@ -64,15 +65,13 @@ $.ajax({
     success: function (data) {
         addOpenOffers(data.result,details);
         addpopUp(data.result);
-        checkNum();
-
     }
 });
 
-// $('#myModal').modal({
-//     backdrop: 'static',
-//     keyboard: false
-// });
+$('#myModal').modal({
+    backdrop: 'static',
+    keyboard: false
+});
 
 
 
@@ -83,13 +82,6 @@ $.ajax({
 
 });*/
 
-function checkNum(){
-   if(numOfAnswers==totalClaims){
-        $('#myModal').modal('hide');
-
-    }
-
-}
 
 function addOpenOffers(offers,details) {
     //let requestedOffers =  $("<div></div>", {class: "info-container"});
@@ -139,9 +131,23 @@ function addOpenOffers(offers,details) {
         //deleteOffer will be a function that gets an id as a parameter
         //and deletes that offer.
 
+        // create a button
+        let executeButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Executed");
+
+        // assign it some data (the relevant offer-id)
+        executeButton.data('offer-id', offer.offer_id);
+
+        // add a click listener
+        executeButton.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            postStatus($(this).data('offer-id'));
+        });
 
         let cardButtons = $("<div></div>", {class: "ad-action-container"})
+            .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Edit"))
             .append(deleteButton)
+            .append(executeButton);
 
         let card = $("<div></div>", {class: "card offer-card"})
             .append($("<h5></h5>", {class: "card-header"}).text(offer.offered_currency))
@@ -153,6 +159,7 @@ function addOpenOffers(offers,details) {
 
         $(".offers-container").append(card);
         //request claimed to happen by some users
+
     }
 
 //    $(".modal-body").append(requestedOffers);
@@ -167,37 +174,6 @@ function addpopUp(offers){
             for (i = 0; i < offer.requestedBy.length; i++) {
                 if (offer.requestedBy[i].claimed_by_buyer) {
                     requestedOffers.append(getUserDetails(offer.requestedBy[i].user_id,offer));
-       /*             totalClaims++;
-                    let userStatus = $("<div></div>", {class: "card-body info-container"})
-
-                    const user_name =  getUserDetails(offer.requestedBy[i].user_id).done;
-                    requestedOffers.append(userStatus);
-
-                   // let user_name = "dkfls";
-                     let executeButton = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-
-                     executeButton.data('offer-id', offer.offer_id);
-                     // add a click listener
-                     executeButton.click(function () {
-                         // here, this stands for the button that was clicked
-                         // so we want to get that button's offer-id
-                         numOfAnswers++;
-                         postStatus($(this).data('offer-id'));
-                     });
-
-                     let NotexecuteButton = $("<button></button>", {class: "btn btn-default"}).text("NO");
-
-                     NotexecuteButton.data('offer-id', offer.offer_id);
-                     // add a click listener
-                     NotexecuteButton.click(function () {
-                         //ask tamir which route should i put
-                         numOfAnswers++;
-                         postNotclaimByBuyer($(this).data('offer-id'));
-                     });
-                     userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
-                     userStatus.append(executeButton)
-                     userStatus.append(NotexecuteButton)
-                     requestedOffers.append(userStatus)*/
                 }
             }
         }
@@ -210,7 +186,11 @@ function addpopUp(offers){
 
 function addsingleAlert(offer,user_name){
     if (offer.requestedBy.length > 0) {
-        //need to add all users
+
+        if(firstTime==false){
+            $('#myModal').modal('toggle');
+            firstTime=true;
+        }
                 let userStatus = $("<div></div>", {class: "card-body info-container"})
                 //const user_name =  getUserDetails(offer.requestedBy[i].user_id).done;
 
@@ -236,7 +216,7 @@ function addsingleAlert(offer,user_name){
                    // postNotclaimByBuyer($(this).data('offer-id'));
                 });
                 userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
-                userStatus.append(executeButton);
+                userStatus.append(executeButton)
                 userStatus.append(NotexecuteButton);
                 requestedOffers.append(userStatus);
             }
@@ -260,7 +240,6 @@ function addsingleAlert(offer,user_name){
 
 
 
-//$('#myModal').modal('toggle');
 
 function postNotclaimByBuyer(offer_id){
     $.ajax({
@@ -274,15 +253,13 @@ function postNotclaimByBuyer(offer_id){
         success: function(data) {
             numOfAnswers++;
             console.log("success to update claim by the buyer");
-           // if(totalClaims==numOfAnswers){
-             //   $('#myModal').modal('hide');
-            //}
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
         },
         dataType: 'json'
     });
 }
-$('#myModal').modal('toggle');
-
 
 
 function postStatus(offer_id){
@@ -296,6 +273,9 @@ function postStatus(offer_id){
         },
         success: function(data) {
             console.log("dffd");
+            if(totalClaims==numOfAnswers){
+                $('#myModal').modal('hide');
+            }
         },
         dataType: 'json'
     });
@@ -311,8 +291,7 @@ function deleteOffer(offer_id){
             withCredentials: true
         },
         success: function(data) {
-            console.log("dffd");
-            window.location.href = '../openOffers/openOffers.html';
+            console.log("dffd")
         },
         dataType: 'json'
     });
