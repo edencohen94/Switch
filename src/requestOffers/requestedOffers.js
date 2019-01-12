@@ -67,27 +67,28 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result)
+            //addPop(offer_data, data.result)
         }
     });
 
 }
 
+
 $('#myModal').modal('toggle');
 
 function addRequested(offers) {
-    let Day = new Date().toLocaleDateString()
+    let Day = new Date()
     let currDay = new Date(Day)
     let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
 
-        let da= requestedoffer.date.split("T");
-        let dd= da[0].split("-");
-        let offerDay = new Date(dd[2]/dd[1]/dd[0])
+        let offerDay = new Date(requestedoffer.date)
         var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
+        var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
         if(diffDays >= 7){
+
+            let userStatus = $("<div></div>", {class: "card-body info-container"})
 
             let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
 
@@ -106,16 +107,52 @@ function addRequested(offers) {
                 //ask tamir which route should i put
                 postStatus($(this).data('offer-id'));
             });
-            reminderOffers.append("You were interested in this offer a week ago. Was the exchange made?")
-            reminderOffers.append(executeButtonB)
-            reminderOffers.append(notExecutedButtonB)
+            userStatus.append("You were interested in this offer that was posted by"/* + user_name*/+ "with amount : " + requestedoffer.amount +" and currency : " +requestedoffer.offered_currency+ ", over a week ago. Was the exchange made?")
+            userStatus.append(executeButtonB)
+            userStatus.append(notExecutedButtonB)
+            reminderOffers.append(userStatus)
 
         }
     }
     $(".modal-body").append(reminderOffers);
 }
 
+//let reminderOffers =  $("<div></div>", {class: "info-container"})
+/*
+function addPop(ruquestedoffer,details){
+    let offerDay = new Date(requestedoffer.date)
+    var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
+    var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
+    if(diffDays >= 7) {
 
+        let userStatus = $("<div></div>", {class: "card-body info-container"})
+
+        let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+
+        executeButtonB.data('offer-id', requestedoffer.offer_id);
+        // add a click listener
+        executeButtonB.click(function () {
+            // here, this stands for the button that was clicked
+            // so we want to get that button's offer-id
+            postStatus($(this).data('offer-id'));
+        });
+        let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
+
+        notExecutedButtonB.data('offer-id', requestedoffer.offer_id);
+        // add a click listener
+        notExecutedButtonB.click(function () {
+            //ask tamir which route should i put
+            postStatus($(this).data('offer-id'));
+        });
+        userStatus.append("You were interested in this offer that was posted by" + details.username + "with amount : " + requestedoffer.amount + " and currency : " + requestedoffer.offered_currency + ", over a week ago. Was the exchange made?")
+        userStatus.append(executeButtonB)
+        userStatus.append(notExecutedButtonB)
+        reminderOffers.append(userStatus)
+
+
+    }
+}
+*/
 
 function addSingleRequest(offer,details) {
     let cardBody = $("<div></div>", {class: "card-body info-container"})
