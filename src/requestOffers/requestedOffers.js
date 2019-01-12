@@ -20,22 +20,26 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         $(".greetings").text(data.result.first_name + "'s requested offers");
+        presentoffers();
     }
 });
 
 // get user's rquested offers from server
-$.ajax({
-    type:"GET",
-    url: config.host+ '/offer/requested',
-    crossDomain: true,
-    xhrFields: {
-        withCredentials: true
-    },
-    success: function(data) {
-        addRequested(data.result);
-    },
-    dataType: 'json'
-});
+function presentoffers(){
+    $.ajax({
+        type:"GET",
+        url: config.host+ '/offer/requested',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            addRequested(data.result);
+            //addPop(offer_data, data.result);
+        },
+        dataType: 'json'
+    });
+}
 
 
 // get offer
@@ -51,6 +55,7 @@ function getOfferDetails(offer_id){
         dataType: 'json',
         success: function(data) {
             getUserDetails(data.result[0],data.result[0].user_id);
+            //addPop(offer_data, data.result);
         }
     });
 }
@@ -67,7 +72,7 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result);
-            addPop(offer_data, data.result);
+            //addPop(offer_data, data.result);
         }
     });
 
@@ -76,16 +81,16 @@ function getUserDetails(offer_data, user_id){
 
 $('#myModal').modal('toggle');
 
-let reminderOffers =  $("<div></div>", {class: "info-container"})
+//  let reminderOffers =  $("<div></div>", {class: "info-container"})
 
 function addRequested(offers) {
-    //let Day = new Date()
-    //let currDay = new Date(Day)
-    //let reminderOffers =  $("<div></div>", {class: "info-container"})
+    let Day = new Date()
+    let currDay = new Date(Day)
+    let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
 
-        /*
+
         let offerDay = new Date(requestedoffer.date)
         var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
         var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
@@ -115,15 +120,15 @@ function addRequested(offers) {
             userStatus.append(notExecutedButtonB)
             reminderOffers.append(userStatus)
 
-        }*/
+        }
     }
         $(".modal-body").append(reminderOffers);
 }
 
-
+/*
 
 function addPop(ruquestedoffer,details){
-    //let reminderOffers =  $("<div></div>", {class: "info-container"})
+    let reminderOffers =  $("<div></div>", {class: "info-container"})
     let Day = new Date()
     let currDay = new Date(Day)
     let offerDay = new Date(requestedoffer.date)
@@ -159,6 +164,7 @@ function addPop(ruquestedoffer,details){
     }
 }
 
+*/
 
 function addSingleRequest(offer,details) {
     let cardBody = $("<div></div>", {class: "card-body info-container"})
