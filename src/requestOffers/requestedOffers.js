@@ -9,6 +9,10 @@ function formatDate(date) {
 
     return [day, month, year].join('-');
 }
+var firstTime=false;
+var totalExp = 0;
+var flagpopup=false;
+var numofanswers=0;
 // get user's name for greeting
 $.ajax({
     type: "POST",
@@ -20,26 +24,22 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         $(".greetings").text(data.result.first_name + "'s requested offers");
-        presentoffers();
     }
 });
 
 // get user's rquested offers from server
-function presentoffers(){
-    $.ajax({
-        type:"GET",
-        url: config.host+ '/offer/requested',
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            addRequested(data.result);
-            //addPop(offer_data, data.result);
-        },
-        dataType: 'json'
-    });
-}
+$.ajax({
+    type:"GET",
+    url: config.host+ '/offer/requested',
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(data) {
+        addRequested(data.result);
+    },
+    dataType: 'json'
+});
 
 
 // get offer
@@ -55,7 +55,6 @@ function getOfferDetails(offer_id){
         dataType: 'json',
         success: function(data) {
             getUserDetails(data.result[0],data.result[0].user_id);
-            //addPop(offer_data, data.result);
         }
     });
 }
@@ -72,70 +71,46 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result);
-            //addPop(offer_data, data.result);
+            addPop(offer_data, data.result);
         }
     });
 
 }
 
 
-$('#myModal').modal('toggle');
-
-//  let reminderOffers =  $("<div></div>", {class: "info-container"})
+let reminderOffers =  $("<div></div>", {class: "info-container"})
 
 function addRequested(offers) {
-    let Day = new Date()
-    let currDay = new Date(Day)
-    let reminderOffers =  $("<div></div>", {class: "info-container"})
+    //let Day = new Date()
+    //let currDay = new Date(Day)
+    //let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
-
-
-        let offerDay = new Date(requestedoffer.date)
-        var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
-        var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
-        if(diffDays >= 7){
-
-            let userStatus = $("<div></div>", {class: "card-body info-container"})
-
-            let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
-
-            executeButtonB.data('offer-id', requestedoffer.offer_id);
-            // add a click listener
-            executeButtonB.click(function () {
-                // here, this stands for the button that was clicked
-                // so we want to get that button's offer-id
-                postStatus($(this).data('offer-id'));
-            });
-            let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
-
-            notExecutedButtonB.data('offer-id', requestedoffer.offer_id);
-            // add a click listener
-            notExecutedButtonB.click(function () {
-                //ask tamir which route should i put
-                postStatus($(this).data('offer-id'));
-            });
-            userStatus.append("You were interested in this offer that was posted by with amount : " + requestedoffer.amount +" and currency : " +requestedoffer.offered_currency+ ", over a week ago. Was the exchange made?")
-            userStatus.append(executeButtonB)
-            userStatus.append(notExecutedButtonB)
-            reminderOffers.append(userStatus)
-
-        }
     }
-        $(".modal-body").append(reminderOffers);
+    $(".modal-body").append(reminderOffers);
 }
 
-/*
 
-function addPop(ruquestedoffer,details){
-    let reminderOffers =  $("<div></div>", {class: "info-container"})
+
+function addPop(requestedoffer,details){
+    //let reminderOffers =  $("<div></div>", {class: "info-container"})
     let Day = new Date()
     let currDay = new Date(Day)
     let offerDay = new Date(requestedoffer.date)
     var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
     var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
     if(diffDays >= 7) {
+        totalExp++;
+        flagpopup=true;
+        if (firstTime==false){
+            $('#myModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
 
+            $('#myModal').modal('toggle');
+            firstTime=true;
+        }
         let userStatus = $("<div></div>", {class: "card-body info-container"})
 
         let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
@@ -153,9 +128,9 @@ function addPop(ruquestedoffer,details){
         // add a click listener
         notExecutedButtonB.click(function () {
             //ask tamir which route should i put
-            postStatus($(this).data('offer-id'));
+            deleteRequested($(this).data('offer-id'));
         });
-        userStatus.append("You were interested in this offer that was posted by" + details.username + "with amount : " + requestedoffer.amount + " and currency : " + requestedoffer.offered_currency + ", over a week ago. Was the exchange made?")
+        userStatus.append("You were interested in this offer that was posted by " + details.first_name + " with amount : " + requestedoffer.amount + " and currency : " + requestedoffer.offered_currency + ", over a week ago. Was the exchange made?");
         userStatus.append(executeButtonB)
         userStatus.append(notExecutedButtonB)
         reminderOffers.append(userStatus)
@@ -164,7 +139,6 @@ function addPop(ruquestedoffer,details){
     }
 }
 
-*/
 
 function addSingleRequest(offer,details) {
     let cardBody = $("<div></div>", {class: "card-body info-container"})
@@ -173,11 +147,11 @@ function addSingleRequest(offer,details) {
         .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
         .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
     let textBody = $("<div></div>", {class: "card-body info-container"})
-        if(offer.description){
-            textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
-        }
-        textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-        textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+    if(offer.description){
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
+    }
+    textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+    textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
     if (details.address_2) {
         textBody.append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
     }
@@ -185,11 +159,11 @@ function addSingleRequest(offer,details) {
         textBody.append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
     }
     let contactBody = $("<div></div>", {class: "card-body info-container"})
-        if(details.phone){
-            contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
-        }
-        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
+    if(details.phone){
+        contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+    }
+    contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+    contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
 
     let da= offer.date.split("T");
     let dd= da[0].split("-");
@@ -204,9 +178,22 @@ function addSingleRequest(offer,details) {
     executeButton.click(function () {
         // here, this stands for the button that was clicked
         // so we want to get that button's offer-id
-            postStatus($(this).data('offer-id'));
+        postStatus($(this).data('offer-id'));
     });
 
+
+    // create a button
+    let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
+
+    // assign it some data (the relevant offer-id)
+    deleteButton.data('offer-id', offer.offer_id);
+
+    // add a click listener
+    deleteButton.click(function () {
+        // here, this stands for the button that was clicked
+        // so we want to get that button's offer-id
+        deleteRequested($(this).data('offer-id'));
+    });
     // create a button
     let likebutton = $("<button></button>");
 
@@ -239,8 +226,8 @@ function addSingleRequest(offer,details) {
     });
 
     let cardButtons = $("<div></div>", {class: "ad-action-container"})
-        .append($("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Not Executed"))
         .append(executeButton)
+        .append(deleteButton)
         .append(likebutton)
         .append(unlikebutton)
 
@@ -255,6 +242,28 @@ function addSingleRequest(offer,details) {
 }
 
 
+function deleteRequested(offer_id){
+    $.ajax({
+        type:"DELETE",
+        url: config.host+ '/offer/requested',
+        data: createNew(offer_id),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            if(flagpopup){
+                numofanswers++;
+                if(numofanswers==totalExp){
+                    $('#myModal').modal('hide');
+                }
+            }
+            console.log("success to update claim by the buyer")
+        },
+        dataType: 'json'
+    });
+}
+
 function postStatus(offer_id){
     $.ajax({
         type:"POST",
@@ -265,6 +274,12 @@ function postStatus(offer_id){
             withCredentials: true
         },
         success: function(data) {
+            if(flagpopup){
+                numofanswers++;
+                if(numofanswers==totalExp){
+                    $('#myModal').modal('hide');
+                }
+            }
             console.log("success to update claim by the buyer")
         },
         dataType: 'json'
