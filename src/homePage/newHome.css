@@ -5,9 +5,11 @@
     width: 200%;
     border-style: groove;
     padding:5px;
-    color: white;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    color: black;
+    margin: 0.2em;
+    background-color: white;
+
+    border-radius: 5px;
 }
 
 .result >div{
@@ -16,8 +18,8 @@
     margin: 5px;
     text-align: left;
     line-height: 20px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
+
 
 }
 
@@ -26,12 +28,13 @@
     flex-direction: column;
     justify-content: space-between;
     width: 200%;
-    border-style: outset;
     padding: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin: 1em;
-    background-color: white;
+    border: 4px outset;
+    margin: 0.2em;
+    background-color: snow;
+    border-radius: 5px;
+
+
 }
 
 
@@ -80,9 +83,11 @@
 
 
 .resultTitle {
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: white;
     width: 100%;
     border-style: groove;
     font-weight: bold;
@@ -101,7 +106,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background-color: white;
 }
 
 .topResults.container{
@@ -175,6 +179,7 @@ html,body{
     position: relative;
     display: inline-block;
     color: white;
+    width:220px;
 
 }
 
@@ -184,14 +189,13 @@ html,body{
     border-bottom-right-radius: 5px;
 }
 #dropdownMenuOffset1 {
-    margin-top: 1em;
-    width: 200px;
+    width:220px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 .searchoffers-body span{
     margin: 0 auto;
-    width: 50px;
+    width: 2000px;
     background-color: #FFC312;
     color: black;
     border:0 !important;
@@ -201,7 +205,9 @@ html,body{
     max-height: 200px;
     overflow-x: hidden;
 }
+
 #inputRigion-City {
+    margin-top: 1em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -218,7 +224,10 @@ input:hover {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+#btn-next{
+    margin-right: 40px;
 
+}
 #inputFreeText {
     margin-top: 1em;
     border-bottom-left-radius: 5px;
@@ -239,6 +248,7 @@ input:hover {
     display: flex;
     justify-content: center;
 }
+
 
 .btn-danger{
     width: 120px;

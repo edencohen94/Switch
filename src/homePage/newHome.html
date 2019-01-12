@@ -73,13 +73,10 @@
         <h1 style="color:white;font-size:600%;">SWITCH</h1>
         <br>
         <div class="searchContainer container">
-            <div class="d-flex justify-content-center h-100">
-                <div class="searchoffers-body h-100">
+            <div class="d-flex justify-content-center">
+                <div class="searchoffers-body">
                     <form class="form-col">
-                        <div class="city">
-                            <input type="text" id="inputRigion-City" class="form-control" placeholder="Region/City"
-                                   required>
-                        </div>
+
                         <div class="country">
                             <form autocomplete="off" action="/action_page.php">
                                 <div class="autocomplete">
@@ -88,6 +85,10 @@
                                 </div>
 
                             </form>
+                        </div>
+                        <div class="city">
+                            <input type="text" id="inputRigion-City" class="form-control" placeholder="Region/City"
+                                   required>
                         </div>
                         <p style="margin-left:2.5em"></p>
 
@@ -117,38 +118,39 @@
 
         <div class="topResults container">
             <div class="resultTitle container">
-                <div id="amount" class="amount">amount</div>
-                <div id="currency" class="currency">currency</div>
-                <div id="preferred" class="Pcurrency">preffered currency</div>
-                <div id="city" class="city">city</div>
+                <div id="amount" class="amount">Amount</div>
+                <div id="currency" class="currency">Currency</div>
+                <div id="preferred" class="Pcurrency">Preferred currency</div>
+                <div id="city" class="city">City</div>
                 <div id="rankUser" class="rankUser">User's Rank</div>
-                <div id="lastUpdate" class="lastUpdate">last update</div>
-                <div id="details_btn" class="details">details</div>
-
+                <div id="lastUpdate" class="lastUpdate">Last Update</div>
+                <div id="details_btn" class="details">Details</div>
 
             </div>
+
+        </div>
+        <div class="btns_next_prev">
+            <button class="btn btn-primary" id="btn-prev">
+                Previous
+            </button>
+            <button class="btn btn-primary" id="btn-next">
+                Next
+            </button>
         </div>
 
-        <div class="btns_next_prev">
-            <button class="btn" id="btn-prev">
-                previous
-            </button>
-            <button class="btn" id="btn-next">
-                next
-            </button>
-        </div>
+
 
         <br><br>
         <h1 style="color:white">Third party Exchange</h1>
         <div class="transitive container">
             <div class="resultTitle container">
-                <div id="amount2" class="amount">amount</div>
-                <div id="currency2" class="currency">currency</div>
-                <div id="preferredTrans" class="Pcurrency">preffered currency</div>
-                <div id="city2" class="city">city</div>
+                <div id="amount2" class="amount">Amount</div>
+                <div id="currency2" class="currency">Currency</div>
+                <div id="preferredTrans" class="Pcurrency">Preferred currency</div>
+                <div id="city2" class="city">City</div>
                 <div id="rankUser2" class="rankUser">User's Rank</div>
-                <div id="lastUpdate2" class="lastUpdate">last update</div>
-                <div id="details_btn2" class="details">details</div>
+                <div id="lastUpdate2" class="lastUpdate">Last Update</div>
+                <div id="details_btn2" class="details">Details</div>
 
             </div>
         </div>

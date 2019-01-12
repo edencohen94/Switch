@@ -43,7 +43,7 @@ $.ajax({
 
 
 // get offer
-function getOfferDetails(offer_id){
+function getOfferDetails(offer_id,date){
     $.ajax({
         type:"POST",
         url: config.host+'/offer/specific',
@@ -54,12 +54,12 @@ function getOfferDetails(offer_id){
         },
         dataType: 'json',
         success: function(data) {
-            getUserDetails(data.result[0],data.result[0].user_id);
+            getUserDetails(data.result[0],data.result[0].user_id,date);
         }
     });
 }
 
-function getUserDetails(offer_data, user_id){
+function getUserDetails(offer_data, user_id,date){
     $.ajax({
         type: "POST",
         url: config.host + '/user/specific',
@@ -71,7 +71,7 @@ function getUserDetails(offer_data, user_id){
         dataType: 'json',
         success: function (data) {
             addSingleRequest(offer_data, data.result);
-            addPop(offer_data, data.result);
+            addPop(offer_data, data.result,date);
         }
     });
 
@@ -85,18 +85,18 @@ function addRequested(offers) {
     //let currDay = new Date(Day)
     //let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
-        getOfferDetails(requestedoffer.offer_id);
+        getOfferDetails(requestedoffer.offer_id,requestedoffer.date);
     }
     $(".modal-body").append(reminderOffers);
 }
 
 
 
-function addPop(requestedoffer,details){
+function addPop(requestedoffer,details,date){
     //let reminderOffers =  $("<div></div>", {class: "info-container"})
     let Day = new Date()
     let currDay = new Date(Day)
-    let offerDay = new Date(requestedoffer.date)
+    let offerDay = new Date(date)
     var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
     var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
     if(diffDays >= 7) {
@@ -113,7 +113,7 @@ function addPop(requestedoffer,details){
         }
         let userStatus = $("<div></div>", {class: "card-body info-container"})
 
-        let executeButtonB = $("<button></button>", {class: "btn btn-primary"}).text("YES");
+        let executeButtonB = $("<button></button>", {class: "btn btn-success"}).text("YES");
 
         executeButtonB.data('offer-id', requestedoffer.offer_id);
         // add a click listener
@@ -122,7 +122,7 @@ function addPop(requestedoffer,details){
             // so we want to get that button's offer-id
             postStatus($(this).data('offer-id'));
         });
-        let notExecutedButtonB = $("<button></button>", {class: "btn btn-default"}).text("NO");
+        let notExecutedButtonB = $("<button></button>", {class: "btn btn-danger"}).text("NO");
 
         notExecutedButtonB.data('offer-id', requestedoffer.offer_id);
         // add a click listener
