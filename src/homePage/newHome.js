@@ -19,7 +19,7 @@
         },
         dataType: 'json',
         success: function(data) {
-            funAdd(data.result);
+            convertCurrenyAdd(data.result);
             //number of offers in the site
             var num= $("<h3 style='color:white'></h3>").text("Currently there are "+data.result.length+" relevent offers");
             $("#all").append(num);
@@ -136,19 +136,49 @@ for (let currency of config.currencies) {
     element.text(currency.name + " - " + currency.code);
     $("#currency-dropdown").append(element);
 }
-$("#currency-dropdown").click(function () {
-    var selText = (event.target).text;
-    $("#dropdownMenuOffset").html(selText);
-});
 
 
+    $("#currency-dropdown").click(function () {
+        preferred1 = (event.target).text;
+        $("#dropdownMenuOffset1").val(preferred1);
+    });
 
 // previous- next : in results of search
 var maxrows=5;
 var page=0;
 $("#btn_next").click();
 var rank={};
-function funAdd(offers) {
+var searchB= false;
+
+function searchbutton() {
+    $.ajax({
+            type:"POST",
+            url: config.host +'/offer/search',
+            data: getDeatilsFromHtml(),
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            dataType: 'json',
+            "content-Type": 'application/json',
+            success: function (data) {
+                searchB=true;
+                convertCurrenyAdd(data.result)
+            }
+
+        });
+    }
+function getDeatilsFromHtml() {
+        let data = {};
+        data.city = $('#inputRigion-City').val();
+        data.country = $('#inputdestinationCountry').val();
+        currLength= data.requstedCurrency = ($('#dropdownMenuOffset1').val().split(" ")).length;
+        data.requstedCurrency = ($('#dropdownMenuOffset1').val().split(" "))[currLength-1];
+        data.amount = $('#inputEstimated').val();
+        return data
+
+}
+function funAdd(offers,converstionRates) {
     var el;
     var len= offers.length;
     if(len-page>0) {
@@ -179,20 +209,19 @@ function funAdd(offers) {
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el);
+            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
 
             // create a button
             let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
             // assign it some data (the relevant offer-id)
             askForDeatils.data('offer-id', offer.offer_id);
-
 
             // add a click listener
             askForDeatils.click(function () {
@@ -201,23 +230,27 @@ function funAdd(offers) {
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
-            convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
+            commitConversion(converstionRates,offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
             if (offer.secondary_currency){
-                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+                commitConversion(converstionRates,offer.offered_currency,offer.secondary_currency,parseInt(offer.amount),i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
         }
     }
+    if(len==0){
+        for (var j =  page-maxrows; j < page+maxrows ; j++) {
+            $("#results" + j).remove();
+        }
+    }
 }
 
-
-function funRem(offers){
+function funRem(offers,converstionRates){
     var el;
     if(page>maxrows) {
         page = page - maxrows;
@@ -245,11 +278,11 @@ function funRem(offers){
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
@@ -268,73 +301,103 @@ function funRem(offers){
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
-            convertCurreny(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
+
+            commitConversion(converstionRates,offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
             if (offer.secondary_currency){
-                convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+                commitConversion(converstionRates,offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
         }
     }
-}
+    if(len==0){
+        {
+        for (var j = page-maxrows; j < page ; j++) {
+            $("#results" + j).remove();
+        }
+    }
 
-function convertCurreny (fromCurr, toCurr, amount,i){
+}}
+
+function convertCurrenyRem (offers){
     // set endpoint and access key
     let endpoint = 'latest';
-    let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
+    let access_key = '2d5b00bc20182a068df161c1239f8f48';
     // get the most recent exchange rates via the "latest" endpoint:
-    let preferred = $("<a></a>");
    $.ajax({
         type:"GET",
         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
         dataType: 'jsonp',
         success: function(data) {
-            var finalRateExchange =  commitConversion(data,fromCurr,toCurr,amount)
-            finalRateExchange = finalRateExchange.toFixed(2);
-            preferred.text(toCurr+'=' +finalRateExchange+ ' ');
-            $("#preferred" + i).append(preferred);
+            funRem(offers,data.rates);
+
         }
     });
 }
 
-function commitConversion(data,fromCurr, toCurr, amount){
-    var exchangeRateTocurr=data.rates[toCurr];
-    var exchangeRateFromcurr= data.rates[fromCurr];
+function convertCurrenyAdd (offers){
+    let endpoint = 'latest';
+    let access_key = '2d5b00bc20182a068df161c1239f8f48';
+    // get the most recent exchange rates via the "latest" endpoint:
+    $.ajax({
+        type: "GET",
+        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+        dataType: 'jsonp',
+        success: function (data) {
+            funAdd(offers,data.rates);
+        }
+    });
+}
+
+function commitConversion(data,fromCurr, toCurr, amount,i){
+    var exchangeRateTocurr=data[toCurr];
+    var exchangeRateFromcurr= data[fromCurr];
     var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
-    return finalRateExchange
+    finalRateExchange = finalRateExchange.toFixed(2);
+    let preferred = $("<a></a>");
+    preferred.text(toCurr+'=' +finalRateExchange+ ' ');
+    $("#preferred" + i).append(preferred);
 }
 
 function getNextOffers() {
+    var prefix= '/offer/all-offers';
+    if (searchB){
+        prefix = '/offer/search';
+    }
     $.ajax({
         type:"GET",
-        url: config.host + '/offer/all-offers',
+        url: config.host + prefix,
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         dataType: 'json',
         success: function(data) {
-            funAdd(data.result);
+            convertCurrenyAdd(data.result);
         }
     });
 }
 
 function getPreviousOffers() {
+    var prefix= '/offer/all-offers';
+    if (searchB){
+        prefix = '/offer/search';
+    }
     $.ajax({
         type:"GET",
-        url: config.host + '/offer/all-offers',
+        url: config.host +prefix,
         crossDomain: true,
         xhrFields: {
             withCredentials: true
         },
         dataType: 'json',
         success: function(data) {
-            funRem(data.result)
+            convertCurrenyRem(data.result);
         }
 
     });
@@ -433,13 +496,13 @@ funAddTrans(transOffers);
                 var result = $(".transitive").append(el);
                 var el_first= $('<div>', {id: 'results1' + i, class: 'result1 container'});
                 el_first.appendTo(el);
-                $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
                 $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el_first);
                 $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el_first);
                 $('<div>', {id: 'preferred1' + i, class: 'Pcurrency'}).appendTo(el_first);
                 $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el_first);
+                $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
                 $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el_first);
-                $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
+                $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
 
 
                 // create a button
@@ -455,7 +518,6 @@ funAddTrans(transOffers);
                     postToRequestedOffers($(this).data('offer-id'));
                 });
 
-                $("#rank"+i).append(rankUser);
                 $("#amount" + i).append(amount);
                 $("#currency" + i).append(curr);
                 convertCurrenyTrans(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i,flag);
@@ -464,6 +526,7 @@ funAddTrans(transOffers);
                 }
 
                 $("#city" + i).append(city);
+                $("#rank"+i).append(rankUser);
                 $("#lastUpdate" + i).append(lastUpdate);
                 $("#details"+i).append(askForDeatils);
 
@@ -483,13 +546,13 @@ funAddTrans(transOffers);
             }
             var el_second= $('<div>', {id: 'results2' + i, class: 'result2 container'});
             el_second.appendTo(el);
-            $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
             $('<div>', {id: 'amount2' + i, class: 'amount'}).appendTo(el_second);
             $('<div>', {id: 'currency2' + i, class: 'currency'}).appendTo(el_second);
             $('<div>', {id: 'preferred2' + i, class: 'Pcurrency'}).appendTo(el_second);
             $('<div>', {id: 'city2' + i, class: 'city'}).appendTo(el_second);
+            $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
             $('<div>', {id: 'lastUpdate2' + i, class: 'lastUpdate'}).appendTo(el_second);
-            $('<button>', {id: 'details2' + i, class: 'details'}).appendTo(el_second);
+            $('<div>', {id: 'details2' + i, class: 'details'}).appendTo(el_second);
 
 
             // create a button
@@ -505,7 +568,6 @@ funAddTrans(transOffers);
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank2"+i).append(rankUser2);
             $("#amount2" + i).append(amount2);
             $("#currency2" + i).append(curr2);
             convertCurrenyTrans(offer.offered_currency2,offer.main_currency2,parseInt(offer.amount2),i,flag);
@@ -513,6 +575,7 @@ funAddTrans(transOffers);
                 convertCurrenyTrans(offer.offered_currency2, offer.secondary_currency2, parseInt(offer.amount2), i, flag);
             }
             $("#city2" + i).append(city2);
+            $("#rank2"+i).append(rankUser2);
             $("#lastUpdate2" + i).append(lastUpdate2);
             $("#details2"+i).append(askForDeatils2);
 
@@ -531,7 +594,7 @@ funAddTrans(transOffers);
             url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
             dataType: 'jsonp',
             success: function(data) {
-                var finalRateExchange =  commitConversionTrans(data,fromCurr,toCurr,amount)
+                var finalRateExchange =  commitConversionTrans(data.rates,fromCurr,toCurr,amount)
                 finalRateExchange = finalRateExchange.toFixed(2);
                 preferred.text(toCurr+'=' +finalRateExchange+ ' ');
                 if(flag==1) {
@@ -545,8 +608,8 @@ funAddTrans(transOffers);
     }
 
     function commitConversionTrans(data,fromCurr, toCurr, amount){
-        var exchangeRateTocurr=data.rates[toCurr];
-        var exchangeRateFromcurr= data.rates[fromCurr];
+        var exchangeRateTocurr=data[toCurr];
+        var exchangeRateFromcurr= data[fromCurr];
         var finalRateExchange = (exchangeRateTocurr/exchangeRateFromcurr)*amount;
-        return finalRateExchange
+        return finalRateExchange;
     }

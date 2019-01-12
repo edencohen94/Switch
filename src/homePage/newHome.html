@@ -89,11 +89,11 @@
 
                             </form>
                         </div>
-                        <div class="currency">
-                            <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenuOffset"
-                                    data-toggle="dropdown">Select primary currency<span class="caret"></span>
-                            </button>
-                            <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        <p style="margin-left:2.5em"></p>
+
+                        <div class="dropdown mr-1">
+                            <input value="Select preferred currency" type="button" class="btn dropdown-toggle" id="dropdownMenuOffset1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" >
+                            <div id="currency-dropdown" class="dropdown-menu">
                             </div>
                         </div>
                         <div class="estimated">
@@ -104,7 +104,7 @@
                         </div>
                         <p style="margin-left:2.5em"></p>
 
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" type="search">Search</button>
+                        <button type="submit" onclick="searchbutton()" class="btn btn-lg btn-primary btn-block" type="search">Search</button>
 
                     </form>
                 </div>
@@ -117,11 +117,11 @@
 
         <div class="topResults container">
             <div class="resultTitle container">
-                <div id="rankUser" class="rankUser">rank User</div>
                 <div id="amount" class="amount">amount</div>
                 <div id="currency" class="currency">currency</div>
                 <div id="preferred" class="Pcurrency">preffered currency</div>
                 <div id="city" class="city">city</div>
+                <div id="rankUser" class="rankUser">User's Rank</div>
                 <div id="lastUpdate" class="lastUpdate">last update</div>
                 <div id="details_btn" class="details">details</div>
 
@@ -139,14 +139,14 @@
         </div>
 
         <br><br>
-        <h1 style="color:white">Transitivity</h1>
+        <h1 style="color:white">third party Exchange</h1>
         <div class="transitive container">
             <div class="resultTitle container">
-                <div id="rankUser2" class="rankUser">rank User</div>
                 <div id="amount2" class="amount">amount</div>
                 <div id="currency2" class="currency">currency</div>
                 <div id="preferredTrans" class="Pcurrency">preffered currency</div>
                 <div id="city2" class="city">city</div>
+                <div id="rankUser2" class="rankUser">User's Rank</div>
                 <div id="lastUpdate2" class="lastUpdate">last update</div>
                 <div id="details_btn2" class="details">details</div>
 
