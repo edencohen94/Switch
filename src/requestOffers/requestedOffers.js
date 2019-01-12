@@ -50,7 +50,7 @@ function getOfferDetails(offer_id){
         },
         dataType: 'json',
         success: function(data) {
-            getUserDetails(data.result[0],data.result[0].user_id)
+            getUserDetails(data.result[0],data.result[0].user_id);
         }
     });
 }
@@ -66,8 +66,8 @@ function getUserDetails(offer_data, user_id){
         },
         dataType: 'json',
         success: function (data) {
-            addSingleRequest(offer_data, data.result)
-            //addPop(offer_data, data.result)
+            addSingleRequest(offer_data, data.result);
+            addPop(offer_data, data.result);
         }
     });
 
@@ -76,13 +76,16 @@ function getUserDetails(offer_data, user_id){
 
 $('#myModal').modal('toggle');
 
+let reminderOffers =  $("<div></div>", {class: "info-container"})
+
 function addRequested(offers) {
     let Day = new Date()
     let currDay = new Date(Day)
-    let reminderOffers =  $("<div></div>", {class: "info-container"})
+    //let reminderOffers =  $("<div></div>", {class: "info-container"})
     for (let requestedoffer of offers) {
         getOfferDetails(requestedoffer.offer_id);
 
+        /*
         let offerDay = new Date(requestedoffer.date)
         var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
         var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
@@ -107,19 +110,20 @@ function addRequested(offers) {
                 //ask tamir which route should i put
                 postStatus($(this).data('offer-id'));
             });
-            userStatus.append("You were interested in this offer that was posted by"/* + user_name*/+ "with amount : " + requestedoffer.amount +" and currency : " +requestedoffer.offered_currency+ ", over a week ago. Was the exchange made?")
+            userStatus.append("You were interested in this offer that was posted by with amount : " + requestedoffer.amount +" and currency : " +requestedoffer.offered_currency+ ", over a week ago. Was the exchange made?")
             userStatus.append(executeButtonB)
             userStatus.append(notExecutedButtonB)
             reminderOffers.append(userStatus)
 
-        }
+        }*/
     }
-    $(".modal-body").append(reminderOffers);
+        $(".modal-body").append(reminderOffers);
 }
 
-//let reminderOffers =  $("<div></div>", {class: "info-container"})
-/*
+
+
 function addPop(ruquestedoffer,details){
+    //let reminderOffers =  $("<div></div>", {class: "info-container"})
     let offerDay = new Date(requestedoffer.date)
     var timeDiff = Math.abs(currDay.getTime() - offerDay.getTime());
     var diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
@@ -152,7 +156,7 @@ function addPop(ruquestedoffer,details){
 
     }
 }
-*/
+
 
 function addSingleRequest(offer,details) {
     let cardBody = $("<div></div>", {class: "card-body info-container"})
