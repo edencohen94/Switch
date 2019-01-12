@@ -71,8 +71,10 @@ function getDetils() {
     let data = {};
     data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[3];
     data.amount = $('#inputAmount').val();
-    data.main_currency=($('#dropdownPreffered1').val().split(" "))[3];
-    data.secondary_currency=($('#dropdownPreffered2').val().split(" "))[3];
+    let main_currency_length = ($('#dropdownPreffered1').val().split(" ")).length
+    data.main_currency=($('#dropdownPreffered1').val().split(" "))[main_currency_length-1];
+    let second_currenty_length = ($('#dropdownPreffered2').val().split(" ")).length
+    data.secondary_currency=($('#dropdownPreffered2').val().split(" "))[second_currenty_length-1];
     data.description = $('#inputFreeText').val();
     return data
 

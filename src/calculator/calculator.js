@@ -21,7 +21,7 @@ var dataCurr;
 function convertCurreny (){
     // set endpoint and access key
     let endpoint = 'latest';
-    let access_key = 'e3201b8ebf57138b968f3c9692754b28';
+    let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type:"GET",
