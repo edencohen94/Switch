@@ -219,11 +219,11 @@ function funAdd(offers,converstionRates) {
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
@@ -240,7 +240,6 @@ function funAdd(offers,converstionRates) {
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             commitConversion(converstionRates,offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
@@ -248,6 +247,7 @@ function funAdd(offers,converstionRates) {
                 commitConversion(converstionRates,offer.offered_currency,offer.secondary_currency,parseInt(offer.amount),i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
@@ -288,11 +288,11 @@ function funRem(offers,converstionRates){
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
@@ -311,7 +311,6 @@ function funRem(offers,converstionRates){
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
 
@@ -320,6 +319,7 @@ function funRem(offers,converstionRates){
                 commitConversion(converstionRates,offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
@@ -508,11 +508,11 @@ funAddTrans(transOffers);
                 var result = $(".transitive").append(el);
                 var el_first= $('<div>', {id: 'results1' + i, class: 'result1 container'});
                 el_first.appendTo(el);
-                $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
                 $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el_first);
                 $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el_first);
                 $('<div>', {id: 'preferred1' + i, class: 'Pcurrency'}).appendTo(el_first);
                 $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el_first);
+                $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
                 $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el_first);
                 $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
 
@@ -530,7 +530,6 @@ funAddTrans(transOffers);
                     postToRequestedOffers($(this).data('offer-id'));
                 });
 
-                $("#rank"+i).append(rankUser);
                 $("#amount" + i).append(amount);
                 $("#currency" + i).append(curr);
                 convertCurrenyTrans(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i,flag);
@@ -539,6 +538,7 @@ funAddTrans(transOffers);
                 }
 
                 $("#city" + i).append(city);
+                $("#rank"+i).append(rankUser);
                 $("#lastUpdate" + i).append(lastUpdate);
                 $("#details"+i).append(askForDeatils);
 
@@ -558,11 +558,11 @@ funAddTrans(transOffers);
             }
             var el_second= $('<div>', {id: 'results2' + i, class: 'result2 container'});
             el_second.appendTo(el);
-            $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
             $('<div>', {id: 'amount2' + i, class: 'amount'}).appendTo(el_second);
             $('<div>', {id: 'currency2' + i, class: 'currency'}).appendTo(el_second);
             $('<div>', {id: 'preferred2' + i, class: 'Pcurrency'}).appendTo(el_second);
             $('<div>', {id: 'city2' + i, class: 'city'}).appendTo(el_second);
+            $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
             $('<div>', {id: 'lastUpdate2' + i, class: 'lastUpdate'}).appendTo(el_second);
             $('<div>', {id: 'details2' + i, class: 'details'}).appendTo(el_second);
 
@@ -580,7 +580,6 @@ funAddTrans(transOffers);
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank2"+i).append(rankUser2);
             $("#amount2" + i).append(amount2);
             $("#currency2" + i).append(curr2);
             convertCurrenyTrans(offer.offered_currency2,offer.main_currency2,parseInt(offer.amount2),i,flag);
@@ -588,6 +587,7 @@ funAddTrans(transOffers);
                 convertCurrenyTrans(offer.offered_currency2, offer.secondary_currency2, parseInt(offer.amount2), i, flag);
             }
             $("#city2" + i).append(city2);
+            $("#rank2"+i).append(rankUser2);
             $("#lastUpdate2" + i).append(lastUpdate2);
             $("#details2"+i).append(askForDeatils2);
 

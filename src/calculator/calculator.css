@@ -72,6 +72,10 @@
 #inputAmount{
     width: 630px;
 }
+#result{
+    font-size: 150%;
+    color : white;
+}
 .dropdown-menu{
     height: auto;
     width: 400px;
