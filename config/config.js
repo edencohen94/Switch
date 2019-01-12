@@ -1,4 +1,5 @@
 const config = {
+    host: "http://77.126.1.218:3060",
     "currencies": [
         {
             "name": "Afghanistan Afghanis",
@@ -308,5 +309,16 @@ const config = {
             "name": "Zambia Kwacha",
             "code": "ZMK"
         }
-    ]
+    ],
+    "preferredCurr":[
+        {
+            "name": "United States Dollars",
+            "code": "USD"
+        },
+        {
+            "name": "Euro",
+            "code": "EUR"
+        }
+        ]
 };
+

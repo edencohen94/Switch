@@ -1,9 +1,26 @@
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+
+.container{
+    display: contents;
+}
 
 html,body{
     background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: 120%;
     font-family: 'Numans', sans-serif;
 }
 label {
@@ -14,14 +31,6 @@ label {
     width: 400px;
     max-height: 200px;
     overflow-x: hidden;
-}
-.offer-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-around;
-    align-items: center;
-    background: white;
 }
 
 #inputAddress{
@@ -56,4 +65,9 @@ label {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.menu-items {
+    display: flex;
+    justify-content: center;
 }

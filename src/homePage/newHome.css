@@ -5,6 +5,11 @@
     width: 200%;
     border-style: groove;
     padding:5px;
+    color: black;
+    margin: 0.2em;
+    background-color: white;
+
+    border-radius: 5px;
 }
 
 .result >div{
@@ -13,13 +18,76 @@
     margin: 5px;
     text-align: left;
     line-height: 20px;
+    border-radius: 5px;
+
 
 }
 
-.resultTitle {
+.resultTrans {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200%;
+    padding: 5px;
+    border: 4px outset;
+    margin: 0.2em;
+    background-color: snow;
+    border-radius: 5px;
+
+
+}
+
+
+
+.result1 {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 200%;
+    padding:5px;
+}
+
+.result1 >div{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+
+}
+.result2 {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200%;
+    padding:5px;
+}
+
+.result2 >div{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align:center;
+    width: 300px;
+    margin: 5px;
+    text-align: left;
+    line-height: 20px;
+
+}
+
+
+
+.resultTitle {
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: white;
     width: 100%;
     border-style: groove;
     font-weight: bold;
@@ -40,9 +108,21 @@
     justify-content: flex-end;
 }
 
-body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+.topResults.container{
+    padding-right: 0px;
+    padding-left: 0px;
 }
+.transitive{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.transitive.container{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+
 .home_page{
     display: flex;
     flex-direction: column;
@@ -50,24 +130,9 @@ body{
     flex-direction: column;
     align-items: center;
     align-content: center;
-    padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
-}
-
-.nav-tabs{
-    margin-bottom:5%;
-}
-.nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
-}
-.nav-tabs .nav-link.active{
-
-    border: none;
-    border-bottom:2px solid #0062cc;
 }
 
 .checkbox{
@@ -76,4 +141,116 @@ body{
 
 .Tabs{
     align-items: left;
+}
+
+
+.nav-item {
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:last-child {
+    margin-bottom: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-img {
+    background-image: url("../../imgs/logo.png");
+    background-repeat: no-repeat;
+    max-height: 32px;
+    max-width: 32px;
+}
+
+
+
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+    /*height: 140%;*/
+    font-family: 'Numans', sans-serif;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+    color: white;
+    width:220px;
+
+}
+
+#inputdestinationCountry{
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#dropdownMenuOffset1 {
+    width:220px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.searchoffers-body span{
+    margin: 0 auto;
+    width: 2000px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+#currency-dropdown{
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+#inputRigion-City {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+input:hover {
+    background-color: #efefef;
+}
+#inputCurrency {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#inputEstimated {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#btn-next{
+    margin-right: 40px;
+
+}
+#inputFreeText {
+    margin-top: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#searchContainer {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.menu-items {
+    display: flex;
+    justify-content: center;
+}
+
+
+.btn-danger{
+    width: 120px;
+    height: 30px;
 }
