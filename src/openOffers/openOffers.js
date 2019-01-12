@@ -45,7 +45,7 @@ function getUserDetails(user_id,offer){
         dataType: 'json',
         success: function (data) {
             userRes++;
-            addsingleAlert(offer,data.result.first_name);
+            addsingleAlert(offer,data.result.first_name,data.result.user_id);
         }
     });
 
@@ -102,9 +102,6 @@ function addOpenOffers(offers,details) {
             intrestedUsers.text(offer.requestedBy.length+" users  were interested in your offer");
 
             contactBody.append(intrestedUsers);
-
-
-
 
         // create a button
         let deleteButton = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Delete");
@@ -172,17 +169,14 @@ function addpopUp(offers){
                 });
 
             }
-
         }
     }
 
-
     $(".modal-body").append(requestedOffers);
-
 
 }
 
-function addsingleAlert(offer,user_name){
+function addsingleAlert(offer,user_name,buyer_id){
     if (offer.requestedBy.length > 0) {
         if (firstTime==false){
         $('#myModal').modal({
@@ -198,11 +192,12 @@ function addsingleAlert(offer,user_name){
         let executeButton = $("<button></button>", {class: "btn btn-success"}).text("YES");
 
         executeButton.data('offer-id', offer.offer_id);
+        executeButton.data('buyer-id',buyer_id);
                 // add a click listener
         executeButton.click(function () {
             // here, this stands for the button that was clicked
             // so we want to get that button's offer-id
-            postStatus($(this).data('offer-id'));
+            postStatus($(this).data('offer-id'),$(this).data('buyer-id'));
         });
 
         userStatus.append(user_name + " says an exchange was made for offer with amount : " + offer.amount + " and currency : " + offer.offered_currency + " .Do you confirm?")
@@ -215,7 +210,7 @@ function addsingleAlert(offer,user_name){
 function postNotclaimByBuyer(offer_id, numOfClaimers) {
     $.ajax({
         type: "POST",
-        url: config.host + '/offer/not-claim-buyer',
+        url: config.host + '/offer//offer/unclaim-seller',
         data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
@@ -223,7 +218,7 @@ function postNotclaimByBuyer(offer_id, numOfClaimers) {
         },
         success: function (data) {
             numOfAnswers+=numOfClaimers;
-            console.log("success to update claim by the buyer");
+            console.log("success to update claim by the seller");
              if(totalClaims==numOfAnswers){
                $('#myModal').modal('hide');
             }
@@ -232,11 +227,11 @@ function postNotclaimByBuyer(offer_id, numOfClaimers) {
     });
 }
 
-function postStatus(offer_id){
+function postStatus(offer_id,buyer_id){
     $.ajax({
         type:"POST",
         url: config.host+ '/offer/claim-seller',
-        data: createNew(offer_id),
+        data: paramsForExe(offer_id,buyer_id),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -268,6 +263,12 @@ function deleteOffer(offer_id){
         },
         dataType: 'json'
     });
+}
+function paramsForExe(offer_id,buyer_id){
+    let data={}
+    data.offer_id=offer_id;
+    data.buyer_id=buyer_id;
+    return data
 }
 function createNew(offer_id){
     let data={}

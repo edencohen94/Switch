@@ -144,11 +144,14 @@ for (let currency of config.currencies) {
     });
 
 // previous- next : in results of search
+
 var maxrows=5;
 var page=0;
+var searchResult;
 $("#btn_next").click();
 var rank={};
 var searchB= false;
+var transOffers;
 
 function searchbutton() {
     $.ajax({
@@ -163,7 +166,14 @@ function searchbutton() {
             "content-Type": 'application/json',
             success: function (data) {
                 searchB=true;
-                convertCurrenyAdd(data.result)
+                page=0;
+                for (var j = page; j < page+maxrows ; j++) {
+                    $("#results" + j).remove();
+                }
+                searchResult=data.result.regularResults;
+                transOffers=data.result.transitiveResults;
+                convertCurrenyAdd(data.result.regularResults);
+                funAddTrans(data.result.transitiveResults);
             }
 
         });
@@ -173,7 +183,7 @@ function getDeatilsFromHtml() {
         data.city = $('#inputRigion-City').val();
         data.country = $('#inputdestinationCountry').val();
         currLength= data.requstedCurrency = ($('#dropdownMenuOffset1').val().split(" ")).length;
-        data.requstedCurrency = ($('#dropdownMenuOffset1').val().split(" "))[currLength-1];
+        data.requestedCurrency = ($('#dropdownMenuOffset1').val().split(" "))[currLength-1];
         data.amount = $('#inputEstimated').val();
         return data
 
@@ -367,7 +377,8 @@ function commitConversion(data,fromCurr, toCurr, amount,i){
 function getNextOffers() {
     var prefix= '/offer/all-offers';
     if (searchB){
-        prefix = '/offer/search';
+        convertCurrenyAdd(searchResult);
+        funAddTrans(transOffers);
     }
     $.ajax({
         type:"GET",
@@ -386,7 +397,8 @@ function getNextOffers() {
 function getPreviousOffers() {
     var prefix= '/offer/all-offers';
     if (searchB){
-        prefix = '/offer/search';
+        convertCurrenyRem(searchResult);
+        funrem
     }
     $.ajax({
         type:"GET",
@@ -586,7 +598,7 @@ funAddTrans(transOffers);
     function convertCurrenyTrans (fromCurr, toCurr, amount,i,flag){
         // set endpoint and access key
         let endpoint = 'latest';
-        let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
+        let access_key = '2d5b00bc20182a068df161c1239f8f48';
         // get the most recent exchange rates via the "latest" endpoint:
         let preferred = $("<a></a>");
         $.ajax({
