@@ -153,11 +153,11 @@ function addSingleRequest(offer,details) {
         .append($("<span></span>", {class: "offer-detail"}).text("preferred Currency: " + offer.main_currency))
         .append($("<span></span>", {class: "offer-detail"}).text("second Currency: " + offer.secondary_currency))
     let textBody = $("<div></div>", {class: "card-body info-container"})
-        if(offer.description){
-            textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
-        }
-        textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
-        textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
+    if(offer.description){
+        textBody.append($("<span></span>", {class: "offer-detail"}).text("'"+offer.description+"'"))
+    }
+    textBody.append($("<span></span>", {class: "offer-detail"}).text("Address: " + details.address_1))
+    textBody.append($("<span></span>", {class: "offer-detail"}).text("City: " + details.city_1))
     if (details.address_2) {
         textBody.append($("<span></span>", {class: "offer-detail"}).text("Address2: " + details.address_2))
     }
@@ -165,11 +165,11 @@ function addSingleRequest(offer,details) {
         textBody.append($("<span></span>", {class: "offer-detail"}).text("City2: " + details.city_2))
     }
     let contactBody = $("<div></div>", {class: "card-body info-container"})
-        if(details.phone){
-            contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
-        }
-        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
-        contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
+    if(details.phone){
+        contactBody.append($("<span></span>", {class: "offer-detail"}).text("phone: " + details.phone))
+    }
+    contactBody.append($("<span></span>", {class: "offer-detail"}).text("Email: " + details.email))
+    contactBody.append($("<span></span>", {class: "offer-detail"}).text("Date: " + formatDate(offer.date)));
 
     let da= offer.date.split("T");
     let dd= da[0].split("-");
@@ -184,7 +184,7 @@ function addSingleRequest(offer,details) {
     executeButton.click(function () {
         // here, this stands for the button that was clicked
         // so we want to get that button's offer-id
-            postStatus($(this).data('offer-id'));
+        postStatus($(this).data('offer-id'));
     });
 
     // create a button
@@ -284,5 +284,3 @@ function createUser(user_id){
     data.user_id=user_id;
     return data
 }
-
-
