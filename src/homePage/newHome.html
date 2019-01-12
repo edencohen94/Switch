@@ -89,11 +89,11 @@
 
                             </form>
                         </div>
-                        <div class="currency">
-                            <button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenuOffset"
-                                    data-toggle="dropdown">Select primary currency<span class="caret"></span>
-                            </button>
-                            <div id="currency-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        <p style="margin-left:2.5em"></p>
+
+                        <div class="dropdown mr-1">
+                            <input value="Select preferred currency" type="button" class="btn dropdown-toggle" id="dropdownMenuOffset1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" >
+                            <div id="currency-dropdown" class="dropdown-menu">
                             </div>
                         </div>
                         <div class="estimated">
@@ -104,7 +104,7 @@
                         </div>
                         <p style="margin-left:2.5em"></p>
 
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" type="search">Search</button>
+                        <button type="submit" onclick="searchbutton()" class="btn btn-lg btn-primary btn-block" type="search">Search</button>
 
                     </form>
                 </div>
