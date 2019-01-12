@@ -179,11 +179,11 @@ function funAdd(offers) {
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<button>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
@@ -201,7 +201,6 @@ function funAdd(offers) {
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             convertCurreny(offer.offered_currency,offer.main_currency,parseInt(offer.amount),i);
@@ -209,6 +208,7 @@ function funAdd(offers) {
                 convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
@@ -245,11 +245,11 @@ function funRem(offers){
                 el = $('<div>', {id: 'results' + i, class: 'result container'});
             }
             var result = $(".topResults").append(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
 
@@ -268,7 +268,6 @@ function funRem(offers){
                 postToRequestedOffers($(this).data('offer-id'));
             });
 
-            $("#rank"+i).append(rankUser);
             $("#amount" + i).append(amount);
             $("#currency" + i).append(curr);
             convertCurreny(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
@@ -276,6 +275,7 @@ function funRem(offers){
                 convertCurreny(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
             }
             $("#city" + i).append(city);
+            $("#rank"+i).append(rankUser);
             $("#lastUpdate" + i).append(lastUpdate);
             $("#details"+i).append(askForDeatils);
 
