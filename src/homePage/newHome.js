@@ -186,6 +186,7 @@ function searchbutton() {
         success: function (data) {
             pageState.offers = data.result.regularResults;
             updateOffers();
+            funAddTrans(transOffers);
             // searchB = true;
             // page = 0;
             // for (let j = page; j < page + maxrows; j++) {
@@ -326,7 +327,7 @@ function addOffersToResultsList(offers) {
         el = $('<div>', {id: 'results' + i, class: 'result container'});
 
         if (offer.topUser) {
-           el.addClass("highlight-offer");
+            el.addClass("highlight-offer");
         }
 
         $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
@@ -508,15 +509,43 @@ $('#btn-prev').click(showPreviousOffers);
 
 // getNextOffers();
 
-
+// let bla = {
+//     arr: [{
+//         "offer_id": 8505,
+//         "offered_currency": "TTD",
+//         "amount": 660,
+//         "main_currency": "SAR",
+//         "secondary_currency": "TWD",
+//         "description": null,
+//         "date": "2019-01-11T20:38:59.000Z",
+//         "user_id": 1736,
+//         "first_name": "lea",
+//         "last_name": "thomsen",
+//         "city_1": "samsø",
+//         "rank": 0
+//     }, {
+//         "offer_id": 6919,
+//         "offered_currency": "XDR",
+//         "amount": 250,
+//         "main_currency": "TTD",
+//         "secondary_currency": "XAG",
+//         "description": null,
+//         "date": "2018-12-20T05:33:56.000Z",
+//         "user_id": 1127,
+//         "first_name": "sönke",
+//         "last_name": "bernhardt",
+//         "city_1": "storkow (mark)",
+//         "rank": 0
+//     }]
+// };
 transOffers = {
     "offers": [
         {
             "rank": "0",
-            "amount": "10",
-            "offered_currency": "USD",
-            "main_currency": "USD",
-            "secondary_currency": "EUR",
+            "amount": "660",
+            "offered_currency": "TTD",
+            "main_currency": "SAR",
+            "secondary_currency": "TWD",
             "city_1": "Tel-Aviv",
             "date": "19/12/2018",
             "rank2": "0",
@@ -530,10 +559,10 @@ transOffers = {
         },
         {
             "rank": "0",
-            "amount": "30",
-            "offered_currency": "USD",
-            "main_currency": "USD",
-            "secondary_currency": "EUR",
+            "amount": "250",
+            "offered_currency": "XDR",
+            "main_currency": "TTD",
+            "secondary_currency": "XAG",
             "city_1": "Tel-Aviv",
             "date": "19/12/2018",
             "rank2": "0",
@@ -547,7 +576,7 @@ transOffers = {
 
     ]
 };
-funAddTrans(transOffers);
+
 
 ////////////////////transitivity/////////////////////////////////////////
 function funAddTrans(transOffers) {

@@ -146,7 +146,7 @@ function addpopUp(offers){
     for (let offer of sortedOffers) {
         atLeastOneClaimTrue=false;
         numOfClaimers=0;
-        let NotexecuteButton = $("<button></button>", {class: "btn btn-danger"}).text("NO");
+        let NotexecuteButton = $("<button></button>", {class: "btn btn-danger"}).text("I didn't switch");
 
         NotexecuteButton.data('offer-id', offer.offer_id);
         // add a click listener
@@ -210,7 +210,7 @@ function addsingleAlert(offer,user_name,buyer_id){
 function postNotclaimByBuyer(offer_id, numOfClaimers) {
     $.ajax({
         type: "POST",
-        url: config.host + '/offer//offer/unclaim-seller',
+        url: config.host + '/offer/unclaim-seller',
         data: createNew(offer_id),
         crossDomain: true,
         xhrFields: {
