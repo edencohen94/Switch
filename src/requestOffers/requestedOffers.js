@@ -259,6 +259,7 @@ function deleteRequested(offer_id){
                 }
             }
             console.log("success to update claim by the buyer")
+            window.location.href = '../requestOffers/requestedOffers.html';
         },
         dataType: 'json'
     });
