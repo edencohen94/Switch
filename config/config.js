@@ -1,5 +1,6 @@
 const config = {
-    host: "localhost:3060",
+
+    host: "http://77.126.1.218:3060",
     access_key: "d503e6c1d9af586e338393ca54cd6abd",
     "currencies": [
         {
