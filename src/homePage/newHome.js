@@ -340,7 +340,7 @@ function addOffersToResultsList(offers) {
 
 
         // create a button
-        let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+        let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for details");
         // assign it some data (the relevant offer-id)
         askForDeatils.data('offer-id', offer.offer_id);
 
@@ -584,7 +584,7 @@ function funAddTrans(transOffers) {
 
 
         // create a button
-        let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+        let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for details");
         // assign it some data (the relevant offer-id)
         askForDeatils.data('offer-id', offer.offer_id);
 
@@ -634,7 +634,7 @@ function funAddTrans(transOffers) {
 
 
         // create a button
-        let askForDeatils2 = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+        let askForDeatils2 = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for details");
         // assign it some data (the relevant offer-id)
         askForDeatils2.data('offer-id', offer.offer_id);
 

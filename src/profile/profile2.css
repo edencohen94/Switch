@@ -112,12 +112,14 @@
     width: 100%;
 }
 html,body{
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-    /*background-size: cover;*/
+    background-image: url('../Images/backround-switch.jpeg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-repeat: no-repeat;
-    /*height: 100%;*/
-    /*padding: 0;*/
     font-family: 'Numans', sans-serif;
+    background-attachment: fixed;
+
 }
 .nav-item {
     margin-bottom: 0.25rem;
@@ -166,7 +168,8 @@ html,body{
 }
 
 .row{
-    background-color: #e9f3f4;
+    color:white;
+    font-size:105%;
 }
 
 .col-md-2{
