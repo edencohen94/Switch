@@ -254,3 +254,7 @@ input:hover {
     width: 120px;
     height: 30px;
 }
+
+.highlight-offer {
+    background-color: #f7f47f;
+}
