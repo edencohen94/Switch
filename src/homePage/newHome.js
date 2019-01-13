@@ -19,12 +19,16 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
-        convertCurrenyAdd(data.result);
+        // convertCurrenyAdd(data.result);
         pageState.offers = data.result;
         pageState.offerIndex = 0;
+        getConvertionRates();
         //number of offers in the site
-        let num = $("<h3 style='color:white'></h3>").text("Currently there are " + data.result.length + " relevent offers");
-        $("#all").append(num);
+        // let num = $("<h3 style='color:white'></h3>").text("Currently there are " + data.result.length + " relevent offers");
+        // $("#all").append(num);
+    },
+    error: function () { // not signed in
+        window.location.href = '../login/login.html'
     }
 });
 
@@ -156,15 +160,16 @@ $("#currency-dropdown").click(function () {
 let pageState = {
     offers: [],
     offerIndex: 0,
-    itemsPerPage: 3
+    itemsPerPage: 5,
+    rates: {}
 };
 
-let maxrows = 5;
-let page = 0;
-let searchResult;
-$("#btn_next").click();
-let rank = {};
-let searchB = false;
+// let maxrows = 5;
+// let page = 0;
+// let searchResult;
+// $("#btn_next").click();
+// let rank = {};
+// let searchB = false;
 let transOffers;
 
 function searchbutton() {
@@ -179,15 +184,17 @@ function searchbutton() {
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {
-            searchB = true;
-            page = 0;
-            for (let j = page; j < page + maxrows; j++) {
-                $("#results" + j).remove();
-            }
-            searchResult = data.result.regularResults;
-            transOffers = data.result.transitiveResults;
-            convertCurrenyAdd(data.result.regularResults);
-            funAddTrans(data.result.transitiveResults);
+            pageState.offers = data.result.regularResults;
+            updateOffers();
+            // searchB = true;
+            // page = 0;
+            // for (let j = page; j < page + maxrows; j++) {
+            //     $("#results" + j).remove();
+            // }
+            // searchResult = data.result.regularResults;
+            // transOffers = data.result.transitiveResults;
+            // convertCurrenyAdd(data.result.regularResults);
+            // funAddTrans(data.result.transitiveResults);
         }
 
     });
@@ -204,94 +211,96 @@ function getDeatilsFromHtml() {
 
 }
 
-function funAdd(offers, converstionRates) {
-    let el;
-    let len = offers.length;
-    if (len - page > 0) {
-        page = page + maxrows;
-        if (page > maxrows) {
-            for (let j = page - (2 * maxrows); j < page - maxrows; j++) {
-                $("#results" + j).remove();
-            }
-        }
-        for (let i = page - maxrows; i < page && i < len; i++) {
-            let offer = offers[i];
-            let amount = $("<a></a>").text(offer.amount);
-            let curr = $("<a></a>").text(offer.offered_currency);
-            let city = $("<a></a>").text(offer.city_1);
-            let lastUpdate = $("<a></a>").text(formatDate(offer.date));
-            let rankUser;
-            if (offer.rank < 0) {
-                rankUser = $("<a style='color: red'></a>").text(offer.rank);
-            }
-            else {
-                rankUser = $("<a style='color: green'></a>").text(offer.rank);
-            }
-
-            if (offer.isActive) {
-                el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
-            }
-            else {
-                el = $('<div>', {id: 'results' + i, class: 'result container'});
-            }
-            let result = $(".results-container").append(el);
-            $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
-            $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
-            $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
-            $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
-            $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
-            $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
-            $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
-
-
-            // create a button
-            let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
-            // assign it some data (the relevant offer-id)
-            askForDeatils.data('offer-id', offer.offer_id);
-
-            // add a click listener
-            askForDeatils.click(function () {
-                // here, this stands for the button that was clicked
-                // so we want to get that button's offer-id
-                postToRequestedOffers($(this).data('offer-id'));
-            });
-
-            $("#amount" + i).append(amount);
-            $("#currency" + i).append(curr);
-            commitConversion(converstionRates, offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
-            if (offer.secondary_currency) {
-                commitConversion(converstionRates, offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
-            }
-            $("#city" + i).append(city);
-            $("#rank" + i).append(rankUser);
-            $("#lastUpdate" + i).append(lastUpdate);
-            $("#details" + i).append(askForDeatils);
-
-        }
-    }
-    if (len === 0) {
-        for (let j = page - maxrows; j < page + maxrows; j++) {
-            $("#results" + j).remove();
-        }
-    }
-}
+// function funAdd(offers, converstionRates) {
+//     let el;
+//     let len = offers.length;
+//     if (len - page > 0) {
+//         page = page + maxrows;
+//         if (page > maxrows) {
+//             for (let j = page - (2 * maxrows); j < page - maxrows; j++) {
+//                 $("#results" + j).remove();
+//             }
+//         }
+//         for (let i = page - maxrows; i < page && i < len; i++) {
+//             let offer = offers[i];
+//             let amount = $("<a></a>").text(offer.amount);
+//             let curr = $("<a></a>").text(offer.offered_currency);
+//             let city = $("<a></a>").text(offer.city_1);
+//             let lastUpdate = $("<a></a>").text(formatDate(offer.date));
+//             let rankUser;
+//             if (offer.rank < 0) {
+//                 rankUser = $("<a style='color: red'></a>").text(offer.rank);
+//             }
+//             else {
+//                 rankUser = $("<a style='color: green'></a>").text(offer.rank);
+//             }
+//
+//             if (offer.isActive) {
+//                 el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
+//             }
+//             else {
+//                 el = $('<div>', {id: 'results' + i, class: 'result container'});
+//             }
+//             let result = $(".results-container").append(el);
+//             $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
+//             $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
+//             $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
+//             $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el);
+//             $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el);
+//             $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el);
+//             $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el);
+//
+//
+//             // create a button
+//             let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for deatils");
+//             // assign it some data (the relevant offer-id)
+//             askForDeatils.data('offer-id', offer.offer_id);
+//
+//             // add a click listener
+//             askForDeatils.click(function () {
+//                 // here, this stands for the button that was clicked
+//                 // so we want to get that button's offer-id
+//                 postToRequestedOffers($(this).data('offer-id'));
+//             });
+//
+//             $("#amount" + i).append(amount);
+//             $("#currency" + i).append(curr);
+//             commitConversion(converstionRates, offer.offered_currency, offer.main_currency, parseInt(offer.amount), i);
+//             if (offer.secondary_currency) {
+//                 commitConversion(converstionRates, offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i);
+//             }
+//             $("#city" + i).append(city);
+//             $("#rank" + i).append(rankUser);
+//             $("#lastUpdate" + i).append(lastUpdate);
+//             $("#details" + i).append(askForDeatils);
+//
+//         }
+//     }
+//     if (len === 0) {
+//         for (let j = page - maxrows; j < page + maxrows; j++) {
+//             $("#results" + j).remove();
+//         }
+//     }
+// }
 
 function showNextOffers() {
     if (pageState.offerIndex <= pageState.offers.length - pageState.itemsPerPage - 1) {
         pageState.offerIndex = pageState.offerIndex + pageState.itemsPerPage;
-        let currentOffersToShow = pageState.offers.slice(pageState.offerIndex, pageState.offerIndex + pageState.itemsPerPage);
-        emptyList();
-        addOffersToResultsList(currentOffersToShow);
+        updateOffers();
     }
 }
 
 function showPreviousOffers() {
     if (pageState.offerIndex >= pageState.itemsPerPage) {
         pageState.offerIndex = pageState.offerIndex - pageState.itemsPerPage;
-        let currentOffersToShow = pageState.offers.slice(pageState.offerIndex, pageState.offerIndex + pageState.itemsPerPage);
-        emptyList();
-        addOffersToResultsList(currentOffersToShow);
+        updateOffers();
     }
+}
+
+function updateOffers() {
+    let currentOffersToShow = pageState.offers.slice(pageState.offerIndex, pageState.offerIndex + pageState.itemsPerPage);
+    emptyList();
+    addOffersToResultsList(currentOffersToShow);
 }
 
 function emptyList() {
@@ -300,6 +309,7 @@ function emptyList() {
 
 function addOffersToResultsList(offers) {
     let el;
+    let converstionRates = pageState.rates;
     for (let i = 0; i < offers.length; i++) {
         let offer = offers[i];
         let amount = $("<a></a>").text(offer.amount);
@@ -358,53 +368,68 @@ function addOffersToResultsList(offers) {
     }
 }
 
-function funRem(offers, converstionRates) {
-    if (page > maxrows) {
-        page = page - maxrows;
-        for (let j = page; j < page + maxrows; j++) {
-            $("#results" + j).remove();
-        }
+// function funRem(offers, converstionRates) {
+//     if (page > maxrows) {
+//         page = page - maxrows;
+//         for (let j = page; j < page + maxrows; j++) {
+//             $("#results" + j).remove();
+//         }
+//
+//     }
+//     if (len == 0) {
+//         {
+//             for (let j = page - maxrows; j < page; j++) {
+//                 $("#results" + j).remove();
+//             }
+//         }
+//
+//     }
+// }
 
-    }
-    if (len == 0) {
-        {
-            for (let j = page - maxrows; j < page; j++) {
-                $("#results" + j).remove();
-            }
-        }
+// function convertCurrenyRem(offers) {
+//     // set endpoint and access key
+//     let endpoint = 'latest';
+//     let access_key = '2d5b00bc20182a068df161c1239f8f48';
+//     // get the most recent exchange rates via the "latest" endpoint:
+//     $.ajax({
+//         type: "GET",
+//         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+//         dataType: 'jsonp',
+//         success: function (data) {
+//             funRem(offers, data.rates);
+//
+//         }
+//     });
+// }
 
-    }
-}
-
-function convertCurrenyRem(offers) {
-    // set endpoint and access key
+function getConvertionRates() {
     let endpoint = 'latest';
-    let access_key = '2d5b00bc20182a068df161c1239f8f48';
+    let access_key = 'd503e6c1d9af586e338393ca54cd6abd';
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type: "GET",
         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
         dataType: 'jsonp',
-        success: function (data) {
-            funRem(offers, data.rates);
-
+        success: function (result) {
+            pageState.rates = result.rates;
+            updateOffers();
         }
     });
 }
 
-function convertCurrenyAdd(offers) {
-    let endpoint = 'latest';
-    let access_key = '2d5b00bc20182a068df161c1239f8f48';
-    // get the most recent exchange rates via the "latest" endpoint:
-    $.ajax({
-        type: "GET",
-        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
-        dataType: 'jsonp',
-        success: function (data) {
-            funAdd(offers, data.rates);
-        }
-    });
-}
+// function convertCurrenyAdd(offers) {
+//     let endpoint = 'latest';
+//     let access_key = '2d5b00bc20182a068df161c1239f8f48';
+//     // get the most recent exchange rates via the "latest" endpoint:
+//     $.ajax({
+//         type: "GET",
+//         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+//         dataType: 'jsonp',
+//         success: function (data) {
+//             funAdd(offers, data.rates);
+//         }
+//     });
+// }
 
 function commitConversion(data, fromCurr, toCurr, amount, i) {
     let exchangeRateTocurr = data[toCurr];
@@ -416,46 +441,46 @@ function commitConversion(data, fromCurr, toCurr, amount, i) {
     $("#preferred" + i).append(preferred);
 }
 
-function getNextOffers() {
-    let prefix = '/offer/all-offers';
-    if (searchB) {
-        convertCurrenyAdd(searchResult);
-        funAddTrans(transOffers);
-    }
-    $.ajax({
-        type: "GET",
-        url: config.host + prefix,
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        dataType: 'json',
-        success: function (data) {
-            convertCurrenyAdd(data.result);
-        }
-    });
-}
-
-function getPreviousOffers() {
-    let prefix = '/offer/all-offers';
-    if (searchB) {
-        convertCurrenyRem(searchResult);
-        funrem
-    }
-    $.ajax({
-        type: "GET",
-        url: config.host + prefix,
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        dataType: 'json',
-        success: function (data) {
-            convertCurrenyRem(data.result);
-        }
-
-    });
-}
+// function getNextOffers() {
+//     let prefix = '/offer/all-offers';
+//     if (searchB) {
+//         convertCurrenyAdd(searchResult);
+//         funAddTrans(transOffers);
+//     }
+//     $.ajax({
+//         type: "GET",
+//         url: config.host + prefix,
+//         crossDomain: true,
+//         xhrFields: {
+//             withCredentials: true
+//         },
+//         dataType: 'json',
+//         success: function (data) {
+//             convertCurrenyAdd(data.result);
+//         }
+//     });
+// }
+//
+// function getPreviousOffers() {
+//     let prefix = '/offer/all-offers';
+//     if (searchB) {
+//         convertCurrenyRem(searchResult);
+//         funrem
+//     }
+//     $.ajax({
+//         type: "GET",
+//         url: config.host + prefix,
+//         crossDomain: true,
+//         xhrFields: {
+//             withCredentials: true
+//         },
+//         dataType: 'json',
+//         success: function (data) {
+//             convertCurrenyRem(data.result);
+//         }
+//
+//     });
+// }
 
 function postToRequestedOffers(offer_id) {
     $.ajax({
@@ -481,7 +506,7 @@ function postToRequestedOffers(offer_id) {
 $('#btn-next').click(showNextOffers);
 $('#btn-prev').click(showPreviousOffers);
 
-getNextOffers();
+// getNextOffers();
 
 
 transOffers = {
