@@ -323,13 +323,12 @@ function addOffersToResultsList(offers) {
         else {
             rankUser = $("<a style='color: green'></a>").text(offer.rank);
         }
+        el = $('<div>', {id: 'results' + i, class: 'result container'});
 
-        if (offer.isActive) {
-            el = $('<div>', {id: 'results' + i, class: 'result container', style: 'background-color: yellow;'});
+        if (offer.topUser) {
+           el.addClass("highlight-offer");
         }
-        else {
-            el = $('<div>', {id: 'results' + i, class: 'result container'});
-        }
+
         $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el);
         $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el);
         $('<div>', {id: 'preferred' + i, class: 'Pcurrency'}).appendTo(el);
@@ -404,11 +403,10 @@ function addOffersToResultsList(offers) {
 
 function getConvertionRates() {
     let endpoint = 'latest';
-    let access_key = 'd503e6c1d9af586e338393ca54cd6abd';
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type: "GET",
-        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + config.access_key,
         dataType: 'jsonp',
         success: function (result) {
             pageState.rates = result.rates;
@@ -432,13 +430,15 @@ function getConvertionRates() {
 // }
 
 function commitConversion(data, fromCurr, toCurr, amount, i) {
-    let exchangeRateTocurr = data[toCurr];
-    let exchangeRateFromcurr = data[fromCurr];
-    let finalRateExchange = (exchangeRateTocurr / exchangeRateFromcurr) * amount;
-    finalRateExchange = finalRateExchange.toFixed(2);
-    let preferred = $("<a></a>");
-    preferred.text(toCurr + '=' + finalRateExchange + ' ');
-    $("#preferred" + i).append(preferred);
+    if (data) {
+        let exchangeRateTocurr = data[toCurr];
+        let exchangeRateFromcurr = data[fromCurr];
+        let finalRateExchange = (exchangeRateTocurr / exchangeRateFromcurr) * amount;
+        finalRateExchange = finalRateExchange.toFixed(2);
+        let preferred = $("<a></a>");
+        preferred.text(toCurr + '=' + finalRateExchange + ' ');
+        $("#preferred" + i).append(preferred);
+    }
 }
 
 // function getNextOffers() {
@@ -664,12 +664,11 @@ function funAddTrans(transOffers) {
 function convertCurrenyTrans(fromCurr, toCurr, amount, i, flag) {
     // set endpoint and access key
     let endpoint = 'latest';
-    let access_key = '2d5b00bc20182a068df161c1239f8f48';
     // get the most recent exchange rates via the "latest" endpoint:
     let preferred = $("<a></a>");
     $.ajax({
         type: "GET",
-        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + config.access_key,
         dataType: 'jsonp',
         success: function (data) {
             let finalRateExchange = commitConversionTrans(data.rates, fromCurr, toCurr, amount)

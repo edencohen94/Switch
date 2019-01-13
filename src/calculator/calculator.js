@@ -21,11 +21,10 @@ var dataCurr;
 function convertCurreny (){
     // set endpoint and access key
     let endpoint = 'latest';
-    let access_key = 'c0be842d6b953f9adc84792bc89c24b2';
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
         type:"GET",
-        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
+        url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + config.access_key,
         dataType: 'jsonp',
         success: function(data) {
             dataCurr=data;
