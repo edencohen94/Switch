@@ -94,7 +94,9 @@ html,body{
     background-attachment: fixed;
 
 }
-
+#imagediv{
+    mix-blend-mode: multiply;
+}
 #btndiv{
     margin: auto;
     width: 100px;
