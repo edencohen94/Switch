@@ -60,7 +60,7 @@
 }
 
 .logo-img {
-    background-image: url("../../imgs/logo.png");
+    background-image: url("../../Images/logo.png");
     background-repeat: no-repeat;
     max-height: 32px;
     max-width: 32px;
@@ -139,14 +139,14 @@ html,body{
     margin-top: 15px;
 }
 .logo-img {
-    background-image: url("../../imgs/logo.png");
+    background-image: url("../../Images/logo.png");
     background-repeat: no-repeat;
     max-height: 32px;
     max-width: 32px;
 }
 
 .logo-img {
-    background-image: url("../../imgs/logo.png");
+    background-image: url("../../Images/logo.png");
     background-repeat: no-repeat;
     max-height: 32px;
     max-width: 32px;
