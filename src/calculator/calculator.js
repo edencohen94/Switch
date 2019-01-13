@@ -18,28 +18,30 @@ $("#dropdownCurrency2").click(function () {
 });
 
 var dataCurr;
-function convertCurreny (){
+
+function convertCurreny() {
     // set endpoint and access key
     let endpoint = 'latest';
     // get the most recent exchange rates via the "latest" endpoint:
     $.ajax({
-        type:"GET",
+        type: "GET",
         url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + config.access_key,
         dataType: 'jsonp',
-        success: function(data) {
-            dataCurr=data;
-            commitConversion(dataCurr,$("#dropdownMainCurrency").val(),$("#dropdownMainCurrency2").val(),$("#inputAmount").val());
+        success: function (data) {
+            dataCurr = data;
+            commitConversion(dataCurr, $("#dropdownMainCurrency").val(), $("#dropdownMainCurrency2").val(), $("#inputAmount").val());
         }
     });
 }
 
-function commitConversion(data,fromCurr, toCurr, amount){
-        toCurr=toCurr.substr(toCurr.length - 3);
-        fromCurr=fromCurr.substr(fromCurr.length - 3)
-        var exchangeRateTocurr = data.rates[toCurr];
-        var exchangeRateFromcurr = data.rates[fromCurr];
-        var finalRateExchange = (exchangeRateTocurr / exchangeRateFromcurr) * amount;
+function commitConversion(data, fromCurr, toCurr, amount) {
+    toCurr = toCurr.substr(toCurr.length - 3);
+    fromCurr = fromCurr.substr(fromCurr.length - 3)
+    var exchangeRateTocurr = data.rates[toCurr];
+    var exchangeRateFromcurr = data.rates[fromCurr];
+    var finalRateExchange = (exchangeRateTocurr / exchangeRateFromcurr) * amount;
     finalRateExchange = finalRateExchange.toFixed(3);
-        let el = $("<a></a>").text(amount+" "+fromCurr+" = "+finalRateExchange+" "+toCurr);
-        $("#result").append(el);
+    let el = $("<a></a>").text(amount + " " + fromCurr + " = " + finalRateExchange + " " + toCurr);
+    $("#result").empty();
+    $("#result").append(el);
 }
