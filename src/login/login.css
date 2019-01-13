@@ -1,13 +1,14 @@
 html,body{
-    background: url('../Images/switch3.jpeg') no-repeat center center fixed;
-    background-size: cover ;
+    background-image: url('../Images/backround-switch.jpeg') ;
+
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+
+    background-attachment: fixed;
     font-family: 'Numans', sans-serif;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
 }
 
 .input-group-prepend span{

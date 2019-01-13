@@ -1,5 +1,5 @@
 .logo-img {
-    background-image: url("../../Images/logo.png");
+    background-image: url("../../imgs/logo.png");
     background-repeat: no-repeat;
     max-height: 32px;
     max-width: 32px;
@@ -17,11 +17,13 @@
 }
 
 html,body{
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-    background-size: cover;
+    background-image: url('../Images/backround-switch.jpeg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-repeat: no-repeat;
-    height: 120%;
     font-family: 'Numans', sans-serif;
+    background-attachment: fixed;
 }
 label {
     color: white;

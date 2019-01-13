@@ -157,7 +157,7 @@
 }
 
 .logo-img {
-    background-image: url("../../Images/logo.png");
+    background-image: url("../../imgs/logo.png");
     background-repeat: no-repeat;
     max-height: 32px;
     max-width: 32px;
@@ -166,12 +166,15 @@
 
 
 html,body{
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-    background-repeat: no-repeat;
+    background-image: url('../Images/backround-switch.jpeg') ;
     background-size: cover;
-    overflow: auto;
-    /*height: 140%;*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Numans', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    overflow: auto;
 }
 .autocomplete {
     /*the container must be positioned relative:*/

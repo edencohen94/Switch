@@ -69,7 +69,8 @@ function postNewRequest(){
 }
 function getDetils() {
     let data = {};
-    data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[3];
+    let offered_currency_length = ($('#dropdownMainCurrency').val().split(" ")).length
+    data.offered_currency=($('#dropdownMainCurrency').val().split(" "))[offered_currency_length-1];
     data.amount = $('#inputAmount').val();
     let main_currency_length = ($('#dropdownPreffered1').val().split(" ")).length
     data.main_currency=($('#dropdownPreffered1').val().split(" "))[main_currency_length-1];

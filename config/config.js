@@ -1,6 +1,6 @@
 const config = {
-    host: "http://77.126.1.218:3060",
-    accessKey: "d503e6c1d9af586e338393ca54cd6abd",
+    host: "localhost:3060",
+    access_key: "d503e6c1d9af586e338393ca54cd6abd",
     "currencies": [
         {
             "name": "Afghanistan Afghanis",
