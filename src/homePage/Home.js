@@ -191,7 +191,7 @@ function searchTrans() {
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {
-            if(data.result>0){
+            if(data.result.length>0){
                 funAddTrans(data.result);
             }
         }
@@ -408,7 +408,7 @@ function funAddTrans(offers) {
         $("#amountTrans1" + i).append(amount);
         $("#currencyTrans1" + i).append(curr);
         convertCurrenyTrans(offer[0].offered_currency, offer[0].main_currency, parseInt(offer[0].amount), i, flag);
-        if (offer.secondary_currency) {
+        if (offer[0].secondary_currency) {
             convertCurrenyTrans(offer[0].offered_currency, offer[0].secondary_currency, parseInt(offer[0].amount), i, flag);
         }
 
