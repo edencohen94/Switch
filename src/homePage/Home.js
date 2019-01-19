@@ -159,8 +159,6 @@ let pageState = {
     rates: {}
 };
 
-let transOffers;
-
 function searchbutton() {
     $.ajax({
         type: "POST",
@@ -174,10 +172,28 @@ function searchbutton() {
         "content-Type": 'application/json',
         success: function (data) {
             pageState.offers = data.result.regularResults;
-            //TODO CHANE TO CURRENT NAME
-            transOffers=data.result.trans;
             updateOffers();
-            funAddTrans(transOffers);
+            searchTrans();
+        }
+
+    });
+}
+
+function searchTrans() {
+    $.ajax({
+        type: "POST",
+        url: config.host + '/offer/transitive',
+        data: getDeatilsFromHtml(),
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        dataType: 'json',
+        "content-Type": 'application/json',
+        success: function (data) {
+            if(data.result>0){
+                funAddTrans(data.result);
+            }
         }
 
     });
@@ -187,7 +203,7 @@ function getDeatilsFromHtml() {
     let data = {};
     data.city = $('#inputRigion-City').val();
     data.country = $('#inputdestinationCountry').val();
-    currLength = data.requstedCurrency = ($('#dropdownMenuOffset1').val().split(" ")).length;
+    let currLength = ($('#dropdownMenuOffset1').val().split(" ")).length;
     data.requestedCurrency = ($('#dropdownMenuOffset1').val().split(" "))[currLength - 1];
     data.amount = $('#inputEstimated').val();
     return data
@@ -241,7 +257,6 @@ function addOffersToResultsList(offers) {
             //user may be spammer or the user might be suspicious due to low rank
             if(offer.rank <0){
                 el.addClass("suspicious-highlight-offers");
-
             }
 
             else{
@@ -338,84 +353,49 @@ function postToRequestedOffers(offer_id) {
 $('#btn-next').click(showNextOffers);
 $('#btn-prev').click(showPreviousOffers);
 
-transOffers = {
-    "offers": [
-        {
-            "rank": "0",
-            "amount": "660",
-            "offered_currency": "TTD",
-            "main_currency": "SAR",
-            "secondary_currency": "TWD",
-            "city_1": "Tel-Aviv",
-            "date": "19/12/2018",
-            "rank2": "0",
-            "amount2": "20",
-            "offered_currency2": "USD",
-            "main_currency2": "USD",
-            "secondary_currency2": "EUR",
-            "city_1_2": "Tel-Aviv",
-            "date2": "19/12/2018"
 
-        },
-        {
-            "rank": "0",
-            "amount": "250",
-            "offered_currency": "XDR",
-            "main_currency": "TTD",
-            "secondary_currency": "XAG",
-            "city_1": "Tel-Aviv",
-            "date": "19/12/2018",
-            "rank2": "0",
-            "amount2": "40",
-            "offered_currency2": "USD",
-            "main_currency2": "USD",
-            "secondary_currency2": "EUR",
-            "city_1_2": "Tel-Aviv",
-            "date2": "19/12/2018"
-        }
+function emptyTrans(){
+    $(".transitive").empty();
 
-    ]
-};
-
-
+}
 ////////////////////transitivity/////////////////////////////////////////
-function funAddTrans(transOffers) {
+function funAddTrans(offers) {
+    emptyTrans();
     let flag = 0; // 1-first user, 2 second user
-    let offers = transOffers.offers;
     let el;
     let len = offers.length;
     for (let i = 0; i < len; i++) {
         let offer = offers[i];
         flag = 1;
-        let amount = $("<a></a>").text(offer.amount);
-        let curr = $("<a></a>").text(offer.offered_currency);
-        let city = $("<a></a>").text(offer.city_1);
-        let lastUpdate = $("<a></a>").text(offer.date);
+        let amount = $("<a></a>").text(offer[0].amount);
+        let curr = $("<a></a>").text(offer[0].offered_currency);
+        let city = $("<a></a>").text(offer[0].city_1);
+        let lastUpdate = $("<a></a>").text(formatDate(offer[0].date));
         let rankUser;
-        if (offer.rank < 0) {
-            rankUser = $("<a style='color: red'></a>").text(offer.rank);
+        if (offer[0].rank < 0) {
+            rankUser = $("<a style='color: red'></a>").text(offer[0].rank);
         }
         else {
-            rankUser = $("<a style='color: green'></a>").text(offer.rank);
+            rankUser = $("<a style='color: green'></a>").text(offer[0].rank);
         }
 
         el = $('<div>', {id: 'results' + i, class: 'resultTrans container'});
         let result = $(".transitive").append(el);
         let el_first = $('<div>', {id: 'results1' + i, class: 'result1 container'});
         el_first.appendTo(el);
-        $('<div>', {id: 'amount' + i, class: 'amount'}).appendTo(el_first);
-        $('<div>', {id: 'currency' + i, class: 'currency'}).appendTo(el_first);
-        $('<div>', {id: 'preferred1' + i, class: 'Pcurrency'}).appendTo(el_first);
-        $('<div>', {id: 'city' + i, class: 'city'}).appendTo(el_first);
-        $('<div>', {id: 'rank' + i, class: 'rank'}).appendTo(el_first);
-        $('<div>', {id: 'lastUpdate' + i, class: 'lastUpdate'}).appendTo(el_first);
-        $('<div>', {id: 'details' + i, class: 'details'}).appendTo(el_first);
+        $('<div>', {id: 'amountTrans1' + i, class: 'amount'}).appendTo(el_first);
+        $('<div>', {id: 'currencyTrans1' + i, class: 'currency'}).appendTo(el_first);
+        $('<div>', {id: 'preferredTrans1' + i, class: 'Pcurrency'}).appendTo(el_first);
+        $('<div>', {id: 'cityTrans1' + i, class: 'city'}).appendTo(el_first);
+        $('<div>', {id: 'rankTrans1' + i, class: 'rank'}).appendTo(el_first);
+        $('<div>', {id: 'lastUpdateTrans1' + i, class: 'lastUpdate'}).appendTo(el_first);
+        $('<div>', {id: 'detailsTrans1' + i, class: 'details'}).appendTo(el_first);
 
 
         // create a button
         let askForDeatils = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for details");
         // assign it some data (the relevant offer-id)
-        askForDeatils.data('offer-id', offer.offer_id);
+        askForDeatils.data('offer-id', offer[0].offer_id);
 
 
         // add a click listener
@@ -425,47 +405,47 @@ function funAddTrans(transOffers) {
             postToRequestedOffers($(this).data('offer-id'));
         });
 
-        $("#amount" + i).append(amount);
-        $("#currency" + i).append(curr);
-        convertCurrenyTrans(offer.offered_currency, offer.main_currency, parseInt(offer.amount), i, flag);
+        $("#amountTrans1" + i).append(amount);
+        $("#currencyTrans1" + i).append(curr);
+        convertCurrenyTrans(offer[0].offered_currency, offer[0].main_currency, parseInt(offer[0].amount), i, flag);
         if (offer.secondary_currency) {
-            convertCurrenyTrans(offer.offered_currency, offer.secondary_currency, parseInt(offer.amount), i, flag);
+            convertCurrenyTrans(offer[0].offered_currency, offer[0].secondary_currency, parseInt(offer[0].amount), i, flag);
         }
 
-        $("#city" + i).append(city);
-        $("#rank" + i).append(rankUser);
-        $("#lastUpdate" + i).append(lastUpdate);
-        $("#details" + i).append(askForDeatils);
+        $("#cityTrans1" + i).append(city);
+        $("#rankTrans1" + i).append(rankUser);
+        $("#lastUpdateTrans1" + i).append(lastUpdate);
+        $("#detailsTrans1" + i).append(askForDeatils);
 
 
         // second offer
         flag = 2;
-        let amount2 = $("<a></a>").text(offer.amount2);
-        let curr2 = $("<a></a>").text(offer.offered_currency2);
-        let city2 = $("<a></a>").text(offer.city_1_2);
-        let lastUpdate2 = $("<a></a>").text(offer.date2);
+        let amount2 = $("<a></a>").text(offer[1].amount);
+        let curr2 = $("<a></a>").text(offer[1].offered_currency);
+        let city2 = $("<a></a>").text(offer[1].city_1);
+        let lastUpdate2 = $("<a></a>").text(formatDate(offer[1].date));
         let rankUser2;
         if (offer.rank < 0) {
-            rankUser2 = $("<a style='color: red'></a>").text(offer.rank);
+            rankUser2 = $("<a style='color: red'></a>").text(offer[1].rank);
         }
         else {
-            rankUser2 = $("<a style='color: green'></a>").text(offer.rank);
+            rankUser2 = $("<a style='color: green'></a>").text(offer[1].rank);
         }
         let el_second = $('<div>', {id: 'results2' + i, class: 'result2 container'});
         el_second.appendTo(el);
-        $('<div>', {id: 'amount2' + i, class: 'amount'}).appendTo(el_second);
-        $('<div>', {id: 'currency2' + i, class: 'currency'}).appendTo(el_second);
-        $('<div>', {id: 'preferred2' + i, class: 'Pcurrency'}).appendTo(el_second);
-        $('<div>', {id: 'city2' + i, class: 'city'}).appendTo(el_second);
-        $('<div>', {id: 'rank2' + i, class: 'rank'}).appendTo(el_second);
-        $('<div>', {id: 'lastUpdate2' + i, class: 'lastUpdate'}).appendTo(el_second);
-        $('<div>', {id: 'details2' + i, class: 'details'}).appendTo(el_second);
+        $('<div>', {id: 'amount2Trans2' + i, class: 'amount'}).appendTo(el_second);
+        $('<div>', {id: 'currency2Trans2' + i, class: 'currency'}).appendTo(el_second);
+        $('<div>', {id: 'preferred2Trans2' + i, class: 'Pcurrency'}).appendTo(el_second);
+        $('<div>', {id: 'city2Trans2' + i, class: 'city'}).appendTo(el_second);
+        $('<div>', {id: 'rank2Trans2' + i, class: 'rank'}).appendTo(el_second);
+        $('<div>', {id: 'lastUpdate2Trans2' + i, class: 'lastUpdate'}).appendTo(el_second);
+        $('<div>', {id: 'details2Trans2' + i, class: 'details'}).appendTo(el_second);
 
 
         // create a button
         let askForDeatils2 = $("<button></button>", {class: "btn btn-danger cancel-changes card-button"}).text("Ask for details");
         // assign it some data (the relevant offer-id)
-        askForDeatils2.data('offer-id', offer.offer_id);
+        askForDeatils2.data('offer-id', offer[1].offer_id);
 
 
         // add a click listener
@@ -475,16 +455,16 @@ function funAddTrans(transOffers) {
             postToRequestedOffers($(this).data('offer-id'));
         });
 
-        $("#amount2" + i).append(amount2);
-        $("#currency2" + i).append(curr2);
-        convertCurrenyTrans(offer.offered_currency2, offer.main_currency2, parseInt(offer.amount2), i, flag);
-        if (offer.secondary_currency2) {
-            convertCurrenyTrans(offer.offered_currency2, offer.secondary_currency2, parseInt(offer.amount2), i, flag);
+        $("#amount2Trans2" + i).append(amount2);
+        $("#currency2Trans2" + i).append(curr2);
+        convertCurrenyTrans(offer[1].offered_currency, offer[1].main_currency, parseInt(offer[1].amount), i, flag);
+        if (offer[1].secondary_currency) {
+            convertCurrenyTrans(offer[1].offered_currency, offer[1].secondary_currency, parseInt(offer[1].amount), i, flag);
         }
-        $("#city2" + i).append(city2);
-        $("#rank2" + i).append(rankUser2);
-        $("#lastUpdate2" + i).append(lastUpdate2);
-        $("#details2" + i).append(askForDeatils2);
+        $("#city2Trans2" + i).append(city2);
+        $("#rank2Trans2" + i).append(rankUser2);
+        $("#lastUpdate2Trans2" + i).append(lastUpdate2);
+        $("#details2Trans2" + i).append(askForDeatils2);
 
     }
 }
@@ -504,10 +484,10 @@ function convertCurrenyTrans(fromCurr, toCurr, amount, i, flag) {
             finalRateExchange = finalRateExchange.toFixed(2);
             preferred.text(toCurr + '=' + finalRateExchange + ' ');
             if (flag == 1) {
-                $("#preferred1" + i).append(preferred);
+                $("#preferredTrans1" + i).append(preferred);
             }
             if (flag == 2) {
-                $("#preferred2" + i).append(preferred);
+                $("#preferred2Trans2" + i).append(preferred);
             }
         }
     });
