@@ -63,7 +63,7 @@ function postNewRequest(){
         },
         dataType: 'json',
         success: function (data) {
-            window.location.href = '../homePage/newHome.html';
+            window.location.href = '../homePage/Home.html';
         }
     });
 }

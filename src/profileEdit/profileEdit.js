@@ -31,7 +31,7 @@ function submitChanges(){
             withCredentials: true
         },
         success: function(data) {
-            window.location.href = '../profile/profile2.html';
+            window.location.href = '../profile/profile.html';
         },
         dataType: 'json'
     });
