@@ -260,3 +260,7 @@ input:hover {
 .highlight-offer {
     background-color: #f7f47f;
 }
+
+.suspicious-highlight-offer{
+    background-color: indianred;
+}

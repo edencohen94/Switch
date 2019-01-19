@@ -135,7 +135,7 @@ function signUpButton() {
     $.ajax({
         type:"POST",
         url: config.host +'/signup',
-        data: getDeatilsFromHtml(),
+        data: getDetailsFromHtml(),
         crossDomain: true,
         xhrFields: {
             withCredentials: true
@@ -143,13 +143,13 @@ function signUpButton() {
         dataType: 'json',
         "content-Type": 'application/json',
         success: function (data) {
-            window.location.href = '../homePage/newHome.html';
+            window.location.href = '../homePage/Home.html';
         }
 
     });
 }
 
-function getDeatilsFromHtml() {
+function getDetailsFromHtml() {
     let data = {};
     data.first_name = $('#inputFirstName').val();
     data.last_name = $('#inputLastName').val();
@@ -161,9 +161,9 @@ function getDeatilsFromHtml() {
     data.city_1 = $('#inputCity').val();
     data.city_2 = $('#inputCity2').val();
     data.country= $('#inputdestinationCountry').val();
-    let main_currency_length=($('#dropdownMenuOffset1').val().split(" ")).length
+    let main_currency_length=($('#dropdownMenuOffset1').val().split(" ")).length;
     data.main_currency=($('#dropdownMenuOffset1').val().split(" "))[main_currency_length-1];
-    let secondary_currency_length=($('#dropdownMenuOffset2').val().split(" ")).length
+    let secondary_currency_length=($('#dropdownMenuOffset2').val().split(" ")).length;
     data.secondary_currency=($('#dropdownMenuOffset2').val().split(" "))[secondary_currency_length-1];
     return data
 

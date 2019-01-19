@@ -17,7 +17,6 @@ var numOfAnswers=0;
 var totalClaims=0;
 
 // get user's name for greeting
-
 $.ajax({
     type: "POST",
     url: config.host + '/user',
@@ -71,7 +70,6 @@ function presentoffers(details){
 
 
 function addOpenOffers(offers,details) {
-    //let requestedOffers =  $("<div></div>", {class: "info-container"});
     for (let offer of offers) {
         let cardBody = $("<div></div>", {class: "card-body info-container"})
             .append($("<span></span>", {class: "offer-detail"}).text("Amount: " + offer.amount))
@@ -129,12 +127,9 @@ function addOpenOffers(offers,details) {
             .append(contactBody)
             .append(cardButtons);
 
-
         $(".offers-container").append(card);
-        //request claimed to happen by some users
     }
 
-//    $(".modal-body").append(requestedOffers);
 
 }
 let requestedOffers =  $("<div></div>", {class: "container"});
@@ -178,7 +173,7 @@ function addpopUp(offers){
 
 function addsingleAlert(offer,user_name,buyer_id){
     if (offer.requestedBy.length > 0) {
-        if (firstTime==false){
+        if (!firstTime){
         $('#myModal').modal({
             backdrop: 'static',
             keyboard: false
@@ -219,7 +214,7 @@ function postNotclaimByBuyer(offer_id, numOfClaimers) {
         success: function (data) {
             numOfAnswers+=numOfClaimers;
             console.log("success to update claim by the seller");
-             if(totalClaims==numOfAnswers){
+             if(totalClaims===numOfAnswers){
                $('#myModal').modal('hide');
             }
         },
@@ -239,7 +234,7 @@ function postStatus(offer_id,buyer_id){
         success: function(data) {
             numOfAnswers++;
             console.log("dffd");
-            if(numOfAnswers==totalClaims){
+            if(numOfAnswers===totalClaims){
                 $('#myModal').modal('hide');
 
             }

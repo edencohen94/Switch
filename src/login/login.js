@@ -25,7 +25,7 @@ function loginButton() {
             //
             // });
 
-            window.location.href = '../homePage/newHome.html';
+            window.location.href = '../homePage/Home.html';
         },
         error: function(err) {
             console.error(err);
